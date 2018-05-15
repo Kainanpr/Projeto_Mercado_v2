@@ -1,0 +1,15 @@
+C:\Users\KainanXD\Documents\Visual Studio 2013\Projects\ProjetoMercado\ProjetoMercado\bin\Debug\ProjetoMercado.exe.config
+C:\Users\KainanXD\Documents\Visual Studio 2013\Projects\ProjetoMercado\ProjetoMercado\bin\Debug\ProjetoMercado.exe
+C:\Users\KainanXD\Documents\Visual Studio 2013\Projects\ProjetoMercado\ProjetoMercado\bin\Debug\ProjetoMercado.pdb
+C:\Users\KainanXD\Documents\Visual Studio 2013\Projects\ProjetoMercado\ProjetoMercado\obj\Debug\ProjetoMercado.csprojResolveAssemblyReference.cache
+C:\Users\KainanXD\Documents\Visual Studio 2013\Projects\ProjetoMercado\ProjetoMercado\obj\Debug\ProjetoMercado.Properties.Resources.resources
+C:\Users\KainanXD\Documents\Visual Studio 2013\Projects\ProjetoMercado\ProjetoMercado\obj\Debug\ProjetoMercado.csproj.GenerateResource.Cache
+C:\Users\KainanXD\Documents\Visual Studio 2013\Projects\ProjetoMercado\ProjetoMercado\obj\Debug\ProjetoMercado.exe
+C:\Users\KainanXD\Documents\Visual Studio 2013\Projects\ProjetoMercado\ProjetoMercado\obj\Debug\ProjetoMercado.pdb
+C:\Users\KainanXD\Documents\Visual Studio 2013\Projects\ProjetoMercado\ProjetoMercado\obj\Debug\ProjetoMercado.view.TelaCategoria.resources
+C:\Users\KainanXD\Documents\Visual Studio 2013\Projects\ProjetoMercado\ProjetoMercado\obj\Debug\ProjetoMercado.view.TelaInicial.resources
+C:\Users\KainanXD\Documents\Visual Studio 2013\Projects\ProjetoMercado\ProjetoMercado\obj\Debug\ProjetoMercado.view.TelaListarVendas.resources
+C:\Users\KainanXD\Documents\Visual Studio 2013\Projects\ProjetoMercado\ProjetoMercado\obj\Debug\ProjetoMercado.view.TelaProduto.resources
+C:\Users\KainanXD\Documents\Visual Studio 2013\Projects\ProjetoMercado\ProjetoMercado\obj\Debug\ProjetoMercado.view.TelaRealizarVenda.resources
+C:\Users\KainanXD\Documents\Visual Studio 2013\Projects\ProjetoMercado\ProjetoMercado\bin\Debug\MySql.Data.dll
+C:\Users\KainanXD\Documents\Visual Studio 2013\Projects\ProjetoMercado\ProjetoMercado\bin\Debug\MySql.Data.xml

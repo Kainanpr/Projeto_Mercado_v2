@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FE6E3E64-D45F-4697-A6D6-966490BD0E1B}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ProjetoMercado</RootNamespace>
+    <AssemblyName>ProjetoMercado</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MySql.Data">
+      <HintPath>driver_conexaodb\MYSQL\v4.5.2\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="model\connection\Database.cs" />
+    <Compile Include="model\dao\CategoriaDAO.cs" />
+    <Compile Include="model\dao\ItemVendaDAO.cs" />
+    <Compile Include="model\dao\ProdutoDAO.cs" />
+    <Compile Include="model\dao\VendaDAO.cs" />
+    <Compile Include="model\domain\Categoria.cs" />
+    <Compile Include="model\domain\ItemVenda.cs" />
+    <Compile Include="model\domain\Produto.cs" />
+    <Compile Include="model\domain\Venda.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="view\TelaCategoria.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\TelaCategoria.designer.cs">
+      <DependentUpon>TelaCategoria.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\TelaInicial.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\TelaInicial.designer.cs">
+      <DependentUpon>TelaInicial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\TelaListarVendas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\TelaListarVendas.designer.cs">
+      <DependentUpon>TelaListarVendas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\TelaProduto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\TelaProduto.designer.cs">
+      <DependentUpon>TelaProduto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\TelaRealizarVenda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\TelaRealizarVenda.designer.cs">
+      <DependentUpon>TelaRealizarVenda.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="view\TelaCategoria.resx">
+      <DependentUpon>TelaCategoria.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\TelaInicial.resx">
+      <DependentUpon>TelaInicial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\TelaListarVendas.resx">
+      <DependentUpon>TelaListarVendas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\TelaProduto.resx">
+      <DependentUpon>TelaProduto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\TelaRealizarVenda.resx">
+      <DependentUpon>TelaRealizarVenda.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
