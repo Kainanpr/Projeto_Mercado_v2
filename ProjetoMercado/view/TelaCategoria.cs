@@ -15,6 +15,9 @@ namespace ProjetoMercado.view
 {
     public partial class TelaCategoria : Form
     {
+        /* Atributo responsável pelo CRUD categoria */
+        CategoriaDAO categoriaDAO = new CategoriaDAO();
+
         public TelaCategoria()
         {
             InitializeComponent();
@@ -66,7 +69,6 @@ namespace ProjetoMercado.view
         private void btnSalvar_Click(object sender, EventArgs e)
         {
             Categoria categoria;
-            CategoriaDAO categoriaDAO = new CategoriaDAO();
 
             /* Verifica se os campos obrigatórios estão preenchidos */
             if (!txtDescricao.Text.Equals(""))
@@ -111,23 +113,28 @@ namespace ProjetoMercado.view
 
         private void btnExcluir_Click(object sender, EventArgs e)
         {
-            /* Busca no Banco de Dados e exclui */
-            CategoriaDAO categoriaDAO = new CategoriaDAO();
-            Categoria categoria = GetDTO();
-            categoriaDAO.Delete(categoria);
+            /* Verifica se o usúario tem certeza que deseja excluir a categoria */
+            var result = MessageBox.Show(this, "Você tem certeza que deseja excluir esta categoria?", "Sim", MessageBoxButtons.YesNo);
 
-            AtualizaDGV(); /* Atualiza o Data Grid View */
+            if (result == DialogResult.Yes)
+            {
+                /* Busca no Banco de Dados e exclui */
+                Categoria categoria = GetDTO();
+                categoriaDAO.Delete(categoria);
 
-            txtDescricao.ReadOnly = true; /* Desabilita a edição */
+                AtualizaDGV(); /* Atualiza o Data Grid View */
 
-            /* Habilitação e desabilitação dos botões */
-            btnAdicionar.Enabled = true;
-            btnAtualizar.Enabled = false;
-            btnSalvar.Enabled = false;
-            btnExcluir.Enabled = false;
-            btnCancelar.Enabled = false;
+                txtDescricao.ReadOnly = true; /* Desabilita a edição */
 
-            limparTextBox(); /* Limpa as caixas de texto */
+                /* Habilitação e desabilitação dos botões */
+                btnAdicionar.Enabled = true;
+                btnAtualizar.Enabled = false;
+                btnSalvar.Enabled = false;
+                btnExcluir.Enabled = false;
+                btnCancelar.Enabled = false;
+
+                limparTextBox(); /* Limpa as caixas de texto */
+            }
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -148,6 +155,10 @@ namespace ProjetoMercado.view
         {
             this.Close(); /* Fecha a janela */
         }
+
+
+
+        /* ABAIXO APENAS METODOS AUXILIARES */
 
         /* Retorna um objeto categoria com as informações recolhidas da tela */
         private Categoria GetDTO()
@@ -171,8 +182,6 @@ namespace ProjetoMercado.view
         /* Atualiza as informações da dataGridView */
         private void AtualizaDGV()
         {
-            CategoriaDAO categoriaDAO = new CategoriaDAO();
-
             /* Recebe todas as categorias do Bando de Dados */
             List<Categoria> listaCategorias = categoriaDAO.ListAll();
 
@@ -194,7 +203,6 @@ namespace ProjetoMercado.view
             int codigo = int.Parse(dgvCategorias.CurrentRow.Cells[0].Value.ToString());
 
             /* Busca no Banco de Dados e preenche a tela */
-            CategoriaDAO categoriaDAO = new CategoriaDAO();
             Categoria categoria = categoriaDAO.Read(codigo);
             SetDTO(categoria);
         }
