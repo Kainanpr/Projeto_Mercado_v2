@@ -57,7 +57,7 @@ namespace ProjetoMercado.view
             /* Percorre toda a lista de itens adicionando no Data Grid View */
             foreach (ItemVenda itemVenda in listaItens)
                 dgvProdutos.Rows.Add(itemVenda.Produto.Codigo, itemVenda.Produto.Descricao,
-                    itemVenda.Quantidade, (itemVenda.Quantidade * itemVenda.Produto.Preco).ToString("c"));
+                    itemVenda.Quantidade, itemVenda.PrecoUnitario.ToString("c"), (itemVenda.Quantidade * itemVenda.PrecoUnitario).ToString("c"));
 
             /* Limpa a seleção de linha */
             dgvProdutos.ClearSelection();

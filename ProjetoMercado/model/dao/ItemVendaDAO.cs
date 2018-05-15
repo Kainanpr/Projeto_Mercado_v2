@@ -21,8 +21,8 @@ namespace ProjetoMercado.model.dao
             Database mercadoDB = Database.GetInstance();
 
             /* String que contém o SQL que será executado */
-            string query = "INSERT INTO Item_Venda (cod_venda, cod_produto, quantidade) " +
-                "VALUES (@Cod_venda, @Cod_produto, @Quantidade);";
+            string query = "INSERT INTO Item_Venda (cod_venda, cod_produto, quantidade, preco_unitario) " +
+                "VALUES (@Cod_venda, @Cod_produto, @Quantidade, @Preco_unitario);";
 
             /* Responsável pelo comando SQL */
             MySqlCommand command = new MySqlCommand(query);
@@ -31,6 +31,7 @@ namespace ProjetoMercado.model.dao
             command.Parameters.AddWithValue("@Cod_venda", itemVenda.Venda.Codigo);
             command.Parameters.AddWithValue("@Cod_produto", itemVenda.Produto.Codigo);
             command.Parameters.AddWithValue("@Quantidade", itemVenda.Quantidade);
+            command.Parameters.AddWithValue("@Preco_unitario", itemVenda.PrecoUnitario);
 
             /* Chama o método de Database para executar um comando que não retorna dados */
             mercadoDB.ExecuteSQL(command);
@@ -81,14 +82,15 @@ namespace ProjetoMercado.model.dao
                     itemVenda.Venda.Codigo = dataReader.GetInt32(1);
                     itemVenda.Produto.Codigo = dataReader.GetInt32(2);
                     itemVenda.Quantidade = dataReader.GetInt32(3);
-                    itemVenda.Venda.DataHora = dataReader.GetDateTime(5);
-                    itemVenda.Venda.ValotTotal = dataReader.GetDecimal(6);
-                    itemVenda.Produto.Preco = dataReader.GetDecimal(8);
-                    itemVenda.Produto.CodigoBarras = dataReader.GetInt64(9);
-                    itemVenda.Produto.Descricao = dataReader.GetString(10);
-                    itemVenda.Produto.Categoria.Codigo = dataReader.GetInt32(11);
-                    itemVenda.Produto.QntMinEstoque = dataReader.GetInt32(12);
-                    itemVenda.Produto.Categoria.Descricao = dataReader.GetString(13);
+                    itemVenda.PrecoUnitario = dataReader.GetDecimal(4);
+                    itemVenda.Venda.DataHora = dataReader.GetDateTime(6);
+                    itemVenda.Venda.ValotTotal = dataReader.GetDecimal(7);
+                    itemVenda.Produto.Preco = dataReader.GetDecimal(9);
+                    itemVenda.Produto.CodigoBarras = dataReader.GetInt64(10);
+                    itemVenda.Produto.Descricao = dataReader.GetString(11);
+                    itemVenda.Produto.Categoria.Codigo = dataReader.GetInt32(12);
+                    itemVenda.Produto.QntMinEstoque = dataReader.GetInt32(13);
+                    itemVenda.Produto.Categoria.Descricao = dataReader.GetString(14);
 
                     listaItens.Add(itemVenda); /* Adiciona na lista */
                 }

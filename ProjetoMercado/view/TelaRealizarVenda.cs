@@ -145,6 +145,10 @@ namespace ProjetoMercado.view
                 /* Coloca a quantidade em item */
                 itemVenda.Quantidade = int.Parse(dgvProdutos.Rows[i].Cells[2].Value.ToString());
 
+                /* Pega o preco do produto e coloca o preco no item da venda 
+                 * (Caso o valor do produto mude, temos esse registro do valor que o produto foi vendido)*/
+                itemVenda.PrecoUnitario = itemVenda.Produto.Preco;
+
                 /* Grava o ItemVenda no Banco de Dados */
                 itemVendaDAO.Create(itemVenda);
             }

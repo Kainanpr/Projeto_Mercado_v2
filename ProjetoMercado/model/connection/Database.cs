@@ -138,6 +138,7 @@ namespace ProjetoMercado.model.connection
                     "cod_venda INTEGER NOT NULL," +
                     "cod_produto INTEGER NOT NULL," +
                     "quantidade INTEGER NOT NULL," +
+                    "preco_unitario DECIMAL(10,2) NOT NULL," +
                     "CONSTRAINT pk_item PRIMARY KEY(codigo)," +
                     "CONSTRAINT fk_item_venda FOREIGN KEY(cod_venda) " +
                     "REFERENCES Venda (codigo)," +
