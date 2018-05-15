@@ -15,6 +15,9 @@ namespace ProjetoMercado.view
 {
     public partial class TelaListarVendas : Form
     {
+        /* Atributo responsável pelo CRUD venda */
+        private VendaDAO vendaDAO = new VendaDAO();
+
         public TelaListarVendas()
         {
             InitializeComponent();
@@ -27,8 +30,6 @@ namespace ProjetoMercado.view
 
         private void AtualizaDGVVendas()
         {
-            VendaDAO vendaDAO = new VendaDAO();
-
             /* Recebe todos os dados do Banco de Dados */
             List<Venda> listaVendas = vendaDAO.ListAll();
 

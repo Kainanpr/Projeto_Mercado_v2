@@ -16,7 +16,7 @@ namespace ProjetoMercado.view
     public partial class TelaCategoria : Form
     {
         /* Atributo responsável pelo CRUD categoria */
-        CategoriaDAO categoriaDAO = new CategoriaDAO();
+        private CategoriaDAO categoriaDAO = new CategoriaDAO();
 
         public TelaCategoria()
         {
@@ -114,7 +114,7 @@ namespace ProjetoMercado.view
         private void btnExcluir_Click(object sender, EventArgs e)
         {
             /* Verifica se o usúario tem certeza que deseja excluir a categoria */
-            var result = MessageBox.Show(this, "Você tem certeza que deseja excluir esta categoria?", "Sim", MessageBoxButtons.YesNo);
+            var result = MessageBox.Show(this, "Você tem certeza que deseja excluir esta categoria?", "Atenção", MessageBoxButtons.YesNo);
 
             if (result == DialogResult.Yes)
             {

@@ -15,6 +15,9 @@ namespace ProjetoMercado.view
 {
     public partial class TelaProduto : Form
     {
+        /* Atributo responsável pelo CRUD produto */
+        private ProdutoDAO produtoDAO = new ProdutoDAO();
+
         public TelaProduto()
         {
             InitializeComponent();
@@ -68,7 +71,6 @@ namespace ProjetoMercado.view
         private void btnSalvar_Click(object sender, EventArgs e)
         {
             Produto produto;
-            ProdutoDAO produtoDAO = new ProdutoDAO();
 
             /* Verifica se os campos obrigatórios estão preenchidos */
             if (!txtPreco.Text.Equals("") && !txtCodBarras.Text.Equals("") &&
@@ -126,7 +128,6 @@ namespace ProjetoMercado.view
         private void btnExcluir_Click(object sender, EventArgs e)
         {
             /* Busca no Banco de Dados e exclui */
-            ProdutoDAO produtoDAO = new ProdutoDAO();
             Produto produto = GetDTO();
             produtoDAO.Delete(produto);
 
@@ -200,8 +201,6 @@ namespace ProjetoMercado.view
         /* Atualiza as informações da dataGridView */
         private void AtualizaDGV()
         {
-            ProdutoDAO produtoDAO = new ProdutoDAO();
-
             /* Recebe todos os produtos do Bando de Dados */
             List<Produto> listaProdutos = produtoDAO.ListAll();
 
@@ -238,7 +237,6 @@ namespace ProjetoMercado.view
             int codigo = int.Parse(dgvProdutos.CurrentRow.Cells[0].Value.ToString());
 
             /* Busca no Banco de Dados e preenche a tela */
-            ProdutoDAO produtoDAO = new ProdutoDAO();
             Produto produto = produtoDAO.Read(codigo);
             SetDTO(produto);
         }

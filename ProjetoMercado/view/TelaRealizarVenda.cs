@@ -15,6 +15,13 @@ namespace ProjetoMercado.view
 {
     public partial class TelaRealizarVenda : Form
     {
+        /* Atributo responsável pelo CRUD produto */
+        private ProdutoDAO produtoDAO = new ProdutoDAO();
+        /* Atributo responsável pelo CRUD venda */
+        private VendaDAO vendaDAO = new VendaDAO();
+        /* Atributo responsável pelo CRUD itemVenda */
+        private ItemVendaDAO itemVendaDAO = new ItemVendaDAO();
+
         decimal subTotal = 0.0m;
 
         public TelaRealizarVenda()
@@ -28,7 +35,6 @@ namespace ProjetoMercado.view
             /* Verifica se existe um código de barras inserido */
             if (!txtCodBarras.Text.Equals(""))
             {
-                ProdutoDAO produtoDAO = new ProdutoDAO();
                 Produto produto;
 
                 /* Recupera o produto no Banco de Dados */
@@ -51,7 +57,6 @@ namespace ProjetoMercado.view
 
         private void btnConfirmarProduto_Click(object sender, EventArgs e)
         {
-            ProdutoDAO produtoDAO = new ProdutoDAO();
             Produto produto = produtoDAO.Read(long.Parse(txtCodBarras.Text));
 
             /* Salva a quantidade, se não tiver nada no textbox assume 1 */
@@ -110,7 +115,6 @@ namespace ProjetoMercado.view
         private void btnConfirmarVenda_Click(object sender, EventArgs e)
         {
             /* Realiza as operações com a venda */
-            VendaDAO vendaDAO = new VendaDAO();
             Venda venda = new Venda();
 
             /* Coloca o codigo em venda, sendo o último inserido no banco mais um */
@@ -129,9 +133,7 @@ namespace ProjetoMercado.view
 
             /* Percorre todos os produtos que estão no Data Grid View */
             for(int i = 0; i < dgvProdutos.Rows.Count; i++)
-            {
-                ProdutoDAO produtoDAO = new ProdutoDAO();
-                ItemVendaDAO itemVendaDAO = new ItemVendaDAO();
+            {               
                 ItemVenda itemVenda = new ItemVenda();
 
                 /* Busca o produto pelo código presente no DGV e o coloca em item*/
