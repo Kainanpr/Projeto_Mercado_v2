@@ -17,6 +17,8 @@ namespace ProjetoMercado.view
     {
         /* Atributo responsável pelo CRUD venda */
         private VendaDAO vendaDAO = new VendaDAO();
+        /* Atributo responsável pelo CRUD itemVenda */
+        private ItemVendaDAO itemVendaDAO = new ItemVendaDAO();
 
         public TelaListarVendas()
         {
@@ -45,9 +47,7 @@ namespace ProjetoMercado.view
         private void dgvVendas_CellClick(object sender, DataGridViewCellEventArgs e)
         {
 
-            dgvProdutos.Rows.Clear();
-
-            ItemVendaDAO itemVendaDAO = new ItemVendaDAO();
+            dgvProdutos.Rows.Clear();           
 
             int codVenda = int.Parse(dgvVendas.CurrentRow.Cells[0].Value.ToString());
 

@@ -17,6 +17,8 @@ namespace ProjetoMercado.view
     {
         /* Atributo responsável pelo CRUD produto */
         private ProdutoDAO produtoDAO = new ProdutoDAO();
+        /* Atributo responsável pelo CRUD categoria */
+        private CategoriaDAO categoriaDAO = new CategoriaDAO();
 
         public TelaProduto()
         {
@@ -169,7 +171,6 @@ namespace ProjetoMercado.view
         {
             Produto produto = new Produto();
             Categoria categoria = new Categoria();
-            CategoriaDAO categoriaDAO = new CategoriaDAO();
 
             /* Lê a categoria do Banco de Dados para recuperar o codigo 
              * e para saber se ela está cadastrada */
@@ -216,9 +217,7 @@ namespace ProjetoMercado.view
         }
 
         private void AtualizaCbCategoria()
-        {
-            CategoriaDAO categoriaDAO = new CategoriaDAO();
-
+        {          
             /* Recebe todas as Categorias do Bando de Dados */
             List<Categoria> listaCategorias = categoriaDAO.ListAll();
 
