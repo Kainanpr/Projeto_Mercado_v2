@@ -90,8 +90,7 @@ namespace ProjetoMercado.model.connection
                 command = new MySqlCommand(query, connection);
                 command.ExecuteNonQuery();
 
-                /* Inclui o Banco de Dados na connectionString e muda o banco de dados em uso */
-                connectionString = "Server=localhost; Database=mercado; Uid=root; Pwd=";
+                /* Muda o banco de dados em uso */
                 connection.ChangeDatabase("mercado");
 
                 /* SQL para criar a tabela categoria */
