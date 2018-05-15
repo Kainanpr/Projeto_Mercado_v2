@@ -129,22 +129,28 @@ namespace ProjetoMercado.view
 
         private void btnExcluir_Click(object sender, EventArgs e)
         {
-            /* Busca no Banco de Dados e exclui */
-            Produto produto = GetDTO();
-            produtoDAO.Delete(produto);
+            /* Verifica se o usúario tem certeza que deseja excluir um produto */
+            var result = MessageBox.Show(this, "Você tem certeza que deseja excluir este produto?", "Atenção", MessageBoxButtons.YesNo);
 
-            AtualizaDGV(); /* Atualiza o Data Grid View */
+            if (result == DialogResult.Yes)
+            {
+                /* Busca no Banco de Dados e exclui */
+                Produto produto = GetDTO();
+                produtoDAO.Delete(produto);
 
-            habilitarEdicao(false); /* Desabilita a edição */
+                AtualizaDGV(); /* Atualiza o Data Grid View */
 
-            /* Habilitação e desabilitação dos botões */
-            btnAdicionar.Enabled = true;
-            btnAtualizar.Enabled = false;
-            btnSalvar.Enabled = false;
-            btnExcluir.Enabled = false;
-            btnCancelar.Enabled = false;
+                habilitarEdicao(false); /* Desabilita a edição */
 
-            limparTextBox(); /* Limpa as caixas de texto */
+                /* Habilitação e desabilitação dos botões */
+                btnAdicionar.Enabled = true;
+                btnAtualizar.Enabled = false;
+                btnSalvar.Enabled = false;
+                btnExcluir.Enabled = false;
+                btnCancelar.Enabled = false;
+
+                limparTextBox(); /* Limpa as caixas de texto */
+            }
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -165,6 +171,10 @@ namespace ProjetoMercado.view
         {
             this.Close(); /* Fecha a janela */
         }
+
+
+
+        /* ABAIXO APENAS METODOS AUXILIARES */
 
         /* Retorna um objeto categoria com as informações recolhidas da tela */
         private Produto GetDTO()
@@ -191,7 +201,7 @@ namespace ProjetoMercado.view
         private void SetDTO(Produto produto)
         {
             txtCodigo.Text = produto.Codigo.ToString();
-            txtPreco.Text = produto.Preco.ToString("c");
+            txtPreco.Text = produto.Preco.ToString();
             txtCodBarras.Text = produto.CodigoBarras.ToString();
             txtDescricao.Text = produto.Descricao;
             cbCategoria.Text = produto.Categoria.Descricao;

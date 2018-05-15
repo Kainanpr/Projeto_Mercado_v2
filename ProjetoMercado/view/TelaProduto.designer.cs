@@ -182,11 +182,11 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(211, 25);
+            this.label6.Location = new System.Drawing.Point(199, 25);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(44, 16);
+            this.label6.Size = new System.Drawing.Size(72, 16);
             this.label6.TabIndex = 15;
-            this.label6.Text = "Preço";
+            this.label6.Text = "Preço (R$)";
             // 
             // txtQntMinEstoque
             // 
