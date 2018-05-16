@@ -70,6 +70,7 @@
             this.btnFornecedores.TabIndex = 1;
             this.btnFornecedores.Text = "Fornecedores";
             this.btnFornecedores.UseVisualStyleBackColor = true;
+            this.btnFornecedores.Click += new System.EventHandler(this.btnFornecedores_Click);
             // 
             // btnCategorias
             // 

@@ -98,7 +98,26 @@ namespace ProjetoMercado.model.connection
                     "codigo INTEGER AUTO_INCREMENT," +
                     "descricao VARCHAR(64) NOT NULL," +
                     "CONSTRAINT pk_categoria PRIMARY KEY(codigo)," +
-                    "CONSTRAINT un_categoria UNIQUE(descricao));";
+                    "CONSTRAINT un_categoria_descricao UNIQUE(descricao));";
+
+                /* Executa o comando MySql */
+                command = new MySqlCommand(query, connection);
+                command.ExecuteNonQuery();
+
+                /* SQL para criar a tabela Fornecedor */
+                query = "CREATE TABLE IF NOT EXISTS Fornecedor (" +
+                    "codigo INTEGER AUTO_INCREMENT," +
+                    "cnpj VARCHAR(64) NOT NULL," +
+                    "nome VARCHAR(64) NOT NULL," +
+                    "email VARCHAR(64) NOT NULL," +
+                    "telefone VARCHAR(64) NOT NULL," +
+                    "rua VARCHAR(64) NOT NULL," +
+                    "numero INTEGER NOT NULL," +
+                    "cep VARCHAR(64) NOT NULL," +
+                    "cidade VARCHAR(64) NOT NULL," +
+                    "estado VARCHAR(64) NOT NULL," +
+                    "CONSTRAINT pk_fornecedor PRIMARY KEY(codigo), " +
+                    "CONSTRAINT un_fornecedor_cnpj UNIQUE(cnpj));";
 
                 /* Executa o comando MySql */
                 command = new MySqlCommand(query, connection);
@@ -112,10 +131,13 @@ namespace ProjetoMercado.model.connection
                     "descricao VARCHAR(64) NOT NULL," +
                     "cod_categoria INTEGER NOT NULL," +
                     "qnt_min_estoque INTEGER NOT NULL," +
+                    "cod_fornecedor INTEGER NOT NULL, " +
                     "CONSTRAINT pk_produto PRIMARY KEY(codigo)," +
-                    "CONSTRAINT un_produto UNIQUE(descricao)," +
+                    "CONSTRAINT un_produto_descricao UNIQUE(descricao)," +
                     "CONSTRAINT fk_prod_categoria FOREIGN KEY(cod_categoria) " +
-                    "REFERENCES Categoria(codigo));";
+                    "REFERENCES Categoria(codigo), " +
+                    "CONSTRAINT fk_prod_fornecedor FOREIGN KEY(cod_fornecedor) " +
+                    "REFERENCES Fornecedor(codigo));";
 
                 /* Executa o comando MySql */
                 command = new MySqlCommand(query, connection);
@@ -147,7 +169,7 @@ namespace ProjetoMercado.model.connection
 
                 /* Executa o comando MySql */
                 command = new MySqlCommand(query, connection);
-                command.ExecuteNonQuery();
+                command.ExecuteNonQuery();            
 
             }
             catch (Exception exception)

@@ -50,15 +50,23 @@
   <ItemGroup>
     <Compile Include="model\connection\Database.cs" />
     <Compile Include="model\dao\CategoriaDAO.cs" />
+    <Compile Include="model\dao\FornecedorDAO.cs" />
     <Compile Include="model\dao\ItemVendaDAO.cs" />
     <Compile Include="model\dao\ProdutoDAO.cs" />
     <Compile Include="model\dao\VendaDAO.cs" />
     <Compile Include="model\domain\Categoria.cs" />
+    <Compile Include="model\domain\Fornecedor.cs" />
     <Compile Include="model\domain\ItemVenda.cs" />
     <Compile Include="model\domain\Produto.cs" />
     <Compile Include="model\domain\Venda.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="view\TelaFornecedor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\TelaFornecedor.designer.cs">
+      <DependentUpon>TelaFornecedor.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\TelaCategoria.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -98,6 +106,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="view\TelaFornecedor.resx">
+      <DependentUpon>TelaFornecedor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="view\TelaCategoria.resx">
       <DependentUpon>TelaCategoria.cs</DependentUpon>
     </EmbeddedResource>

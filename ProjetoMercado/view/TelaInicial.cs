@@ -44,5 +44,12 @@ namespace ProjetoMercado.view
             TelaListarVendas telaListarVendas = new TelaListarVendas();
             telaListarVendas.ShowDialog();
         }
+
+        private void btnFornecedores_Click(object sender, EventArgs e)
+        {
+            /* Abre a Tela de Fornecedores */
+            TelaFornecedor telaFornecedor = new TelaFornecedor();
+            telaFornecedor.ShowDialog();
+        }
     }
 }

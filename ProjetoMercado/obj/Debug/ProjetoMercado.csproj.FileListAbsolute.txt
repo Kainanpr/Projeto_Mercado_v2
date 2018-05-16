@@ -13,3 +13,4 @@ C:\Users\KainanXD\Documents\Visual Studio 2013\Projects\ProjetoMercado\ProjetoMe
 C:\Users\KainanXD\Documents\Visual Studio 2013\Projects\ProjetoMercado\ProjetoMercado\obj\Debug\ProjetoMercado.view.TelaRealizarVenda.resources
 C:\Users\KainanXD\Documents\Visual Studio 2013\Projects\ProjetoMercado\ProjetoMercado\bin\Debug\MySql.Data.dll
 C:\Users\KainanXD\Documents\Visual Studio 2013\Projects\ProjetoMercado\ProjetoMercado\bin\Debug\MySql.Data.xml
+C:\Users\KainanXD\Documents\Visual Studio 2013\Projects\ProjetoMercado\ProjetoMercado\obj\Debug\ProjetoMercado.view.TelaFornecedor.resources
