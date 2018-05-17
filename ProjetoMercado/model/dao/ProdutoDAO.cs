@@ -22,8 +22,8 @@ namespace ProjetoMercado.model.dao
 
             /* String que contém o SQL que será executado */
             string query = "INSERT INTO Produto (preco, cod_barras, descricao, " +
-                "cod_categoria, qnt_min_estoque) VALUE (@Preco, @Cod_barras, " +
-                "@Descricao, @Cod_categoria, @Qnt_min_estoque);";
+                "cod_categoria, qnt_min_estoque, cod_fornecedor) VALUE (@Preco, @Cod_barras, " +
+                "@Descricao, @Cod_categoria, @Qnt_min_estoque, @Cod_fornecedor);";
 
             /* Responsável pelo comando SQL */
             MySqlCommand command = new MySqlCommand(query);
@@ -34,6 +34,7 @@ namespace ProjetoMercado.model.dao
             command.Parameters.AddWithValue("@Descricao", produto.Descricao);
             command.Parameters.AddWithValue("@Cod_Categoria", produto.Categoria.Codigo);
             command.Parameters.AddWithValue("@Qnt_min_estoque", produto.QntMinEstoque);
+            command.Parameters.AddWithValue("@Cod_fornecedor", produto.Fornecedor.Codigo);
 
             /* Chama o método de Database para executar um comando que não retorna dados */
             mercadoDB.ExecuteSQL(command);

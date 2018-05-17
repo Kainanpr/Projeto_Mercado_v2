@@ -50,10 +50,14 @@ namespace ProjetoMercado.view
                     {
                         /*Encontra o cliente de acordo com seu nome
                          *(Metodo pode lançar uma exceção caso nao encontre o cliente)*/
-                        List<Fornecedor> fornecedores = fornecedorDAO.FindByName(txtPesquisarFornecedor.Text.ToLower());
+                        Fornecedor fornecedor = fornecedorDAO.Read(txtPesquisarFornecedor.Text.ToLower());
 
-                        //Chama o metodo auxiliar que nos criamos para atualizar a tabela de acordo com os dados
-                        AtualizarGrid(fornecedores);
+                        //Limpa todas as rows
+                        dataGridViewClientes.Rows.Clear();
+
+                        //Atualiza a gride
+                        dataGridViewClientes.Rows.Add(fornecedor.Codigo, fornecedor.Nome, fornecedor.Cnpj);
+        
                     }
                     //Caso não encontre nenhum cliente irá recuperar a exceção que nos lançamos
                     catch (Exception ex)
@@ -181,7 +185,7 @@ namespace ProjetoMercado.view
                 btnPesquisar.Enabled = false;
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("Erro: Selecione uma linha válida da tabela");
             }
@@ -286,7 +290,7 @@ namespace ProjetoMercado.view
                 //Envia o cliente para setar a view
                 SetDTO(fornecedor);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //Caso não encontre nenhum cliente limpe os campos
                 LimparCamposGeral();

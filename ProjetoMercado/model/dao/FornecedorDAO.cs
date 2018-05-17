@@ -135,9 +135,62 @@ namespace ProjetoMercado.model.dao
             mercadoDB.ExecuteSQL(command);
         }
 
-        public List<Fornecedor> FindByName(string nome)
+        public Fornecedor Read(string nome)
         {
-            return null;
+            /* Recebe a conexão utilizada para acessar o Banco de Dados */
+            MySqlConnection connection = Database.GetInstance().GetConnection();
+
+            /* Objeto de Categoria para receber as informações do Banco de Dados */
+            Fornecedor fornecedor = null;
+
+            /* String que contém o SQL que será executado */
+            string query = "SELECT * FROM Fornecedor WHERE lower(nome) LIKE @Nome;";
+
+            /* Responsável pelo comando SQL */
+            MySqlCommand command = new MySqlCommand(query, connection);
+
+            /* Adição de parametros ja com valor */
+            command.Parameters.AddWithValue("@Nome", nome + "%");
+
+            try
+            {
+                /* Abre a conexão */
+                if (connection.State != System.Data.ConnectionState.Open)
+                    connection.Open();
+
+                /* Responsável pela leitura do Banco de Dados */
+                MySqlDataReader dataReader = command.ExecuteReader();
+
+                /* Verifica se troxe informações do banco e coloca no objeto categoria */
+                if (dataReader.Read())
+                {
+                    fornecedor = new Fornecedor();
+                    fornecedor.Codigo = dataReader.GetInt32(0);
+                    fornecedor.Cnpj = dataReader.GetString(1);
+                    fornecedor.Nome = dataReader.GetString(2);
+                    fornecedor.Email = dataReader.GetString(3);
+                    fornecedor.Telefone = dataReader.GetString(4);
+                    fornecedor.Rua = dataReader.GetString(5);
+                    fornecedor.Numero = dataReader.GetInt32(6);
+                    fornecedor.Cep = dataReader.GetString(7);
+                    fornecedor.Cidade = dataReader.GetString(8);
+                    fornecedor.Estado = dataReader.GetString(9);
+                }
+                /* Fecha o dataReader */
+                dataReader.Close();
+            }
+            catch (Exception exception)
+            {
+                /* Se ocorrer alguma exceção mostra uma caixa de texto com o erro */
+                MessageBox.Show(exception.ToString(), "Erro", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+            finally
+            {
+                /* Fecha a conexão */
+                connection.Close();
+            }
+            return fornecedor;
         }
 
         public Fornecedor FindByCnpj(string cnpj)
@@ -147,7 +200,63 @@ namespace ProjetoMercado.model.dao
 
         public List<Fornecedor> ListAll()
         {
-            return null;
+            /* Recebe a conexão utilizada para acessar o Banco de Dados */
+
+            Database mercadoBD = Database.GetInstance();
+            MySqlConnection connection = mercadoBD.GetConnection();
+
+            /* Lista de produtos */
+            List<Fornecedor> listaFornecedor = new List<Fornecedor>();
+
+            /* Preenchido com as informações do Banco de Dados */
+            Fornecedor fornecedor;
+
+            /* String que contém o SQL que será executado */
+            string query = "SELECT * FROM Fornecedor";
+
+            /* Responsável pelo comando SQL */
+            MySqlCommand command = new MySqlCommand(query, connection);
+
+            try
+            {
+                /* Abre a conexão */
+                if (connection.State != System.Data.ConnectionState.Open)
+                    connection.Open();
+
+                /* Responsável pela leitura do Banco de Dados */
+                MySqlDataReader dataReader = command.ExecuteReader();
+
+                /* Lê todos os dados na tabela do Banco de Dados */
+                while (dataReader.Read())
+                {
+                    fornecedor = new Fornecedor();
+                    fornecedor.Codigo = dataReader.GetInt32(0);
+                    fornecedor.Cnpj = dataReader.GetString(1);
+                    fornecedor.Nome = dataReader.GetString(2);
+                    fornecedor.Email = dataReader.GetString(3);
+                    fornecedor.Telefone = dataReader.GetString(4);
+                    fornecedor.Rua = dataReader.GetString(5);
+                    fornecedor.Numero = dataReader.GetInt32(6);
+                    fornecedor.Cep = dataReader.GetString(7);
+                    fornecedor.Cidade = dataReader.GetString(8);
+                    fornecedor.Estado = dataReader.GetString(9);
+
+                    listaFornecedor.Add(fornecedor); /* Adiciona na lista */
+                }
+                dataReader.Close();
+            }
+            catch (Exception exception)
+            {
+                /* Se ocorrer alguma exceção mostra uma caixa de texto com o erro */
+                MessageBox.Show(exception.ToString(), "Erro", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+            finally
+            {
+                /* Fecha a conexão */
+                connection.Close();
+            }
+            return listaFornecedor; /* Retorna a lista */
         }
 
         

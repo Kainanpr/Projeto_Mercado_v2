@@ -19,6 +19,8 @@ namespace ProjetoMercado.view
         private ProdutoDAO produtoDAO = new ProdutoDAO();
         /* Atributo responsável pelo CRUD categoria */
         private CategoriaDAO categoriaDAO = new CategoriaDAO();
+        /* Atributo responsável pelo CRUD fornecedor */
+        private FornecedorDAO fornecedorDAO = new FornecedorDAO();
 
         public TelaProduto()
         {
@@ -29,6 +31,7 @@ namespace ProjetoMercado.view
         {
             AtualizaDGV(); /* Atualiza o Data Grid View */
             AtualizaCbCategoria(); /* Atualiza o Combo Box Categoria */
+            AtualizaCbFornecedor(); /* Atualiza o Combo Box Fornecedor */
         }
 
         private void dgvProdutos_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -52,6 +55,7 @@ namespace ProjetoMercado.view
             btnSalvar.Enabled = true;
             btnExcluir.Enabled = false;
             btnCancelar.Enabled = true;
+          
 
             limparTextBox(); /* Limpa as caixas de texto */
 
@@ -77,7 +81,7 @@ namespace ProjetoMercado.view
             /* Verifica se os campos obrigatórios estão preenchidos */
             if (!txtPreco.Text.Equals("") && !txtCodBarras.Text.Equals("") &&
                 !txtDescricao.Text.Equals("") && !cbCategoria.Text.Equals("") &&
-                !txtQntMinEstoque.Text.Equals(""))
+                !txtQntMinEstoque.Text.Equals("") && !cbFornecedor.Text.Equals(""))
             {
                 /* Chama o método para retornar um objeto produto com as informações da tela */
                 produto = GetDTO();
@@ -181,10 +185,15 @@ namespace ProjetoMercado.view
         {
             Produto produto = new Produto();
             Categoria categoria = new Categoria();
+            Fornecedor fornecedor = new Fornecedor();
 
             /* Lê a categoria do Banco de Dados para recuperar o codigo 
              * e para saber se ela está cadastrada */
             categoria = categoriaDAO.Read(cbCategoria.Text);
+
+            /* Lê a fornecedor do Banco de Dados para recuperar o codigo 
+             * e para saber se ela está cadastrada */
+            fornecedor = fornecedorDAO.Read(cbFornecedor.Text);
 
             /* Quando um Produto é adicionada, não é inserido o código */
             if (!txtCodigo.Text.Equals(""))
@@ -193,6 +202,7 @@ namespace ProjetoMercado.view
             produto.CodigoBarras = long.Parse(txtCodBarras.Text);
             produto.Descricao = txtDescricao.Text;
             produto.Categoria = categoria;
+            produto.Fornecedor = fornecedor;
             produto.QntMinEstoque = int.Parse(txtQntMinEstoque.Text);
             return produto;
         }
@@ -205,6 +215,7 @@ namespace ProjetoMercado.view
             txtCodBarras.Text = produto.CodigoBarras.ToString();
             txtDescricao.Text = produto.Descricao;
             cbCategoria.Text = produto.Categoria.Descricao;
+            cbFornecedor.Text = produto.Fornecedor.Nome;
             txtQntMinEstoque.Text = produto.QntMinEstoque.ToString();
 
         }
@@ -239,6 +250,21 @@ namespace ProjetoMercado.view
                 cbCategoria.Items.Add(categoria.Descricao);
         }
 
+
+        private void AtualizaCbFornecedor()
+        {
+            /* Recebe todas as Categorias do Bando de Dados */
+
+            List<Fornecedor> listaFornecedores = fornecedorDAO.ListAll();
+
+            /* Limpa o Combo Box */
+            cbFornecedor.Items.Clear();
+
+            /* Percorre a lista adicionando categoria por categoria no Combo Box */
+            foreach (Fornecedor fornecedor in listaFornecedores)
+                cbFornecedor.Items.Add(fornecedor.Nome);
+        }
+
         /* Verifica qual produto foi selecionada e o exibe */
         private void exibeProduto()
         {
@@ -257,6 +283,7 @@ namespace ProjetoMercado.view
             txtCodBarras.ReadOnly = !state;
             txtDescricao.ReadOnly = !state;
             cbCategoria.Enabled = state;
+            cbFornecedor.Enabled = state;
             txtQntMinEstoque.ReadOnly = !state;
         }
 
