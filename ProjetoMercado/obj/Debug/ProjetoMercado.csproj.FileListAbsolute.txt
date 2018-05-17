@@ -30,3 +30,6 @@ C:\Users\IFSP\Downloads\Projeto_Mercado_v2-master\ProjetoMercado\obj\Debug\Proje
 C:\Users\IFSP\Downloads\Projeto_Mercado_v2-master\ProjetoMercado\obj\Debug\ProjetoMercado.view.TelaProduto.resources
 C:\Users\IFSP\Downloads\Projeto_Mercado_v2-master\ProjetoMercado\obj\Debug\ProjetoMercado.view.TelaRealizarVenda.resources
 C:\Users\IFSP\Downloads\Projeto_Mercado_v2-master\ProjetoMercado\obj\Debug\ProjetoMercado.csproj.GenerateResource.Cache
+C:\Users\IFSP\Desktop\Projeto_Mercado_v2\ProjetoMercado\bin\Debug\ProjetoMercado.exe.config
+C:\Users\IFSP\Desktop\Projeto_Mercado_v2\ProjetoMercado\obj\Debug\ProjetoMercado.exe
+C:\Users\IFSP\Desktop\Projeto_Mercado_v2\ProjetoMercado\obj\Debug\ProjetoMercado.pdb
