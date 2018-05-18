@@ -106,14 +106,15 @@ namespace ProjetoMercado.model.dao
         public Produto Read(long codigoBarras)
         {
             /* Recebe a conexão utilizada para acessar o Banco de Dados */
-            MySqlConnection connection = Database.GetInstance().GetConnection();
+            Database mercadoBD = Database.GetInstance();
+            MySqlConnection connection = mercadoBD.GetConnection();
 
             /* Objeto de Categoria para receber as informações do Banco de Dados */
             Produto produto = null;
 
             /* String que contém o SQL que será executado */
-            string query = "SELECT p.*, c.descricao FROM Produto p JOIN Categoria c " +
-                "ON p.cod_categoria = c.codigo WHERE p.cod_barras = @CodigoBarras;";
+            string query = "SELECT p.*, c.descricao, f.nome FROM Produto p JOIN Categoria c " +
+                "ON p.cod_categoria = c.codigo JOIN Fornecedor f ON p.cod_fornecedor = f.codigo WHERE p.cod_barras = @CodigoBarras;";
 
             /* Responsável pelo comando SQL */
             MySqlCommand command = new MySqlCommand(query, connection);
@@ -135,13 +136,16 @@ namespace ProjetoMercado.model.dao
                 {
                     produto = new Produto();
                     produto.Categoria = new Categoria();
+                    produto.Fornecedor = new Fornecedor();
                     produto.Codigo = dataReader.GetInt32(0);
                     produto.Preco = dataReader.GetDecimal(1);
                     produto.CodigoBarras = dataReader.GetInt64(2);
                     produto.Descricao = dataReader.GetString(3);
                     produto.Categoria.Codigo = dataReader.GetInt32(4);
                     produto.QntMinEstoque = dataReader.GetInt32(5);
-                    produto.Categoria.Descricao = dataReader.GetString(6);
+                    produto.Fornecedor.Codigo = dataReader.GetInt32(6);
+                    produto.Categoria.Descricao = dataReader.GetString(7);
+                    produto.Fornecedor.Nome = dataReader.GetString(8);
                 }
                 /* Fecha o dataReader */
                 dataReader.Close();
