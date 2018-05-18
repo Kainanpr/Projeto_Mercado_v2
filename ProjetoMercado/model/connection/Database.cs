@@ -14,7 +14,7 @@ namespace ProjetoMercado.model.connection
         private static MySqlConnection connection; /* Conexão com o Banco de Dados */
         private static Database instance; /* Instância do objeto Database */
         private string connectionString = /* String de configuração da Conexão */
-            "Server=localhost; Uid=root; Pwd=cocoazul";
+            "Server=localhost; Uid=root; Pwd=";
 
         /* Construtor privado */
         private Database()
