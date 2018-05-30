@@ -86,7 +86,7 @@ namespace ProjetoMercado.model.dao
                     itemVenda.Venda.DataHora = dataReader.GetDateTime(6);
                     itemVenda.Venda.ValotTotal = dataReader.GetDecimal(7);
                     itemVenda.Produto.Preco = dataReader.GetDecimal(9);
-                    itemVenda.Produto.CodigoBarras = dataReader.GetInt64(10);
+                    itemVenda.Produto.CodigoBarras = dataReader.GetString(10);
                     itemVenda.Produto.Descricao = dataReader.GetString(11);
                     itemVenda.Produto.Categoria.Codigo = dataReader.GetInt32(12);
                     itemVenda.Produto.QntMinEstoque = dataReader.GetInt32(13);
