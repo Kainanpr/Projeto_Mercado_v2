@@ -14,13 +14,32 @@ namespace ProjetoMercado.model.connection
         private static MySqlConnection connection; /* Conexão com o Banco de Dados */
         private static Database instance; /* Instância do objeto Database */
         private string connectionString = /* String de configuração da Conexão */
-            "Server=localhost; Uid=root; Pwd=";
+            "Server=localhost; database=mercado; Uid=root; Pwd=leonardobd";
 
         /* Construtor privado */
         private Database()
         {
-            connection = new MySqlConnection(connectionString); /* Configura a conexão */
-            CreateDB(); /* Chama o método para criar o Bando de Dados */
+            try
+            {
+                connection = new MySqlConnection(connectionString); /* Configura a conexão */
+                connection.Open(); /* Abre a conexão para teste */
+            }
+            catch (Exception exception)
+            {
+                if (exception.Message.ToString().Contains("Unknown database 'mercado'"))
+                {
+                    CreateDB(); /* Chama o método para criar o Bando de Dados */
+                }
+                else
+                {
+                    /* Se ocorrer algum erro mostra uma caixa de texto com o erro */
+                    MessageBox.Show(exception.Message.ToString(), "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            finally
+            {
+                connection.Close(); /* Fecha a conexão */
+            }
         }
 
         /* Retorna a Instância */
@@ -73,6 +92,9 @@ namespace ProjetoMercado.model.connection
         {
             try
             {
+                /* Troca a string de conexão */
+                connection.ConnectionString = "Server=localhost; Uid=root; Pwd=leonardobd";
+
                 /* Abre a conexão */
                 if (connection.State != System.Data.ConnectionState.Open)
                     connection.Open();
