@@ -44,7 +44,6 @@ namespace ProjetoMercado.view
             btnCancelar.Enabled = true;
 
             exibeProduto(); /* Exibe o produto nas caixas de texto */
-
         }
 
         private void btnAdicionar_Click(object sender, EventArgs e)
@@ -134,7 +133,8 @@ namespace ProjetoMercado.view
         private void btnExcluir_Click(object sender, EventArgs e)
         {
             /* Verifica se o usúario tem certeza que deseja excluir um produto */
-            var result = MessageBox.Show(this, "Você tem certeza que deseja excluir este produto?", "Atenção", MessageBoxButtons.YesNo);
+            var result = MessageBox.Show(this, "Você tem certeza que deseja excluir este produto?",
+                "Atenção", MessageBoxButtons.YesNo);
 
             if (result == DialogResult.Yes)
             {
@@ -176,7 +176,35 @@ namespace ProjetoMercado.view
             this.Close(); /* Fecha a janela */
         }
 
+        private void txtPreco_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            /* Só permite a inserção de dígitos e de uma vírgula no text box Preço */
+            if (!(char.IsDigit(e.KeyChar) || (e.KeyChar.Equals(',') && !txtPreco.Text.Contains(',')) ||
+                char.IsControl(e.KeyChar)))
+                e.Handled = true;
+        }
 
+        private void txtCodBarras_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            /* Permite apenas a inserção de dígitos no text box Código de Barras */
+            if (!(char.IsDigit(e.KeyChar) || char.IsControl(e.KeyChar)))
+                e.Handled = true;
+        }
+
+        private void txtDescricao_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            /* Não permite a inserção de dígitos e caracteres de pontuação no 
+             * text box descrição */
+            if (char.IsDigit(e.KeyChar) || char.IsPunctuation(e.KeyChar))
+                e.Handled = true;
+        }
+
+        private void txtQntMinEstoque_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            /* Permite apenas a inserção de dígitos no text box Quantidade Mínima */
+            if (!(char.IsDigit(e.KeyChar) || char.IsControl(e.KeyChar)))
+                e.Handled = true;
+        }
 
         /* ABAIXO APENAS METODOS AUXILIARES */
 
@@ -199,7 +227,7 @@ namespace ProjetoMercado.view
             if (!txtCodigo.Text.Equals(""))
                 produto.Codigo = int.Parse(txtCodigo.Text);
             produto.Preco = decimal.Parse(txtPreco.Text);
-            produto.CodigoBarras = long.Parse(txtCodBarras.Text);
+            produto.CodigoBarras = txtCodBarras.Text;
             produto.Descricao = txtDescricao.Text;
             produto.Categoria = categoria;
             produto.Fornecedor = fornecedor;
@@ -212,12 +240,11 @@ namespace ProjetoMercado.view
         {
             txtCodigo.Text = produto.Codigo.ToString();
             txtPreco.Text = produto.Preco.ToString();
-            txtCodBarras.Text = produto.CodigoBarras.ToString();
+            txtCodBarras.Text = produto.CodigoBarras;
             txtDescricao.Text = produto.Descricao;
             cbCategoria.Text = produto.Categoria.Descricao;
             cbFornecedor.Text = produto.Fornecedor.Nome;
             txtQntMinEstoque.Text = produto.QntMinEstoque.ToString();
-
         }
 
         /* Atualiza as informações da dataGridView */

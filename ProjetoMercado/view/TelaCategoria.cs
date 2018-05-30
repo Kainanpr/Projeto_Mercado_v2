@@ -37,7 +37,7 @@ namespace ProjetoMercado.view
             btnExcluir.Enabled = true;
             btnCancelar.Enabled = true;
                         
-            exibeCategoria(); /* Exibe a categoria nas caixas de texto */
+            ExibeCategoria(); /* Exibe a categoria nas caixas de texto */
         }
 
         private void btnAdicionar_Click(object sender, EventArgs e)
@@ -49,7 +49,7 @@ namespace ProjetoMercado.view
             btnExcluir.Enabled = false;
             btnCancelar.Enabled = true;
 
-            limparTextBox(); /* Limpa as caixas de texto */
+            LimparTextBox(); /* Limpa as caixas de texto */
 
             txtDescricao.ReadOnly = false; /* Habilita a edição */
         }
@@ -99,7 +99,7 @@ namespace ProjetoMercado.view
                 btnExcluir.Enabled = false;
                 btnCancelar.Enabled = false;
 
-                limparTextBox(); /* Limpa as caixas de texto */
+                LimparTextBox(); /* Limpa as caixas de texto */
 
                 txtDescricao.ReadOnly = true; /* Desabilita a edição */
             }
@@ -114,7 +114,8 @@ namespace ProjetoMercado.view
         private void btnExcluir_Click(object sender, EventArgs e)
         {
             /* Verifica se o usúario tem certeza que deseja excluir a categoria */
-            var result = MessageBox.Show(this, "Você tem certeza que deseja excluir esta categoria?", "Atenção", MessageBoxButtons.YesNo);
+            var result = MessageBox.Show(this, "Você tem certeza que deseja excluir esta categoria?",
+                "Atenção", MessageBoxButtons.YesNo);
 
             if (result == DialogResult.Yes)
             {
@@ -133,7 +134,7 @@ namespace ProjetoMercado.view
                 btnExcluir.Enabled = false;
                 btnCancelar.Enabled = false;
 
-                limparTextBox(); /* Limpa as caixas de texto */
+                LimparTextBox(); /* Limpa as caixas de texto */
             }
         }
 
@@ -146,7 +147,7 @@ namespace ProjetoMercado.view
             btnExcluir.Enabled = false;
             btnCancelar.Enabled = false;
 
-            limparTextBox(); /* Limpa as caixas de texto */
+            LimparTextBox(); /* Limpa as caixas de texto */
 
             txtDescricao.ReadOnly = true; /* Desabilita a edição */
         }
@@ -156,8 +157,14 @@ namespace ProjetoMercado.view
             this.Close(); /* Fecha a janela */
         }
 
-
-
+        private void txtDescricao_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            /* Não permite a inserção de dígitos e caracteres de pontuação no 
+             * text box descrição */
+            if (char.IsDigit(e.KeyChar) || char.IsPunctuation(e.KeyChar))
+                e.Handled = true;
+        }
+        
         /* ABAIXO APENAS METODOS AUXILIARES */
 
         /* Retorna um objeto categoria com as informações recolhidas da tela */
@@ -197,7 +204,7 @@ namespace ProjetoMercado.view
         }
 
         /* Verifica qual categora foi selecionada e a exibe */
-        private void exibeCategoria()
+        private void ExibeCategoria()
         {
             /* Pega o código da categoria selecionada */
             int codigo = int.Parse(dgvCategorias.CurrentRow.Cells[0].Value.ToString());
@@ -208,7 +215,7 @@ namespace ProjetoMercado.view
         }
 
         /* Limpa as caixas de texto */
-        private void limparTextBox()
+        private void LimparTextBox()
         {
             txtCodigo.Text = "";
             txtDescricao.Text = "";
