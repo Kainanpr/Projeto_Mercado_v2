@@ -7,399 +7,253 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
 using ProjetoMercado.model.domain;
 using ProjetoMercado.model.dao;
 
 namespace ProjetoMercado.view
 {
-
-    /* View responsavel pelo formulario de clientes na parte de exclusao, pesquisa e alterações
-     * Os eventos de botões representam a camada de controller(C) do MVC */
     public partial class TelaFornecedor : Form
     {
-
-        //Atributo responsavel por ter as regras de negocio relacionadas ao DAO
+        /* Atributo responsável pelo CRUD Fornecedor */
         private FornecedorDAO fornecedorDAO = new FornecedorDAO();
-
-        //Atributo para poder ser manipulado pelos metodos
-        private Fornecedor fornecedor = new Fornecedor();
 
         public TelaFornecedor()
         {
             InitializeComponent();
         }
 
-        private void btnSair_Click(object sender, EventArgs e)
+        private void TelaFornecedor_Load(object sender, EventArgs e)
         {
-            this.Close();
+            AtualizaDGV(); /* Atualiza o Data Grid View */
         }
 
-        private void btnPesquisar_Click(object sender, EventArgs e)
+        private void dgvFornecedores_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            //Verifica se o cliente digitou algo no campo localizar cliente
-            if (txtPesquisarFornecedor.Text != "")
-            {
-
-                //Verifica se o radio name esta selecionado
-                if (radioButtonNome.Checked)
-                {
-
-                    //Irá tentar encontrar um cliente
-                    try
-                    {
-                        /*Encontra o cliente de acordo com seu nome
-                         *(Metodo pode lançar uma exceção caso nao encontre o cliente)*/
-                        Fornecedor fornecedor = fornecedorDAO.Read(txtPesquisarFornecedor.Text.ToLower());
-
-                        //Limpa todas as rows
-                        dataGridViewClientes.Rows.Clear();
-
-                        //Atualiza a gride
-                        dataGridViewClientes.Rows.Add(fornecedor.Codigo, fornecedor.Nome, fornecedor.Cnpj);
-        
-                    }
-                    //Caso não encontre nenhum cliente irá recuperar a exceção que nos lançamos
-                    catch (Exception ex)
-                    {
-                        //Recupera a exceção com o erro que nos instanciamos
-                        MessageBox.Show("Erro: " + ex.Message);
-
-                        //Limpa todas as rows
-                        dataGridViewClientes.Rows.Clear();
-                    }
-
-                }//Fim if
-
-                //Verifica se o raio cpf esta selecionado
-                else if (radioButtonCnpj.Checked)
-                {
-
-                    //Irá tentar encontrar um cliente
-                    try
-                    {
-                        /*Encontra o cliente de acordo com seu cpf
-                         *(Metodo pode lançar uma exceção caso nao encontre o cliente)*/
-                        Fornecedor fornecedor = fornecedorDAO.FindByCnpj(txtPesquisarFornecedor.Text.ToLower());
-
-                        //Limpa todas as rows
-                        dataGridViewClientes.Rows.Clear();
-
-                        //Atualiza a gride
-                        dataGridViewClientes.Rows.Add(fornecedor.Codigo, fornecedor.Nome, fornecedor.Cnpj);
-
-                    }
-                    //Caso não encontre nenhum cliente irá recuperar a exceção que nos lançamos
-                    catch (Exception ex)
-                    {
-                        //Recupera a exceção com o erro que nos instanciamos
-                        MessageBox.Show("Erro: " + ex.Message);
-
-                        //Limpa todas as rows
-                        dataGridViewClientes.Rows.Clear();
-                    }
-                }
-                //Verifica se o raio codigo esta selecionado
-                else if (radioButtonCodigo.Checked)
-                {
-
-                    //Irá tentar encontrar um cliente
-                    try
-                    {
-                        /*Encontra o cliente de acordo com seu cpf
-                         *(Metodo pode lançar uma exceção caso nao encontre o cliente)*/
-                        Fornecedor fornecedor = fornecedorDAO.Read(int.Parse(txtPesquisarFornecedor.Text));
-
-                        //Limpa todas as rows
-                        dataGridViewClientes.Rows.Clear();
-
-                        //Atualiza a gride
-                        dataGridViewClientes.Rows.Add(fornecedor.Codigo, fornecedor.Nome, fornecedor.Cnpj);
-
-                    }
-                    //Caso não encontre nenhum cliente irá recuperar a exceção que nos lançamos
-                    catch (Exception ex)
-                    {
-                        //Recupera a exceção com o erro que nos instanciamos
-                        MessageBox.Show("Erro: " + ex.Message);
-
-                        //Limpa todas as rows
-                        dataGridViewClientes.Rows.Clear();
-                    }
-                }
-
-
-            }//Fim if
-            else
-            {
-                MessageBox.Show("Campo está em branco");
-            }
-
-        }
-
-        private void btnListar_Click(object sender, EventArgs e)
-        {
-            //Irá tentar encontrar um cliente
-            try
-            {
-                /*Encontra o cliente de acordo com seu id
-                 *(Metodo pode lançar uma exceção caso nao encontre o cliente)*/
-                List<Fornecedor> fornecedores = fornecedorDAO.ListAll();
-
-                //Chama o metodo auxiliar que nos criamos para atualizar a tabela de acordo com os dados
-                AtualizarGrid(fornecedores);
-            }
-            //Caso não encontre nenhum cliente irá recuperar a exceção que nos lançamos
-            catch (Exception ex)
-            {
-                //Recupera a exceção com o erro que nos instanciamos
-                MessageBox.Show("Erro: " + ex.Message);
-
-            }
-
-        }
-
-        private void btnAlterar_Click(object sender, EventArgs e)
-        {
-
-            try
-            {
-                //Pega o id do cliente da linha do datagrid que estiver selecionado
-                int id = int.Parse(dataGridViewClientes.CurrentRow.Cells[0].Value.ToString());
-
-                //Pesquisa o cliente selecionado
-                fornecedor = fornecedorDAO.Read(id);
-
-                //Envia o cliente para setar a view
-                SetDTO(fornecedor);
-
-                //Comandos abaixos apenas para resetar o layout
-                AbilitarCamposGeral();
-
-                btnSalvar.Enabled = true;
-                btnCancelar.Enabled = true;
-                btnExcluir.Enabled = true;
-
-                btnListar.Enabled = false;
-                btnAlterar.Enabled = false;
-                btnPesquisar.Enabled = false;
-
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Erro: Selecione uma linha válida da tabela");
-            }
-
-
-        }
-
-        private void btnCancelar_Click(object sender, EventArgs e)
-        {
-            LimparCamposGeral();
-            DesabilitarCamposGeral();
-
-            btnCancelar.Enabled = false;
-            btnSalvar.Enabled = false;
-            btnExcluir.Enabled = false;
-
-            btnListar.Enabled = true;
-            btnPesquisar.Enabled = true;
+            /* Habilitação e desabilitação dos botões */
             btnAdicionar.Enabled = true;
-            txtPesquisarFornecedor.Enabled = true;
-        }
-
-        private void btnSalvar_Click(object sender, EventArgs e)
-        {
-           
-            try
-            {
-                //Recupera os dados digitados na view
-                fornecedor = GetDTOCadastro(fornecedor);
-
-                if (fornecedor.Codigo == 0)
-                {
-                    fornecedorDAO.Create(fornecedor);
-                }
-                else
-                {
-                    //Envia o cliente para a camada de service que sera responsavel pela atualização do cliente
-                    fornecedorDAO.Update(fornecedor);
-                }
-  
-            }
-            //Captura uma exceção caso o usuario digite algo que esteja incorreto
-            catch (FormatException)
-            {
-                MessageBox.Show("Erro: Dados incorretos");
-                LimparCamposGeral();
-            }
-
-            //Comandos abaixos apenas para resetar o layout
-            DesabilitarCamposGeral();
-
+            btnAtualizar.Enabled = true;
             btnSalvar.Enabled = false;
-            btnCancelar.Enabled = false;
-            btnExcluir.Enabled = false;
+            btnExcluir.Enabled = true;
+            btnCancelar.Enabled = true;
 
-            btnListar.Enabled = true;
-            btnPesquisar.Enabled = true;
-            btnAdicionar.Enabled = true;
-            txtPesquisarFornecedor.Enabled = true;
-        }
-
-        private void btnExcluir_Click(object sender, EventArgs e)
-        {
-            var result = MessageBox.Show(this, "Você tem certeza que deseja excluir este cliente?", "Sim", MessageBoxButtons.YesNo);
-
-            if (result == DialogResult.Yes)
-            {
-                fornecedorDAO.Delete(fornecedor);
-
-                //Comandos abaixos apenas para resetar o layout
-                DesabilitarCamposGeral();
-
-                btnSalvar.Enabled = false;
-                btnCancelar.Enabled = false;
-                btnExcluir.Enabled = false;
-
-                btnListar.Enabled = true;
-                btnAlterar.Enabled = true;
-                btnPesquisar.Enabled = true;
-
-                LimparCamposGeral();
-
-                //Limpa todas as rows
-                dataGridViewClientes.Rows.Clear();
-            }
-
-        }
-
-
-        //Evento é disparado sempre que eu escolher uma linha da gride
-        private void dataGridViewClientes_SelectionChanged(object sender, EventArgs e)
-        {
-
-            try
-            {
-                //Pega o id do cliente da linha do datagrid que estiver selecionado
-                int id = int.Parse(dataGridViewClientes.CurrentRow.Cells[0].Value.ToString());
-
-                //Pesquisa o cliente selecionado
-                fornecedor = fornecedorDAO.Read(id);
-
-                //Envia o cliente para setar a view
-                SetDTO(fornecedor);
-            }
-            catch (Exception)
-            {
-                //Caso não encontre nenhum cliente limpe os campos
-                LimparCamposGeral();
-            }
-
+            ExibeFornecedor(); /* Exibe o Fornecedor nas caixas de texto */
         }
 
         private void btnAdicionar_Click(object sender, EventArgs e)
         {
-            txtPesquisarFornecedor.Enabled = false;
-            btnPesquisar.Enabled = false;
-            btnListar.Enabled = false;
+            /* Habilitação e desabilitação dos botões */
             btnAdicionar.Enabled = false;
-
-            btnCancelar.Enabled = true;
+            btnAtualizar.Enabled = false;
             btnSalvar.Enabled = true;
+            btnExcluir.Enabled = false;
+            btnCancelar.Enabled = true;
 
-            AbilitarCamposGeral();
+
+            LimparTextBox(); /* Limpa as caixas de texto */
+
+            HabilitarEdicao(true); /* Habilita a edição */
         }
 
-        //Metodos auxiliares
-        private void AbilitarCamposGeral()
+        private void btnAtualizar_Click(object sender, EventArgs e)
         {
-            txtCnpj.Enabled = true;
-            txtTelefone.Enabled = true;
-            txtCidade.Enabled = true;
-            txtCep.Enabled = true;
-            txtEndereco.Enabled = true;
-            txtEmail.Enabled = true;
-            txtNumero.Enabled = true;
-            txtEstado.Enabled = true;
-            txtNome.Enabled = true;
+            /* Habilitação e desabilitação dos botões */
+            btnAdicionar.Enabled = false;
+            btnAtualizar.Enabled = false;
+            btnSalvar.Enabled = true;
+            btnExcluir.Enabled = false;
+            btnCancelar.Enabled = true;
+
+            HabilitarEdicao(true); /* Habilita a edição */
         }
 
-        private void DesabilitarCamposGeral()
+        private void btnSalvar_Click(object sender, EventArgs e)
         {
-            txtCnpj.Enabled = false;
-            txtTelefone.Enabled = false;
-            txtCidade.Enabled = false;
-            txtCep.Enabled = false;
-            txtEndereco.Enabled = false;
-            txtEmail.Enabled = false;
-            txtNumero.Enabled = false;
-            txtEstado.Enabled = false;
-            txtNome.Enabled = false;
-        }
+            Fornecedor fornecedor;
 
-        private void LimparCamposGeral()
-        {
-            txtCnpj.Clear();
-            txtTelefone.Clear();
-            txtCidade.Clear();
-            txtCep.Clear();
-            txtEndereco.Clear();
-            txtEmail.Clear();
-            txtNumero.Clear();
-            txtEstado.Clear();
-            txtNome.Clear();
-        }
-
-        private void AtualizarGrid(List<Fornecedor> clientes)
-        {
-            //Limpa todas as rows
-            dataGridViewClientes.Rows.Clear();
-
-            //Percorre a lista de clientes
-            foreach (Fornecedor cli in clientes)
+            /* Verifica se os campos obrigatórios estão preenchidos */
+            if(!txtCNPJ.Text.Equals("") && !txtNome.Text.Equals("") &&
+                !txtEmail.Text.Equals("") && !txtTelefone.Text.Equals("") &&
+                !txtCEP.Text.Equals("") && !txtRua.Text.Equals("") &&
+                !txtN.Text.Equals("") && !txtCidade.Text.Equals("") &&
+                !txtEstado.Text.Equals(""))
             {
-                //Adiciona os dados do cliente na row
-                dataGridViewClientes.Rows.Add(cli.Codigo, cli.Nome, cli.Cnpj);
+                /* Chama o método para retornar um objeto Fornecedor com as informações da tela */
+                fornecedor = GetDTO();
+
+                if(txtCodigo.Text.Equals(""))
+                {
+                    /* Quando um fornecedor está sendo adicionado ela não possui código, 
+                     * logo, o txtCodigo estará sempre vazio. É chamado então, o método 
+                     * para criar o fornecedor no Banco de Dados */
+                    fornecedorDAO.Create(fornecedor);
+                }
+                else
+                {
+                    /* Já quando ele está sendo atualizado, o txtCodigo estará preenchido,
+                     * então o método para atualizar o fornecedor no Banco de Dados é chamado */
+                    fornecedorDAO.Update(fornecedor);
+                }
+
+                /* Atualiza o Data Grid View */
+                AtualizaDGV();
+
+                /* Habilitação e desabilitação dos botões */
+                btnAdicionar.Enabled = true;
+                btnAtualizar.Enabled = false;
+                btnSalvar.Enabled = false;
+                btnExcluir.Enabled = false;
+                btnCancelar.Enabled = false;
+
+                LimparTextBox(); /* Limpa as caixas de texto */
+
+                HabilitarEdicao(false); /* Desabilita a edição */
+            }
+            else
+            {
+                /* Exibe uma mensagem informando falta de informações */
+                MessageBox.Show("Por favor, preencha todas a informações", "Faltando informações",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
-        /* Metodos auxiliares (DTO). 
-         * Coleta os dados da visão e passa os dados para o modelo */
-        private Fornecedor GetDTOCadastro(Fornecedor fornecedor)
+        private void btnExcluir_Click(object sender, EventArgs e)
         {
-            fornecedor.Nome = txtNome.Text == "" ? null : txtNome.Text;
-            fornecedor.Cnpj = txtCnpj.Text == "" ? null : txtCnpj.Text;
-            fornecedor.Email = txtEmail.Text == "" ? null : txtEmail.Text;
-            fornecedor.Telefone = txtTelefone.Text == "" ? null : txtTelefone.Text;
+            /* Verifica se o usúario tem certeza que deseja excluir o fornecedor */
+            var result = MessageBox.Show(this, "Você tem certeza que deseja excluir este produto?",
+                "Atenção", MessageBoxButtons.YesNo);
 
-            fornecedor.Rua = txtEndereco.Text == "" ? null : txtEndereco.Text;
-            fornecedor.Numero = int.Parse(txtNumero.Text);
-            fornecedor.Cep = txtCep.Text == "" ? null : txtCep.Text;
-            fornecedor.Cidade = txtCidade.Text == "" ? null : txtCidade.Text;
-            fornecedor.Estado = txtEstado.Text == "" ? null : txtEstado.Text;
+            if (result == DialogResult.Yes)
+            {
+                /* Busca no Banco de Dados e exclui */
+                Fornecedor fornecedor = GetDTO();
+                fornecedorDAO.Delete(fornecedor);
 
+                AtualizaDGV(); /* Atualiza o Data Grid View */
+
+                HabilitarEdicao(false); /* Desabilita a edição */
+
+                /* Habilitação e desabilitação dos botões */
+                btnAdicionar.Enabled = true;
+                btnAtualizar.Enabled = false;
+                btnSalvar.Enabled = false;
+                btnExcluir.Enabled = false;
+                btnCancelar.Enabled = false;
+
+                LimparTextBox(); /* Limpa as caixas de texto */
+            }
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            /* Habilitação e desabilitação dos botões */
+            btnAdicionar.Enabled = true;
+            btnAtualizar.Enabled = false;
+            btnSalvar.Enabled = false;
+            btnExcluir.Enabled = false;
+            btnCancelar.Enabled = false;
+
+            LimparTextBox(); /* Limpa as caixas de texto */
+
+            HabilitarEdicao(false); /* Desabilita a edição */
+        }
+
+        private void btnVoltar_Click(object sender, EventArgs e)
+        {
+            this.Close(); /* Fecha a janela */
+        }
+
+        /* ABAIXO APENAS METODOS AUXILIARES */
+
+        /* Retorna um objeto categoria com as informações recolhidas da tela */
+        private Fornecedor GetDTO()
+        {
+            Fornecedor fornecedor = new Fornecedor();
+
+            /* Quando um Fornecedor é adicionado, não é inserido o código */
+            if (!txtCodigo.Text.Equals(""))
+                fornecedor.Codigo = int.Parse(txtCodigo.Text);
+            fornecedor.Cnpj = txtCNPJ.Text;
+            fornecedor.Nome = txtNome.Text;
+            fornecedor.Email = txtEmail.Text;
+            fornecedor.Telefone = txtTelefone.Text;
+            fornecedor.Rua = txtRua.Text;
+            fornecedor.Numero = int.Parse(txtN.Text);
+            fornecedor.Cep = txtCEP.Text;
+            fornecedor.Cidade = txtCidade.Text;
+            fornecedor.Estado = txtEstado.Text;
             return fornecedor;
         }
 
-        /* Metodos auxiliares (DTO). 
-         * Coloca as informações do modelo na visão */
-        private void SetDTO(Fornecedor cliente)
+        /* Preenche a tela com as informações passadas com a categoria */
+        private void SetDTO(Fornecedor fornecedor)
         {
-
-            txtNome.Text = cliente.Nome;
-            txtCnpj.Text = cliente.Cnpj;
-            txtEmail.Text = cliente.Email;
-            txtTelefone.Text = cliente.Telefone;
-            txtEndereco.Text = cliente.Rua;
-            txtNumero.Text = cliente.Numero == 0 ? "" : cliente.Numero.ToString();
-            txtCep.Text = cliente.Cep;
-            txtCidade.Text = cliente.Cidade;
-            txtEstado.Text = cliente.Estado;
-            
-            
+            txtCodigo.Text = fornecedor.Codigo.ToString();
+            txtCNPJ.Text = fornecedor.Cnpj;
+            txtNome.Text = fornecedor.Nome;
+            txtEmail.Text = fornecedor.Email;
+            txtTelefone.Text = fornecedor.Telefone;
+            txtRua.Text = fornecedor.Rua;
+            txtN.Text = fornecedor.Numero.ToString();
+            txtCEP.Text = fornecedor.Cep;
+            txtCidade.Text = fornecedor.Cidade;
+            txtEstado.Text = fornecedor.Estado;
         }
 
+        /* Atualiza as informações do dataGridView */
+        private void AtualizaDGV()
+        {
+            /* Recebe todos os fornecedores do Bando de Dados */
+            List<Fornecedor> listaFornecedores = fornecedorDAO.ListAll();
 
-    }//Fim da classe
-}//Fim da namespace
+            /* Limpa o Data Grid View */
+            dgvFornecedores.Rows.Clear();
+
+            /* Percorre a lista adicionando os fornecedores no Data Grid View */
+            foreach (Fornecedor fornecedor in listaFornecedores)
+                dgvFornecedores.Rows.Add(fornecedor.Codigo.ToString(), fornecedor.Nome, fornecedor.Telefone);
+
+            /* Limpa a seleção de linhas no Data Grid View */
+            dgvFornecedores.ClearSelection();
+        }
+
+        /* Verifica qual produto foi selecionada e o exibe */
+        private void ExibeFornecedor()
+        {
+            /* Pega o código do fornecedor selecionado */
+            int codigo = int.Parse(dgvFornecedores.CurrentRow.Cells[0].Value.ToString());
+
+            /* Busca no Banco de Dados e preenche a tela */
+            Fornecedor fornecedor = fornecedorDAO.Read(codigo);
+            SetDTO(fornecedor);
+        }
+
+        /* Habilita ou desabilita a edição das textBoxs */
+        private void HabilitarEdicao(bool state)
+        {
+            txtCNPJ.ReadOnly = !state;
+            txtNome.ReadOnly = !state;
+            txtEmail.ReadOnly = !state;
+            txtTelefone.ReadOnly = !state;
+            txtCEP.ReadOnly = !state;
+            txtRua.ReadOnly = !state;
+            txtN.ReadOnly = !state;
+            txtCidade.ReadOnly = !state;
+            txtEstado.ReadOnly = !state;
+        }
+
+        /* Limpa as caixas de texto */
+        private void LimparTextBox()
+        {
+            txtCodigo.Text = "";
+            txtCNPJ.Text = "";
+            txtNome.Text = "";
+            txtEmail.Text = "";
+            txtTelefone.Text = "";
+            txtCEP.Text = "";
+            txtRua.Text = "";
+            txtN.Text = "";
+            txtCidade.Text = "";
+            txtEstado.Text = "";
+        }
+    }
+}

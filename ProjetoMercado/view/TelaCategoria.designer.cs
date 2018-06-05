@@ -187,6 +187,7 @@
             this.txtDescricao.ReadOnly = true;
             this.txtDescricao.Size = new System.Drawing.Size(179, 22);
             this.txtDescricao.TabIndex = 1;
+            this.txtDescricao.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDescricao_KeyPress);
             // 
             // label2
             // 

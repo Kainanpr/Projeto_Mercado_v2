@@ -43,7 +43,7 @@ namespace ProjetoMercado.view
             btnExcluir.Enabled = true;
             btnCancelar.Enabled = true;
 
-            exibeProduto(); /* Exibe o produto nas caixas de texto */
+            ExibeProduto(); /* Exibe o produto nas caixas de texto */
         }
 
         private void btnAdicionar_Click(object sender, EventArgs e)
@@ -56,9 +56,9 @@ namespace ProjetoMercado.view
             btnCancelar.Enabled = true;
           
 
-            limparTextBox(); /* Limpa as caixas de texto */
+            LimparTextBox(); /* Limpa as caixas de texto */
 
-            habilitarEdicao(true); /* Habilita a edição */
+            HabilitarEdicao(true); /* Habilita a edição */
         }
 
         private void btnAtualizar_Click(object sender, EventArgs e)
@@ -70,7 +70,7 @@ namespace ProjetoMercado.view
             btnExcluir.Enabled = false;
             btnCancelar.Enabled = true;
 
-            habilitarEdicao(true); /* Habilita a edição */
+            HabilitarEdicao(true); /* Habilita a edição */
         }
 
         private void btnSalvar_Click(object sender, EventArgs e)
@@ -111,9 +111,9 @@ namespace ProjetoMercado.view
                     btnExcluir.Enabled = false;
                     btnCancelar.Enabled = false;
 
-                    limparTextBox(); /* Limpa as caixas de texto */
+                    LimparTextBox(); /* Limpa as caixas de texto */
 
-                    habilitarEdicao(false); /* Desabilita a edição */
+                    HabilitarEdicao(false); /* Desabilita a edição */
                 }
                 else
                 {
@@ -144,7 +144,7 @@ namespace ProjetoMercado.view
 
                 AtualizaDGV(); /* Atualiza o Data Grid View */
 
-                habilitarEdicao(false); /* Desabilita a edição */
+                HabilitarEdicao(false); /* Desabilita a edição */
 
                 /* Habilitação e desabilitação dos botões */
                 btnAdicionar.Enabled = true;
@@ -153,7 +153,7 @@ namespace ProjetoMercado.view
                 btnExcluir.Enabled = false;
                 btnCancelar.Enabled = false;
 
-                limparTextBox(); /* Limpa as caixas de texto */
+                LimparTextBox(); /* Limpa as caixas de texto */
             }
         }
 
@@ -166,9 +166,9 @@ namespace ProjetoMercado.view
             btnExcluir.Enabled = false;
             btnCancelar.Enabled = false;
 
-            limparTextBox(); /* Limpa as caixas de texto */
+            LimparTextBox(); /* Limpa as caixas de texto */
 
-            habilitarEdicao(false); /* Desabilita a edição */
+            HabilitarEdicao(false); /* Desabilita a edição */
         }
 
         private void btnVoltar_Click(object sender, EventArgs e)
@@ -293,7 +293,7 @@ namespace ProjetoMercado.view
         }
 
         /* Verifica qual produto foi selecionada e o exibe */
-        private void exibeProduto()
+        private void ExibeProduto()
         {
             /* Pega o código da categoria selecionada */
             int codigo = int.Parse(dgvProdutos.CurrentRow.Cells[0].Value.ToString());
@@ -304,7 +304,7 @@ namespace ProjetoMercado.view
         }
 
         /* Habilita ou desabilita a edição das textBoxs */
-        private void habilitarEdicao(bool state)
+        private void HabilitarEdicao(bool state)
         {
             txtPreco.ReadOnly = !state;
             txtCodBarras.ReadOnly = !state;
@@ -315,7 +315,7 @@ namespace ProjetoMercado.view
         }
 
         /* Limpa as caixas de texto */
-        private void limparTextBox()
+        private void LimparTextBox()
         {
             txtCodigo.Text = "";
             txtPreco.Text = "";

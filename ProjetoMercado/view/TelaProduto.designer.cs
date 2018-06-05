@@ -146,6 +146,7 @@
             // 
             // cbFornecedor
             // 
+            this.cbFornecedor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbFornecedor.Enabled = false;
             this.cbFornecedor.FormattingEnabled = true;
             this.cbFornecedor.Location = new System.Drawing.Point(90, 139);
@@ -164,6 +165,7 @@
             // 
             // cbCategoria
             // 
+            this.cbCategoria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCategoria.Enabled = false;
             this.cbCategoria.FormattingEnabled = true;
             this.cbCategoria.Location = new System.Drawing.Point(90, 109);
@@ -178,6 +180,7 @@
             this.txtPreco.ReadOnly = true;
             this.txtPreco.Size = new System.Drawing.Size(94, 22);
             this.txtPreco.TabIndex = 14;
+            this.txtPreco.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPreco_KeyPress);
             // 
             // label6
             // 
@@ -195,6 +198,7 @@
             this.txtQntMinEstoque.ReadOnly = true;
             this.txtQntMinEstoque.Size = new System.Drawing.Size(154, 22);
             this.txtQntMinEstoque.TabIndex = 12;
+            this.txtQntMinEstoque.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtQntMinEstoque_KeyPress);
             // 
             // label5
             // 
@@ -221,6 +225,7 @@
             this.txtDescricao.ReadOnly = true;
             this.txtDescricao.Size = new System.Drawing.Size(273, 22);
             this.txtDescricao.TabIndex = 8;
+            this.txtDescricao.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDescricao_KeyPress);
             // 
             // label3
             // 
@@ -302,6 +307,7 @@
             this.txtCodBarras.ReadOnly = true;
             this.txtCodBarras.Size = new System.Drawing.Size(235, 22);
             this.txtCodBarras.TabIndex = 1;
+            this.txtCodBarras.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCodBarras_KeyPress);
             // 
             // label2
             // 
@@ -337,7 +343,7 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "TelaProduto";
-            this.Text = "TelaProduto";
+            this.Text = "Produto";
             this.Load += new System.EventHandler(this.TelaProduto_Load);
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvProdutos)).EndInit();
