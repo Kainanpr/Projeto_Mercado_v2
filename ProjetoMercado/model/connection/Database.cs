@@ -14,7 +14,7 @@ namespace ProjetoMercado.model.connection
         private static MySqlConnection connection; /* Conexão com o Banco de Dados */
         private static Database instance; /* Instância do objeto Database */
         private string connectionString = /* String de configuração da Conexão */
-            "Server=localhost; database=mercado; Uid=root; Pwd=";
+            "Server=localhost; database=mercado; Uid=root; Pwd=leonardobd";
 
         /* Construtor privado */
         private Database()
@@ -114,6 +114,18 @@ namespace ProjetoMercado.model.connection
 
                 /* Muda o banco de dados em uso */
                 connection.ChangeDatabase("mercado");
+
+                /* SQL para criar a tabela Usuário */
+                query = "CREATE TABLE IF NOT EXISTS Usuario (" +
+                    "codigo INTEGER AUTO_INCREMENT," +
+                    "login VARCHAR(64) NOT NULL," +
+                    "senha VARCHAR(64) NOT NULL," +
+                    "CONSTRAINT pk_usuario PRIMARY KEY(codigo)," +
+                    "CONSTRAINT un_usuario_login UNIQUE(login));";
+
+                /* Executa o comando MySql */
+                command = new MySqlCommand(query, connection);
+                command.ExecuteNonQuery();
 
                 /* SQL para criar a tabela categoria */
                 query = "CREATE TABLE IF NOT EXISTS Categoria (" +
