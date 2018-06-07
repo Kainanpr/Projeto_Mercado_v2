@@ -69,44 +69,76 @@ namespace ProjetoMercado.view
         private void btnSalvar_Click(object sender, EventArgs e)
         {
             Fornecedor fornecedor;
+            bool dadosCompletos = false; /* Indica o preenchimento correto dos dados */
 
             /* Verifica se os campos obrigatórios estão preenchidos */
-            if(!txtCNPJ.Text.Equals("") && !txtNome.Text.Equals("") &&
-                !txtEmail.Text.Equals("") && !txtTelefone.Text.Equals("") &&
-                !txtCEP.Text.Equals("") && !txtRua.Text.Equals("") &&
+            if(!txtNome.Text.Equals("") && !txtRua.Text.Equals("") &&
                 !txtN.Text.Equals("") && !txtCidade.Text.Equals("") &&
                 !txtEstado.Text.Equals(""))
             {
-                /* Chama o método para retornar um objeto Fornecedor com as informações da tela */
-                fornecedor = GetDTO();
-
-                if(txtCodigo.Text.Equals(""))
+                /* Verifica se o CNPJ está preenchido completamente */
+                if(txtCNPJ.MaskCompleted)
                 {
-                    /* Quando um fornecedor está sendo adicionado ela não possui código, 
-                     * logo, o txtCodigo estará sempre vazio. É chamado então, o método 
-                     * para criar o fornecedor no Banco de Dados */
-                    fornecedorDAO.Create(fornecedor);
+                    /* Verifica se o telefone está preenchido completamente */
+                    if(txtTelefone.MaskCompleted)
+                    {
+                        /* Verifica se o CEP está completamente preenchido */
+                        if(txtCEP.MaskCompleted)
+                        {
+                            dadosCompletos = true;
+                        }
+                        else
+                        {
+                            MessageBox.Show("O CEP não está completamente preenchido.", "CEP Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("O telefone inserido não é válido.", "Telefone Inválido",
+                            MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    }
                 }
                 else
                 {
-                    /* Já quando ele está sendo atualizado, o txtCodigo estará preenchido,
-                     * então o método para atualizar o fornecedor no Banco de Dados é chamado */
-                    fornecedorDAO.Update(fornecedor);
+                    MessageBox.Show("O CNPJ inserido não está completo.", "CNPJ Incompleto",
+                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
+                /* Chama o método para retornar um objeto Fornecedor com as informações da tela */
+                fornecedor = GetDTO();
 
-                /* Atualiza o Data Grid View */
-                AtualizaDGV();
 
-                /* Habilitação e desabilitação dos botões */
-                btnAdicionar.Enabled = true;
-                btnAtualizar.Enabled = false;
-                btnSalvar.Enabled = false;
-                btnExcluir.Enabled = false;
-                btnCancelar.Enabled = false;
+                /* Se os dados estiverem completos, pode prosseguir */
+                if (dadosCompletos)
+                {
+                    if (txtCodigo.Text.Equals(""))
+                    {
+                        /* Quando um fornecedor está sendo adicionado ela não possui código, 
+                         * logo, o txtCodigo estará sempre vazio. É chamado então, o método 
+                         * para criar o fornecedor no Banco de Dados */
+                        fornecedorDAO.Create(fornecedor);
+                    }
+                    else
+                    {
+                        /* Já quando ele está sendo atualizado, o txtCodigo estará preenchido,
+                         * então o método para atualizar o fornecedor no Banco de Dados é chamado */
+                        fornecedorDAO.Update(fornecedor);
+                    }
 
-                LimparTextBox(); /* Limpa as caixas de texto */
+                    /* Atualiza o Data Grid View */
+                    AtualizaDGV();
 
-                HabilitarEdicao(false); /* Desabilita a edição */
+                    /* Habilitação e desabilitação dos botões */
+                    btnAdicionar.Enabled = true;
+                    btnAtualizar.Enabled = false;
+                    btnSalvar.Enabled = false;
+                    btnExcluir.Enabled = false;
+                    btnCancelar.Enabled = false;
+
+                    LimparTextBox(); /* Limpa as caixas de texto */
+
+                    HabilitarEdicao(false); /* Desabilita a edição */
+                }
             }
             else
             {
@@ -255,5 +287,37 @@ namespace ProjetoMercado.view
             txtCidade.Text = "";
             txtEstado.Text = "";
         }
+
+        private void txtNome_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            /* Não permite a inserção de dígitos e caracteres de pontuação */
+            if (char.IsDigit(e.KeyChar) || char.IsPunctuation(e.KeyChar))
+                e.Handled = true;
+        }
+
+        private void txtTelefone_TextChanged(object sender, EventArgs e)
+        {
+            /* Se o 9º dígito foi inserido muda para o formato de Nº de celular */
+            if (txtTelefone.MaskFull)
+                txtTelefone.Mask = "(00)00000-0009";
+            else
+                txtTelefone.Mask = "(00)0000-00009";
+        }
+
+        private void txtN_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            /* Permite apenas a inserção de dígitos */
+            if (!char.IsDigit(e.KeyChar))
+                e.Handled = true;                
+        }
+
+        private void txtCidade_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            /* Não permite a inserção de dígitos e caracteres de pontuação */
+            if (char.IsDigit(e.KeyChar) || char.IsPunctuation(e.KeyChar))
+                e.Handled = true;
+        }
+
+
     }
 }

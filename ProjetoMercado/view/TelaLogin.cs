@@ -41,7 +41,7 @@ namespace ProjetoMercado.view
                     this.Hide();
 
                     /* Cria o form TelaInicial */
-                    new TelaInicial().ShowDialog();
+                    new TelaInicial(usuario).ShowDialog();
 
                     /* Após fechar a tela inicial, fecha a janela de login encerrando o programa */
                     this.Close();
@@ -77,9 +77,12 @@ namespace ProjetoMercado.view
              * se não existir, uma janela para criação do primeiro usuário é exibida */
             if (!usuarioDAO.ExisteUsuario())
             {
-                MessageBox.Show("Nenhum usuário cadastrado no sistema. Deseja realizar o " +
+                var result = MessageBox.Show("Nenhum usuário cadastrado no sistema. Deseja realizar o " +
                     "cadastro do primeiro usuário?", "Nenhum usuário cadastrado",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                    new TelaCadastroUsuario().ShowDialog();
             }
         }
     }

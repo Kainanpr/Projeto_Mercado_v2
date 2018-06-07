@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
 using ProjetoMercado.model.domain;
 using ProjetoMercado.model.dao;
 
@@ -81,13 +80,23 @@ namespace ProjetoMercado.view
                     /* Quando uma categoria está sendo adicionada ela não possui código, 
                      * logo, o txtCodigo estará sempre vazio. É chamado então o método 
                      * para criar a categoria no Banco de Dados */
-                    categoriaDAO.Create(categoria);
+                    if (categoriaDAO.Create(categoria))
+                    {
+                        /* Mensagem indicando que a categoria foi cadastrada */
+                        MessageBox.Show("Categoria foi cadastrada.", "Categoria Cadastrada",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
                 else
                 {
                     /* Já quando ela está sendo atualizada o txtCodigo estará preenchido,
                      * então o método para atualizar a categoria no Banco de Dados é chamado */
-                    categoriaDAO.Update(categoria);
+                    if(categoriaDAO.Update(categoria))
+                    {
+                        /* Mensagem indicando que a categoria foi atualizada */
+                        MessageBox.Show("Categoria foi atualizada.", "Categoria Atualizada",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
                 /* Atualiza o Data Grid View */
                 AtualizaDGV();
@@ -106,8 +115,8 @@ namespace ProjetoMercado.view
             else
             {
                 /* Exibe uma mensagem informando falta de informações */
-                MessageBox.Show("Por favor, preencha a descrição.", "Faltando informações",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Há informações faltando. Por favor, preencha a descrição.",
+                    "Falta de informações", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
@@ -115,7 +124,7 @@ namespace ProjetoMercado.view
         {
             /* Verifica se o usúario tem certeza que deseja excluir a categoria */
             var result = MessageBox.Show(this, "Você tem certeza que deseja excluir esta categoria?",
-                "Atenção", MessageBoxButtons.YesNo);
+                "Atenção", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
 
             if (result == DialogResult.Yes)
             {
@@ -150,6 +159,9 @@ namespace ProjetoMercado.view
             LimparTextBox(); /* Limpa as caixas de texto */
 
             txtDescricao.ReadOnly = true; /* Desabilita a edição */
+
+            /* Limpa a seleção de linhas no Data Grid View */
+            dgvCategorias.ClearSelection();
         }
 
         private void btnVoltar_Click(object sender, EventArgs e)

@@ -7,15 +7,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ProjetoMercado.model.domain;
 
 namespace ProjetoMercado.view
 {
     public partial class TelaInicial : Form
     {
-        public TelaInicial()
+        /* Atributo */
+        private Usuario usuario;
+
+        public TelaInicial(Usuario usuario)
         {
+            this.usuario = usuario;
             InitializeComponent();
         }
+
+
 
         private void btnCategorias_Click(object sender, EventArgs e)
         {
@@ -50,6 +57,21 @@ namespace ProjetoMercado.view
             /* Abre a Tela de Fornecedores */
             TelaFornecedor telaFornecedor = new TelaFornecedor();
             telaFornecedor.ShowDialog();
+        }
+
+        private void TelaInicial_Load(object sender, EventArgs e)
+        {
+            /* Preenche a label com o login do usuário */
+            lblLogin.Text = usuario.Login;
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            /* Preeche o label com a data atual */
+            lblData.Text = DateTime.Now.ToLongDateString();
+
+            /* Preeche o label com a hora atual */
+            lblHora.Text = DateTime.Now.ToLongTimeString();
         }
     }
 }

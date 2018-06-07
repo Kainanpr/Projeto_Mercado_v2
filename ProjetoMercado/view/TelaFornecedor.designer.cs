@@ -41,7 +41,6 @@
             this.btnSalvar = new System.Windows.Forms.Button();
             this.btnAtualizar = new System.Windows.Forms.Button();
             this.btnAdicionar = new System.Windows.Forms.Button();
-            this.txtEstado = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.txtCidade = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -49,17 +48,18 @@
             this.label8 = new System.Windows.Forms.Label();
             this.txtRua = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.txtCEP = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.txtNome = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtCNPJ = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txtCodigo = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.txtCNPJ = new System.Windows.Forms.MaskedTextBox();
+            this.txtCEP = new System.Windows.Forms.MaskedTextBox();
+            this.txtEstado = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFornecedores)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -123,6 +123,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.txtCEP);
+            this.groupBox2.Controls.Add(this.txtCNPJ);
             this.groupBox2.Controls.Add(this.txtTelefone);
             this.groupBox2.Controls.Add(this.btnVoltar);
             this.groupBox2.Controls.Add(this.btnCancelar);
@@ -138,14 +140,12 @@
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.txtRua);
             this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Controls.Add(this.txtCEP);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.txtEmail);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.txtNome);
             this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.txtCNPJ);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.txtCodigo);
             this.groupBox2.Controls.Add(this.label1);
@@ -160,11 +160,12 @@
             // txtTelefone
             // 
             this.txtTelefone.Location = new System.Drawing.Point(64, 105);
-            this.txtTelefone.Mask = "(99) 99999-9999";
+            this.txtTelefone.Mask = "(00)0000-00009";
             this.txtTelefone.Name = "txtTelefone";
             this.txtTelefone.ReadOnly = true;
             this.txtTelefone.Size = new System.Drawing.Size(135, 22);
             this.txtTelefone.TabIndex = 27;
+            this.txtTelefone.TextChanged += new System.EventHandler(this.txtTelefone_TextChanged);
             // 
             // btnVoltar
             // 
@@ -230,14 +231,6 @@
             this.btnAdicionar.UseVisualStyleBackColor = true;
             this.btnAdicionar.Click += new System.EventHandler(this.btnAdicionar_Click);
             // 
-            // txtEstado
-            // 
-            this.txtEstado.Location = new System.Drawing.Point(285, 164);
-            this.txtEstado.Name = "txtEstado";
-            this.txtEstado.ReadOnly = true;
-            this.txtEstado.Size = new System.Drawing.Size(78, 22);
-            this.txtEstado.TabIndex = 19;
-            // 
             // label10
             // 
             this.label10.AutoSize = true;
@@ -254,6 +247,7 @@
             this.txtCidade.ReadOnly = true;
             this.txtCidade.Size = new System.Drawing.Size(158, 22);
             this.txtCidade.TabIndex = 17;
+            this.txtCidade.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCidade_KeyPress);
             // 
             // label9
             // 
@@ -271,6 +265,7 @@
             this.txtN.ReadOnly = true;
             this.txtN.Size = new System.Drawing.Size(78, 22);
             this.txtN.TabIndex = 15;
+            this.txtN.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtN_KeyPress);
             // 
             // label8
             // 
@@ -297,14 +292,6 @@
             this.label7.Size = new System.Drawing.Size(33, 16);
             this.label7.TabIndex = 14;
             this.label7.Text = "Rua";
-            // 
-            // txtCEP
-            // 
-            this.txtCEP.Location = new System.Drawing.Point(246, 105);
-            this.txtCEP.Name = "txtCEP";
-            this.txtCEP.ReadOnly = true;
-            this.txtCEP.Size = new System.Drawing.Size(117, 22);
-            this.txtCEP.TabIndex = 11;
             // 
             // label6
             // 
@@ -348,6 +335,7 @@
             this.txtNome.ReadOnly = true;
             this.txtNome.Size = new System.Drawing.Size(299, 22);
             this.txtNome.TabIndex = 5;
+            this.txtNome.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNome_KeyPress);
             // 
             // label3
             // 
@@ -357,14 +345,6 @@
             this.label3.Size = new System.Drawing.Size(45, 16);
             this.label3.TabIndex = 6;
             this.label3.Text = "Nome";
-            // 
-            // txtCNPJ
-            // 
-            this.txtCNPJ.Location = new System.Drawing.Point(213, 21);
-            this.txtCNPJ.Name = "txtCNPJ";
-            this.txtCNPJ.ReadOnly = true;
-            this.txtCNPJ.Size = new System.Drawing.Size(150, 22);
-            this.txtCNPJ.TabIndex = 3;
             // 
             // label2
             // 
@@ -392,6 +372,32 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Código";
             // 
+            // txtCNPJ
+            // 
+            this.txtCNPJ.Location = new System.Drawing.Point(213, 21);
+            this.txtCNPJ.Mask = "00.000.000/0000-00";
+            this.txtCNPJ.Name = "txtCNPJ";
+            this.txtCNPJ.ReadOnly = true;
+            this.txtCNPJ.Size = new System.Drawing.Size(150, 22);
+            this.txtCNPJ.TabIndex = 28;
+            // 
+            // txtCEP
+            // 
+            this.txtCEP.Location = new System.Drawing.Point(246, 105);
+            this.txtCEP.Mask = "00000-000";
+            this.txtCEP.Name = "txtCEP";
+            this.txtCEP.ReadOnly = true;
+            this.txtCEP.Size = new System.Drawing.Size(117, 22);
+            this.txtCEP.TabIndex = 29;
+            // 
+            // txtEstado
+            // 
+            this.txtEstado.Location = new System.Drawing.Point(285, 164);
+            this.txtEstado.Name = "txtEstado";
+            this.txtEstado.ReadOnly = true;
+            this.txtEstado.Size = new System.Drawing.Size(78, 22);
+            this.txtEstado.TabIndex = 19;
+            // 
             // TelaFornecedor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -400,6 +406,7 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "TelaFornecedor";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Fornecedor";
             this.Load += new System.EventHandler(this.TelaFornecedor_Load);
             this.groupBox1.ResumeLayout(false);
@@ -422,11 +429,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtNome;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtCNPJ;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtEmail;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtCEP;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtN;
@@ -435,7 +440,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtCidade;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox txtEstado;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button btnVoltar;
         private System.Windows.Forms.Button btnCancelar;
@@ -444,5 +448,8 @@
         private System.Windows.Forms.Button btnAtualizar;
         private System.Windows.Forms.Button btnAdicionar;
         private System.Windows.Forms.MaskedTextBox txtTelefone;
+        private System.Windows.Forms.MaskedTextBox txtCNPJ;
+        private System.Windows.Forms.MaskedTextBox txtCEP;
+        private System.Windows.Forms.TextBox txtEstado;
     }
 }

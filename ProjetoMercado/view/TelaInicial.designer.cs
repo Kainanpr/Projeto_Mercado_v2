@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnProdutos = new System.Windows.Forms.Button();
             this.btnFornecedores = new System.Windows.Forms.Button();
@@ -35,6 +36,11 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnListarVendas = new System.Windows.Forms.Button();
             this.btnRealizarVenda = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lblLogin = new System.Windows.Forms.Label();
+            this.lblData = new System.Windows.Forms.Label();
+            this.lblHora = new System.Windows.Forms.Label();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -45,7 +51,7 @@
             this.groupBox1.Controls.Add(this.btnFornecedores);
             this.groupBox1.Controls.Add(this.btnCategorias);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(13, 13);
+            this.groupBox1.Location = new System.Drawing.Point(12, 64);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(403, 119);
             this.groupBox1.TabIndex = 0;
@@ -87,7 +93,7 @@
             this.groupBox2.Controls.Add(this.btnListarVendas);
             this.groupBox2.Controls.Add(this.btnRealizarVenda);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(422, 13);
+            this.groupBox2.Location = new System.Drawing.Point(421, 64);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(275, 119);
             this.groupBox2.TabIndex = 3;
@@ -114,18 +120,68 @@
             this.btnRealizarVenda.UseVisualStyleBackColor = true;
             this.btnRealizarVenda.Click += new System.EventHandler(this.btnRealizarVenda_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(91, 20);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Bem vindo, ";
+            // 
+            // lblLogin
+            // 
+            this.lblLogin.AutoSize = true;
+            this.lblLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLogin.Location = new System.Drawing.Point(96, 9);
+            this.lblLogin.Name = "lblLogin";
+            this.lblLogin.Size = new System.Drawing.Size(0, 20);
+            this.lblLogin.TabIndex = 5;
+            // 
+            // lblData
+            // 
+            this.lblData.AutoSize = true;
+            this.lblData.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblData.Location = new System.Drawing.Point(256, 9);
+            this.lblData.Name = "lblData";
+            this.lblData.Size = new System.Drawing.Size(0, 20);
+            this.lblData.TabIndex = 6;
+            // 
+            // lblHora
+            // 
+            this.lblHora.AutoSize = true;
+            this.lblHora.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHora.Location = new System.Drawing.Point(603, 9);
+            this.lblHora.Name = "lblHora";
+            this.lblHora.Size = new System.Drawing.Size(0, 20);
+            this.lblHora.TabIndex = 7;
+            // 
+            // timer
+            // 
+            this.timer.Enabled = true;
+            this.timer.Interval = 1000;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            // 
             // TelaInicial
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(711, 146);
+            this.ClientSize = new System.Drawing.Size(711, 195);
+            this.Controls.Add(this.lblHora);
+            this.Controls.Add(this.lblData);
+            this.Controls.Add(this.lblLogin);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "TelaInicial";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Mercado";
+            this.Load += new System.EventHandler(this.TelaInicial_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -138,5 +194,10 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btnListarVendas;
         private System.Windows.Forms.Button btnRealizarVenda;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblLogin;
+        private System.Windows.Forms.Label lblData;
+        private System.Windows.Forms.Label lblHora;
+        private System.Windows.Forms.Timer timer;
     }
 }

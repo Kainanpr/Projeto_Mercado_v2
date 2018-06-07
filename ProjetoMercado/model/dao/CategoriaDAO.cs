@@ -15,22 +15,45 @@ namespace ProjetoMercado.model.dao
     class CategoriaDAO
     {
         /* Salva uma categoria no Banco de Dados */
-        public void Create(Categoria categoria)
+        public bool Create(Categoria categoria)
         {
-            /* Instância de Database para acessar o Banco de Dados */
-            Database mercadoDB = Database.GetInstance();
+            bool state = false; /* Indica se o comando foi executado com sucesso */
+
+            /* Recebe a conexão utilizada para acessar o Banco de Dados */
+            MySqlConnection connection = Database.GetInstance().GetConnection();
 
             /* String que contém o SQL que será executado */
             string query = "INSERT INTO Categoria (descricao) VALUES (@Descricao);";
 
             /* Responsável pelo comando SQL */
-            MySqlCommand command = new MySqlCommand(query);
+            MySqlCommand command = new MySqlCommand(query, connection);
 
             /* Adiciona os parâmetros no comando SQL */
             command.Parameters.AddWithValue("@Descricao", categoria.Descricao);
 
-            /* Chama o método de Database para executar um comando que não retorna dados */
-            mercadoDB.ExecuteSQL(command);
+            try
+            {
+                /* Abre a conexão */
+                if (connection.State != System.Data.ConnectionState.Open)
+                    connection.Open();
+
+                /* Executa o comando SQL */
+                command.ExecuteNonQuery();
+
+                state = true; /* Comando foi executado */
+            }
+            catch (MySqlException exception)
+            {
+                /* Exceção por violar o UNIQUE(descrição) */
+                if (exception.Number == (int)MySqlErrorCode.DuplicateKeyEntry)
+                    MessageBox.Show("Essa categoria já está cadastrada.", "Categoria já cadastrada",
+                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return state;
         }
 
         /* Lê uma categoria no Banco de Dados. Retorna null se não achar */
@@ -136,23 +159,46 @@ namespace ProjetoMercado.model.dao
         }
 
         /* Atualiza uma categoria no Banco de Dados */
-        public void Update(Categoria categoria)
+        public bool Update(Categoria categoria)
         {
-            /* Instância de Database para acessar o Banco de Dados */
-            Database mercadoDB = Database.GetInstance();
+            bool state = false; /* Indica se o comando foi executado com sucesso */
+
+            /* Recebe a conexão utilizada para acessar o Banco de Dados */
+            MySqlConnection connection = Database.GetInstance().GetConnection();
 
             /* String que contém o SQL que será executado */
             string query = "UPDATE Categoria SET descricao = @Descricao WHERE codigo = @Codigo;";
 
             /* Responsável pelo comando SQL */
-            MySqlCommand command = new MySqlCommand(query);
+            MySqlCommand command = new MySqlCommand(query, connection);
 
-            /* Adiciona os parâmetros */
+            /* Adiciona os parâmetros no comando SQL */
             command.Parameters.AddWithValue("@Descricao", categoria.Descricao);
             command.Parameters.AddWithValue("@Codigo", categoria.Codigo);
 
-            /* Chama o método de Database para executar um comando que não retorna dados */
-            mercadoDB.ExecuteSQL(command);
+            try
+            {
+                /* Abre a conexão */
+                if (connection.State != System.Data.ConnectionState.Open)
+                    connection.Open();
+
+                /* Executa o comando SQL */
+                command.ExecuteNonQuery();
+
+                state = true; /* Comando foi executado */
+            }
+            catch (MySqlException exception)
+            {
+                /* Exceção por violar o UNIQUE(descrição) */
+                if (exception.Number == (int)MySqlErrorCode.DuplicateKeyEntry)
+                    MessageBox.Show("Essa categoria já está cadastrada.", "Categoria já cadastrada",
+                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return state;
         }
 
         /* Deleta uma categoria no Banco de Dados */
