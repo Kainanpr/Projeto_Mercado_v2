@@ -14,7 +14,7 @@ namespace ProjetoMercado.model.connection
         private static MySqlConnection connection; /* Conexão com o Banco de Dados */
         private static Database instance; /* Instância do objeto Database */
         private string connectionString = /* String de configuração da Conexão */
-            "Server=localhost; database=mercado; Uid=root; Pwd=";
+            "Server=localhost; database=mercado; Uid=root; Pwd=leonardobd";
 
         /* Construtor privado */
         private Database()
@@ -93,7 +93,7 @@ namespace ProjetoMercado.model.connection
             try
             {
                 /* Troca a string de conexão */
-                connection.ConnectionString = "Server=localhost; Uid=root; Pwd=";
+                connection.ConnectionString = "Server=localhost; Uid=root; Pwd=leonardobd";
 
                 /* Abre a conexão */
                 if (connection.State != System.Data.ConnectionState.Open)
@@ -153,7 +153,9 @@ namespace ProjetoMercado.model.connection
                     "cidade VARCHAR(64) NOT NULL," +
                     "estado VARCHAR(64) NOT NULL," +
                     "CONSTRAINT pk_fornecedor PRIMARY KEY(codigo), " +
-                    "CONSTRAINT un_fornecedor_cnpj UNIQUE(cnpj));";
+                    "CONSTRAINT un_fornecedor_cnpj UNIQUE(cnpj)," +
+                    "CONSTRAINT un_fornecedor_nome UNIQUE(nome)," +
+                    "CONSTRAINT un_fornecedor_email UNIQUE(email));";
 
                 /* Executa o comando MySql */
                 command = new MySqlCommand(query, connection);

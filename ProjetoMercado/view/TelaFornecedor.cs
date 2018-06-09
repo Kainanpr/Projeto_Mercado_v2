@@ -116,13 +116,17 @@ namespace ProjetoMercado.view
                         /* Quando um fornecedor está sendo adicionado ela não possui código, 
                          * logo, o txtCodigo estará sempre vazio. É chamado então, o método 
                          * para criar o fornecedor no Banco de Dados */
-                        fornecedorDAO.Create(fornecedor);
+                        if (fornecedorDAO.Create(fornecedor))
+                            MessageBox.Show("O Fornecedor foi cadastrado.", "Fornecedor Cadastrado",
+                                MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {
                         /* Já quando ele está sendo atualizado, o txtCodigo estará preenchido,
                          * então o método para atualizar o fornecedor no Banco de Dados é chamado */
-                        fornecedorDAO.Update(fornecedor);
+                        if(fornecedorDAO.Update(fornecedor))
+                            MessageBox.Show("O Fornecedor foi atualizado.", "Fornecedor Atualizado",
+                                MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
 
                     /* Atualiza o Data Grid View */

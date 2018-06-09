@@ -16,17 +16,19 @@ namespace ProjetoMercado.model.dao
     {
 
         /* Salva uma fornecedor no Banco de Dados */
-        public void Create(Fornecedor fornecedor)
+        public bool Create(Fornecedor fornecedor)
         {
-            /* Instância de Database para acessar o Banco de Dados */
-            Database mercadoDB = Database.GetInstance();
+            bool state = false; /* Indica se o comando foi executado com sucesso */
+
+            /* Recebe a conexão utilizada para acessar o Banco de Dados */
+            MySqlConnection connection = Database.GetInstance().GetConnection();
 
             /* String que contém o SQL que será executado */
             string query = "INSERT INTO Fornecedor (cnpj, nome, email, telefone, rua, numero, cep, cidade, estado) " +
                            "VALUES (@Cnpj, @Nome, @Email, @Telefone, @Rua, @Numero, @Cep, @Cidade, @Estado);";
 
             /* Responsável pelo comando SQL */
-            MySqlCommand command = new MySqlCommand(query);
+            MySqlCommand command = new MySqlCommand(query, connection);
 
             /* Adiciona os parâmetros no comando SQL */
             command.Parameters.AddWithValue("@Cnpj", fornecedor.Cnpj);
@@ -39,8 +41,44 @@ namespace ProjetoMercado.model.dao
             command.Parameters.AddWithValue("@Cidade", fornecedor.Cidade);
             command.Parameters.AddWithValue("@Estado", fornecedor.Estado);
 
-            /* Chama o método de Database para executar um comando que não retorna dados */
-            mercadoDB.ExecuteSQL(command);
+            try
+            {
+                /* Abre a conexão */
+                if (connection.State != System.Data.ConnectionState.Open)
+                    connection.Open();
+
+                /* Executa o comando SQL */
+                command.ExecuteNonQuery();
+
+                state = true; /* Comando foi executado */
+            }
+            catch(MySqlException exception)
+            {
+                /* Exceção por violar algum UNIQUE */
+                if(exception.Number == (int)MySqlErrorCode.DuplicateKeyEntry)
+                {
+                    /* UNIQUE(cnpj) */
+                    if (exception.Message.ToString().Contains("un_fornecedor_cnpj"))
+                        MessageBox.Show("Este CNPJ já está cadastrado.", "CNPJ já Cadastrado",
+                            MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    
+                    /* UNIQUE(nome) */
+                    if (exception.Message.ToString().Contains("un_fornecedor_nome"))
+                        MessageBox.Show("Este Nome de Fornecedor já está cadastrado.",
+                            "Nome já Cadastrado", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                    /* UNIQUE(email) */
+                    if (exception.Message.ToString().Contains("un_fornecedor_email"))
+                        MessageBox.Show("Este email já está cadastrado.", "Email já Cadastrado",
+                            MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+            }
+            finally
+            {
+                /* Fecha a conexão */
+                connection.Close();
+            }
+            return state;
         }
 
         /* Lê um fornecedor no Banco de Dados. Retorna null se não achar */
@@ -104,10 +142,12 @@ namespace ProjetoMercado.model.dao
 
 
         /* Atualiza um fornecedor no Banco de Dados */
-        public void Update(Fornecedor fornecedor)
+        public bool Update(Fornecedor fornecedor)
         {
-            /* Instância de Database para acessar o Banco de Dados */
-            Database mercadoDB = Database.GetInstance();
+            bool state = false; /* Indica se o comando foi executado com sucesso */
+
+            /* Recebe a conexão utilizada para acessar o Banco de Dados */
+            MySqlConnection connection = Database.GetInstance().GetConnection();
 
             /* String que contém o SQL que será executado */
             string query = "UPDATE Fornecedor SET cnpj = @Cnpj, " +
@@ -117,7 +157,7 @@ namespace ProjetoMercado.model.dao
                            "WHERE codigo = @Codigo;";
 
             /* Responsável pelo comando SQL */
-            MySqlCommand command = new MySqlCommand(query);
+            MySqlCommand command = new MySqlCommand(query, connection);
 
             /* Adiciona os parâmetros */
             command.Parameters.AddWithValue("@Cnpj", fornecedor.Cnpj);
@@ -131,8 +171,44 @@ namespace ProjetoMercado.model.dao
             command.Parameters.AddWithValue("@Estado", fornecedor.Estado);
             command.Parameters.AddWithValue("@Codigo", fornecedor.Codigo);
 
-            /* Chama o método de Database para executar um comando que não retorna dados */
-            mercadoDB.ExecuteSQL(command);
+            try
+            {
+                /* Abre a conexão */
+                if (connection.State != System.Data.ConnectionState.Open)
+                    connection.Open();
+
+                /* Executa o comando SQL */
+                command.ExecuteNonQuery();
+
+                state = true; /* Comando foi executado */
+            }
+            catch (MySqlException exception)
+            {
+                /* Exceção por violar algum UNIQUE */
+                if (exception.Number == (int)MySqlErrorCode.DuplicateKeyEntry)
+                {
+                    /* UNIQUE(cnpj) */
+                    if (exception.Message.ToString().Contains("un_fornecedor_cnpj"))
+                        MessageBox.Show("Este CNPJ já está cadastrado.", "CNPJ já Cadastrado",
+                            MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                    /* UNIQUE(nome) */
+                    if (exception.Message.ToString().Contains("un_fornecedor_nome"))
+                        MessageBox.Show("Este Nome de Fornecedor já está cadastrado.",
+                            "Nome já Cadastrado", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                    /* UNIQUE(email) */
+                    if (exception.Message.ToString().Contains("un_fornecedor_email"))
+                        MessageBox.Show("Este email já está cadastrado.", "Email já Cadastrado",
+                            MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+            }
+            finally
+            {
+                /* Fecha a conexão */
+                connection.Close();
+            }
+            return state;
         }
 
         public Fornecedor Read(string nome)
