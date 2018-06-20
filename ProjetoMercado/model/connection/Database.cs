@@ -14,7 +14,7 @@ namespace ProjetoMercado.model.connection
         private static MySqlConnection connection; /* Conexão com o Banco de Dados */
         private static Database instance; /* Instância do objeto Database */
         private string connectionString = /* String de configuração da Conexão */
-            "Server=localhost; database=mercado; Uid=root; Pwd=";
+            "Server=localhost; database=mercado; Uid=root; Pwd=leonardobd";
 
         /* Construtor privado */
         private Database()
@@ -93,7 +93,7 @@ namespace ProjetoMercado.model.connection
             try
             {
                 /* Troca a string de conexão */
-                connection.ConnectionString = "Server=localhost; Uid=root; Pwd=";
+                connection.ConnectionString = "Server=localhost; Uid=root; Pwd=leonardobd";
 
                 /* Abre a conexão */
                 if (connection.State != System.Data.ConnectionState.Open)
@@ -165,12 +165,13 @@ namespace ProjetoMercado.model.connection
                 query = "CREATE TABLE IF NOT EXISTS Produto (" +
                     "codigo INTEGER AUTO_INCREMENT," +
                     "preco DECIMAL(10,2) NOT NULL," +
-                    "cod_barras BIGINT NOT NULL," +
+                    "cod_barras VARCHAR(64) NOT NULL," +
                     "descricao VARCHAR(64) NOT NULL," +
                     "cod_categoria INTEGER NOT NULL," +
                     "qnt_min_estoque INTEGER NOT NULL," +
                     "cod_fornecedor INTEGER NOT NULL, " +
                     "CONSTRAINT pk_produto PRIMARY KEY(codigo)," +
+                    "CONSTRAINT un_produto_cod_barras UNIQUE(cod_barras)," +
                     "CONSTRAINT un_produto_descricao UNIQUE(descricao)," +
                     "CONSTRAINT fk_prod_categoria FOREIGN KEY(cod_categoria) " +
                     "REFERENCES Categoria(codigo), " +

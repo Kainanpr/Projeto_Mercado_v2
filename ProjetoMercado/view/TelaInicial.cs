@@ -18,8 +18,9 @@ namespace ProjetoMercado.view
 
         public TelaInicial(Usuario usuario)
         {
-            this.usuario = usuario;
+            
             InitializeComponent();
+            this.usuario = usuario;
         }
 
         private void btnCategorias_Click(object sender, EventArgs e)
@@ -43,7 +44,7 @@ namespace ProjetoMercado.view
         private void btnRealizarVenda_Click(object sender, EventArgs e)
         {
             /* Abre a Tela para Realizar Vendas */
-            TelaRealizarVenda telaRealizarVenda = new TelaRealizarVenda();
+            TelaRealizarVenda telaRealizarVenda = new TelaRealizarVenda(usuario);
             this.Hide();
             telaRealizarVenda.ShowDialog();
             this.Show();

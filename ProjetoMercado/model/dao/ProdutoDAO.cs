@@ -15,10 +15,12 @@ namespace ProjetoMercado.model.dao
     class ProdutoDAO
     {
         /* Salva um Produto no Banco de Dados */
-        public void Create(Produto produto)
+        public bool Create(Produto produto)
         {
-            /* Instância de Database para acessar o Banco de Dados */
-            Database mercadoDB = Database.GetInstance();
+            bool state = false; /* Indica se o comando foi executado com sucesso */
+
+            /* Recebe a conexão utilizada para acessar o Banco de Dados */
+            MySqlConnection connection = Database.GetInstance().GetConnection();
 
             /* String que contém o SQL que será executado */
             string query = "INSERT INTO Produto (preco, cod_barras, descricao, " +
@@ -26,7 +28,7 @@ namespace ProjetoMercado.model.dao
                 "@Descricao, @Cod_categoria, @Qnt_min_estoque, @Cod_fornecedor);";
 
             /* Responsável pelo comando SQL */
-            MySqlCommand command = new MySqlCommand(query);
+            MySqlCommand command = new MySqlCommand(query, connection);
 
             /* Adiciona os parâmetros no comando SQL */
             command.Parameters.AddWithValue("@Preco", produto.Preco);
@@ -36,8 +38,41 @@ namespace ProjetoMercado.model.dao
             command.Parameters.AddWithValue("@Qnt_min_estoque", produto.QntMinEstoque);
             command.Parameters.AddWithValue("@Cod_fornecedor", produto.Fornecedor.Codigo);
 
-            /* Chama o método de Database para executar um comando que não retorna dados */
-            mercadoDB.ExecuteSQL(command);
+            try
+            {
+                /* Abre a conexão */
+                if (connection.State != System.Data.ConnectionState.Open)
+                    connection.Open();
+
+                /* Executa o comando SQL */
+                command.ExecuteNonQuery();
+
+                state = true; /* Comando foi executado */
+            }
+            catch (MySqlException exception)
+            {
+                /* Exceção por violar algum UNIQUE */
+                if (exception.Number == (int)MySqlErrorCode.DuplicateKeyEntry)
+                {
+                    /* UNIQUE(cod_barras) */
+                    if (exception.Message.ToString().Contains("un_produto_cod_barras"))
+                    {
+                        MessageBox.Show("Esse código de barras já está cadastrado para outro produto.",
+                            "Código de barras já cadastrado", MessageBoxButtons.OK,
+                            MessageBoxIcon.Exclamation);
+                    }
+                    if (exception.Message.ToString().Contains("un_produto_descricao"))
+                    {
+                        MessageBox.Show("Esse produto já está cadastrado.", "Produto já cadastrado",
+                            MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    }
+                }
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return state;
         }
 
         /* Lê um Produto no Banco de Dados. Retorna null se não achar */
@@ -103,7 +138,7 @@ namespace ProjetoMercado.model.dao
         }
 
         /* Lê um Produto no Banco de Dados pelo seu código de barras. Retorna null se não achar */
-        public Produto Read(long codigoBarras)
+        public Produto Read(string codigoBarras)
         {
             /* Recebe a conexão utilizada para acessar o Banco de Dados */
             Database mercadoBD = Database.GetInstance();
@@ -165,10 +200,12 @@ namespace ProjetoMercado.model.dao
         }
 
         /* Atualiza um Produto no Banco de Dados */
-        public void Update(Produto produto)
+        public bool Update(Produto produto)
         {
-            /* Instância de Database para acessar o Banco de Dados */
-            Database mercadoDB = Database.GetInstance();
+            bool state = false; /* Indica se o comando foi executado com sucesso */
+
+            /* Recebe a conexão utilizada para acessar o Banco de Dados */
+            MySqlConnection connection = Database.GetInstance().GetConnection();
 
             /* String que contém o SQL que será executado */
             string query = "UPDATE Produto SET preco = @Preco, cod_barras = @Cod_barras, " +
@@ -176,7 +213,7 @@ namespace ProjetoMercado.model.dao
                 "qnt_min_estoque = @Qnt_min_estoque WHERE codigo = @codigo;";
 
             /* Responsável pelo comando SQL */
-            MySqlCommand command = new MySqlCommand(query);
+            MySqlCommand command = new MySqlCommand(query, connection);
 
             /* Adiciona os parâmetros */
             command.Parameters.AddWithValue("@Preco", produto.Preco);
@@ -186,27 +223,91 @@ namespace ProjetoMercado.model.dao
             command.Parameters.AddWithValue("@Qnt_min_estoque", produto.QntMinEstoque);
             command.Parameters.AddWithValue("@Codigo", produto.Codigo);
 
-            /* Chama o método de Database para executar um comando que não retorna dados */
-            mercadoDB.ExecuteSQL(command);
+            try
+            {
+                /* Abre a conexão */
+                if (connection.State != System.Data.ConnectionState.Open)
+                    connection.Open();
+
+                /* Executa o comando SQL */
+                command.ExecuteNonQuery();
+
+                state = true; /* Comando foi executado */
+            }
+            catch (MySqlException exception)
+            {
+                /* Exceção por violar o UNIQUE(descrição) */
+                if (exception.Number == (int)MySqlErrorCode.DuplicateKeyEntry)
+                {
+                    /* UNIQUE(cod_barras) */
+                    if (exception.Message.ToString().Contains("un_produto_cod_barras"))
+                    {
+                        MessageBox.Show("Esse código de barras já está cadastrado para outro produto.",
+                            "Código de barras já cadastrado", MessageBoxButtons.OK,
+                            MessageBoxIcon.Exclamation);
+                    }
+                    if (exception.Message.ToString().Contains("un_produto_descricao"))
+                    {
+                        MessageBox.Show("Esse produto já está cadastrado.", "Produto já cadastrado",
+                            MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    }
+                }
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return state;
         }
 
         /* Deleta uma categoria no Banco de Dados */
-        public void Delete(Produto produto)
+        public bool Delete(Produto produto)
         {
-            /* Instância de Database para acessar o Banco de Dados */
-            Database mercadoDB = Database.GetInstance();
+            bool state = false; /* Indica se o comando foi executado com sucesso */
+
+            /* Recebe a conexão utilizada para acessar o Banco de Dados */
+            MySqlConnection connection = Database.GetInstance().GetConnection();
 
             /* String que contém o SQL que será executado */
             string query = "DELETE FROM Produto WHERE codigo = @Codigo;";
 
             /* Responsável pelo comando SQL */
-            MySqlCommand command = new MySqlCommand(query);
+            MySqlCommand command = new MySqlCommand(query, connection);
 
             /* Adiciona o parâmetro */
             command.Parameters.AddWithValue("@Codigo", produto.Codigo);
 
-            /* Chama o método de Database para executar um comando que não retorna dados */
-            mercadoDB.ExecuteSQL(command);
+            try
+            {
+                /* Abre a conexão */
+                if (connection.State != System.Data.ConnectionState.Open)
+                    connection.Open();
+
+                /* Executa o comando SQL */
+                command.ExecuteNonQuery();
+
+                state = true; /* Comando foi executado */
+            }
+            catch (MySqlException exception)
+            {
+                /* Fornecedor está atrelado a produtos */
+                if (exception.Number == (int)MySqlErrorCode.RowIsReferenced2)
+                {
+                    MessageBox.Show("Este produto não pode ser excluído, pois está atrelado " +
+                        "a vendas realizadas", "Produto não pode ser excluído",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show(exception.Message, "Erro ao excluir",
+                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return state;
         }
 
         /* Retorna uma lista com todos os Produtos */

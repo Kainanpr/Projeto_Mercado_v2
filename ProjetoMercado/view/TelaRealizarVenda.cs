@@ -21,13 +21,16 @@ namespace ProjetoMercado.view
         private VendaDAO vendaDAO = new VendaDAO();
         /* Atributo responsável pelo CRUD itemVenda */
         private ItemVendaDAO itemVendaDAO = new ItemVendaDAO();
+        /* Atributo do usuário que realiza a venda */
+        private Usuario usuario;
 
         decimal subTotal = 0.0m;
 
-        public TelaRealizarVenda()
+        public TelaRealizarVenda(Usuario usuario)
         {
             InitializeComponent();
             txtSubTotal.Text = subTotal.ToString("c");
+            this.usuario = usuario;
         }
 
         private void txtCodBarras_Leave(object sender, EventArgs e)
@@ -38,7 +41,7 @@ namespace ProjetoMercado.view
                 Produto produto;
 
                 /* Recupera o produto no Banco de Dados */
-                produto = produtoDAO.Read(long.Parse(txtCodBarras.Text));
+                produto = produtoDAO.Read(txtCodBarras.Text);
 
                 if (produto != null)
                 {
@@ -57,7 +60,7 @@ namespace ProjetoMercado.view
 
         private void btnConfirmarProduto_Click(object sender, EventArgs e)
         {
-            Produto produto = produtoDAO.Read(long.Parse(txtCodBarras.Text));
+            Produto produto = produtoDAO.Read(txtCodBarras.Text);
 
             /* Salva a quantidade, se não tiver nada no textbox assume 1 */
             int quantidade;

@@ -93,13 +93,23 @@ namespace ProjetoMercado.view
                         /* Quando uma categoria está sendo adicionada ela não possui código, 
                          * logo, o txtCodigo estará sempre vazio. É chamado então, o método 
                          * para criar a categoria no Banco de Dados */
-                        produtoDAO.Create(produto);
+                        if(produtoDAO.Create(produto))
+                        {
+                            /* Mensagem indicando que o produto foi cadastrado */
+                            MessageBox.Show("Produto foi cadastrado.", "Produto Cadastrado",
+                                MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
                     }
                     else
                     {
                         /* Já quando ela está sendo atualizada o txtCodigo estará preenchido,
                          * então o método para atualizar a categoria no Banco de Dados é chamado */
-                        produtoDAO.Update(produto);
+                        if(produtoDAO.Update(produto))
+                        {
+                            /* Mensagem indicando que o produto foi atualizado */
+                            MessageBox.Show("Produto foi atualizado.", "Produto Atualizado",
+                                MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
                     }
                     /* Atualiza o Data Grid View */
                     AtualizaDGV();
@@ -125,8 +135,8 @@ namespace ProjetoMercado.view
             else
             {
                 /* Exibe uma mensagem informando falta de informações */
-                MessageBox.Show("Por favor, preencha todas a informações", "Faltando informações",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Há informações faltando. Por favor, preencha todas a informações", 
+                    "Falta de informações", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
@@ -134,13 +144,19 @@ namespace ProjetoMercado.view
         {
             /* Verifica se o usúario tem certeza que deseja excluir um produto */
             var result = MessageBox.Show(this, "Você tem certeza que deseja excluir este produto?",
-                "Atenção", MessageBoxButtons.YesNo);
+                "Deseja excluir produto?", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
 
             if (result == DialogResult.Yes)
             {
                 /* Busca no Banco de Dados e exclui */
                 Produto produto = GetDTO();
-                produtoDAO.Delete(produto);
+
+                if(produtoDAO.Delete(produto))
+                {
+                    /* Mensagem indicando que o produto foi excluído */
+                    MessageBox.Show("Produto foi excluído.", "Produto Excluído",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
 
                 AtualizaDGV(); /* Atualiza o Data Grid View */
 
@@ -193,9 +209,9 @@ namespace ProjetoMercado.view
 
         private void txtDescricao_KeyPress(object sender, KeyPressEventArgs e)
         {
-            /* Não permite a inserção de dígitos e caracteres de pontuação no 
-             * text box descrição */
-            if (char.IsDigit(e.KeyChar) || char.IsPunctuation(e.KeyChar))
+            /* Não permite a inserção de dígitos e caracteres de pontuação */
+            if (!(char.IsLetterOrDigit(e.KeyChar) || char.IsWhiteSpace(e.KeyChar) ||
+                e.KeyChar.Equals('\b')))
                 e.Handled = true;
         }
 
@@ -275,6 +291,8 @@ namespace ProjetoMercado.view
             /* Percorre a lista adicionando categoria por categoria no Combo Box */
             foreach (Categoria categoria in listaCategorias)
                 cbCategoria.Items.Add(categoria.Descricao);
+
+            cbCategoria.Items.Add("");
         }
 
 
@@ -290,6 +308,8 @@ namespace ProjetoMercado.view
             /* Percorre a lista adicionando categoria por categoria no Combo Box */
             foreach (Fornecedor fornecedor in listaFornecedores)
                 cbFornecedor.Items.Add(fornecedor.Nome);
+
+            cbFornecedor.Items.Add("");
         }
 
         /* Verifica qual produto foi selecionada e o exibe */

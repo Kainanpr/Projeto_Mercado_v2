@@ -202,22 +202,53 @@ namespace ProjetoMercado.model.dao
         }
 
         /* Deleta uma categoria no Banco de Dados */
-        public void Delete(Categoria categoria)
+        public bool Delete(Categoria categoria)
         {
-            /* Instância de Database para acessar o Banco de Dados */
-            Database mercadoDB = Database.GetInstance();
+            bool state = false; /* Indica se o comando foi executado com sucesso */
+
+            /* Recebe a conexão utilizada para acessar o Banco de Dados */
+            MySqlConnection connection = Database.GetInstance().GetConnection();
 
             /* String que contém o SQL que será executado */
             string query = "DELETE FROM Categoria WHERE codigo = @Codigo;";
 
             /* Responsável pelo comando SQL */
-            MySqlCommand command = new MySqlCommand(query);
+            MySqlCommand command = new MySqlCommand(query, connection);
 
             /* Adiciona o parâmetro */
             command.Parameters.AddWithValue("@Codigo", categoria.Codigo);
 
-            /* Chama o método de Database para executar um comando que não retorna dados */
-            mercadoDB.ExecuteSQL(command);
+            try
+            {
+                /* Abre a conexão */
+                if (connection.State != System.Data.ConnectionState.Open)
+                    connection.Open();
+
+                /* Executa o comando SQL */
+                command.ExecuteNonQuery();
+
+                state = true; /* Comando foi executado */
+            }
+            catch (MySqlException exception)
+            {
+                /* Categoria está atrelada a produtos */
+                if (exception.Number == (int)MySqlErrorCode.RowIsReferenced2)
+                {
+                    MessageBox.Show("Esta categoria não pode ser excluída, pois está atrelada " +
+                        "a produtos cadastrados", "Categoria não pode ser excluída",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show(exception.Message, "Erro ao excluir",
+                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return state;
         }
 
         /* Retorna uma lista com todas as categorias */

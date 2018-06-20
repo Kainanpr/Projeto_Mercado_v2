@@ -34,6 +34,8 @@
             this.Nome = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Telefone = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtCEP = new System.Windows.Forms.MaskedTextBox();
+            this.txtCNPJ = new System.Windows.Forms.MaskedTextBox();
             this.txtTelefone = new System.Windows.Forms.MaskedTextBox();
             this.btnVoltar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
@@ -57,9 +59,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtCodigo = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtCNPJ = new System.Windows.Forms.MaskedTextBox();
-            this.txtCEP = new System.Windows.Forms.MaskedTextBox();
-            this.txtEstado = new System.Windows.Forms.TextBox();
+            this.cbEstado = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFornecedores)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -72,7 +72,7 @@
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(401, 425);
-            this.groupBox1.TabIndex = 2;
+            this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Lista de Fornecedores";
             // 
@@ -123,6 +123,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.cbEstado);
             this.groupBox2.Controls.Add(this.txtCEP);
             this.groupBox2.Controls.Add(this.txtCNPJ);
             this.groupBox2.Controls.Add(this.txtTelefone);
@@ -132,7 +133,6 @@
             this.groupBox2.Controls.Add(this.btnSalvar);
             this.groupBox2.Controls.Add(this.btnAtualizar);
             this.groupBox2.Controls.Add(this.btnAdicionar);
-            this.groupBox2.Controls.Add(this.txtEstado);
             this.groupBox2.Controls.Add(this.label10);
             this.groupBox2.Controls.Add(this.txtCidade);
             this.groupBox2.Controls.Add(this.label9);
@@ -153,9 +153,27 @@
             this.groupBox2.Location = new System.Drawing.Point(419, 13);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(369, 355);
-            this.groupBox2.TabIndex = 9;
+            this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Fornecedor";
+            // 
+            // txtCEP
+            // 
+            this.txtCEP.Location = new System.Drawing.Point(246, 105);
+            this.txtCEP.Mask = "00000-000";
+            this.txtCEP.Name = "txtCEP";
+            this.txtCEP.ReadOnly = true;
+            this.txtCEP.Size = new System.Drawing.Size(117, 22);
+            this.txtCEP.TabIndex = 8;
+            // 
+            // txtCNPJ
+            // 
+            this.txtCNPJ.Location = new System.Drawing.Point(213, 21);
+            this.txtCNPJ.Mask = "00.000.000/0000-00";
+            this.txtCNPJ.Name = "txtCNPJ";
+            this.txtCNPJ.ReadOnly = true;
+            this.txtCNPJ.Size = new System.Drawing.Size(150, 22);
+            this.txtCNPJ.TabIndex = 4;
             // 
             // txtTelefone
             // 
@@ -164,7 +182,7 @@
             this.txtTelefone.Name = "txtTelefone";
             this.txtTelefone.ReadOnly = true;
             this.txtTelefone.Size = new System.Drawing.Size(135, 22);
-            this.txtTelefone.TabIndex = 27;
+            this.txtTelefone.TabIndex = 7;
             this.txtTelefone.TextChanged += new System.EventHandler(this.txtTelefone_TextChanged);
             // 
             // btnVoltar
@@ -172,7 +190,7 @@
             this.btnVoltar.Location = new System.Drawing.Point(258, 299);
             this.btnVoltar.Name = "btnVoltar";
             this.btnVoltar.Size = new System.Drawing.Size(75, 50);
-            this.btnVoltar.TabIndex = 26;
+            this.btnVoltar.TabIndex = 18;
             this.btnVoltar.Text = "Voltar";
             this.btnVoltar.UseVisualStyleBackColor = true;
             this.btnVoltar.Click += new System.EventHandler(this.btnVoltar_Click);
@@ -183,7 +201,7 @@
             this.btnCancelar.Location = new System.Drawing.Point(147, 299);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 50);
-            this.btnCancelar.TabIndex = 25;
+            this.btnCancelar.TabIndex = 17;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
@@ -194,7 +212,7 @@
             this.btnExcluir.Location = new System.Drawing.Point(31, 299);
             this.btnExcluir.Name = "btnExcluir";
             this.btnExcluir.Size = new System.Drawing.Size(75, 50);
-            this.btnExcluir.TabIndex = 24;
+            this.btnExcluir.TabIndex = 16;
             this.btnExcluir.Text = "Excluir";
             this.btnExcluir.UseVisualStyleBackColor = true;
             this.btnExcluir.Click += new System.EventHandler(this.btnExcluir_Click);
@@ -205,7 +223,7 @@
             this.btnSalvar.Location = new System.Drawing.Point(258, 212);
             this.btnSalvar.Name = "btnSalvar";
             this.btnSalvar.Size = new System.Drawing.Size(75, 50);
-            this.btnSalvar.TabIndex = 23;
+            this.btnSalvar.TabIndex = 15;
             this.btnSalvar.Text = "Salvar";
             this.btnSalvar.UseVisualStyleBackColor = true;
             this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
@@ -216,7 +234,7 @@
             this.btnAtualizar.Location = new System.Drawing.Point(147, 212);
             this.btnAtualizar.Name = "btnAtualizar";
             this.btnAtualizar.Size = new System.Drawing.Size(75, 50);
-            this.btnAtualizar.TabIndex = 22;
+            this.btnAtualizar.TabIndex = 14;
             this.btnAtualizar.Text = "Atualizar";
             this.btnAtualizar.UseVisualStyleBackColor = true;
             this.btnAtualizar.Click += new System.EventHandler(this.btnAtualizar_Click);
@@ -226,7 +244,7 @@
             this.btnAdicionar.Location = new System.Drawing.Point(31, 212);
             this.btnAdicionar.Name = "btnAdicionar";
             this.btnAdicionar.Size = new System.Drawing.Size(75, 50);
-            this.btnAdicionar.TabIndex = 21;
+            this.btnAdicionar.TabIndex = 13;
             this.btnAdicionar.Text = "Adicionar";
             this.btnAdicionar.UseVisualStyleBackColor = true;
             this.btnAdicionar.Click += new System.EventHandler(this.btnAdicionar_Click);
@@ -246,7 +264,7 @@
             this.txtCidade.Name = "txtCidade";
             this.txtCidade.ReadOnly = true;
             this.txtCidade.Size = new System.Drawing.Size(158, 22);
-            this.txtCidade.TabIndex = 17;
+            this.txtCidade.TabIndex = 11;
             this.txtCidade.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCidade_KeyPress);
             // 
             // label9
@@ -264,7 +282,7 @@
             this.txtN.Name = "txtN";
             this.txtN.ReadOnly = true;
             this.txtN.Size = new System.Drawing.Size(78, 22);
-            this.txtN.TabIndex = 15;
+            this.txtN.TabIndex = 10;
             this.txtN.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtN_KeyPress);
             // 
             // label8
@@ -282,7 +300,8 @@
             this.txtRua.Name = "txtRua";
             this.txtRua.ReadOnly = true;
             this.txtRua.Size = new System.Drawing.Size(186, 22);
-            this.txtRua.TabIndex = 13;
+            this.txtRua.TabIndex = 9;
+            this.txtRua.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRua_KeyPress);
             // 
             // label7
             // 
@@ -317,7 +336,7 @@
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.ReadOnly = true;
             this.txtEmail.Size = new System.Drawing.Size(299, 22);
-            this.txtEmail.TabIndex = 7;
+            this.txtEmail.TabIndex = 6;
             // 
             // label4
             // 
@@ -361,7 +380,7 @@
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.ReadOnly = true;
             this.txtCodigo.Size = new System.Drawing.Size(94, 22);
-            this.txtCodigo.TabIndex = 1;
+            this.txtCodigo.TabIndex = 3;
             // 
             // label1
             // 
@@ -372,31 +391,15 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Código";
             // 
-            // txtCNPJ
+            // cbEstado
             // 
-            this.txtCNPJ.Location = new System.Drawing.Point(213, 21);
-            this.txtCNPJ.Mask = "00.000.000/0000-00";
-            this.txtCNPJ.Name = "txtCNPJ";
-            this.txtCNPJ.ReadOnly = true;
-            this.txtCNPJ.Size = new System.Drawing.Size(150, 22);
-            this.txtCNPJ.TabIndex = 28;
-            // 
-            // txtCEP
-            // 
-            this.txtCEP.Location = new System.Drawing.Point(246, 105);
-            this.txtCEP.Mask = "00000-000";
-            this.txtCEP.Name = "txtCEP";
-            this.txtCEP.ReadOnly = true;
-            this.txtCEP.Size = new System.Drawing.Size(117, 22);
-            this.txtCEP.TabIndex = 29;
-            // 
-            // txtEstado
-            // 
-            this.txtEstado.Location = new System.Drawing.Point(285, 164);
-            this.txtEstado.Name = "txtEstado";
-            this.txtEstado.ReadOnly = true;
-            this.txtEstado.Size = new System.Drawing.Size(78, 22);
-            this.txtEstado.TabIndex = 19;
+            this.cbEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbEstado.Enabled = false;
+            this.cbEstado.FormattingEnabled = true;
+            this.cbEstado.Location = new System.Drawing.Point(285, 161);
+            this.cbEstado.Name = "cbEstado";
+            this.cbEstado.Size = new System.Drawing.Size(78, 24);
+            this.cbEstado.TabIndex = 21;
             // 
             // TelaFornecedor
             // 
@@ -450,6 +453,6 @@
         private System.Windows.Forms.MaskedTextBox txtTelefone;
         private System.Windows.Forms.MaskedTextBox txtCNPJ;
         private System.Windows.Forms.MaskedTextBox txtCEP;
-        private System.Windows.Forms.TextBox txtEstado;
+        private System.Windows.Forms.ComboBox cbEstado;
     }
 }

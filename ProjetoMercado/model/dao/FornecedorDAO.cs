@@ -269,11 +269,6 @@ namespace ProjetoMercado.model.dao
             return fornecedor;
         }
 
-        public Fornecedor FindByCnpj(string cnpj)
-        {
-            return null;
-        }
-
         public List<Fornecedor> ListAll()
         {
             /* Recebe a conexão utilizada para acessar o Banco de Dados */
@@ -337,10 +332,53 @@ namespace ProjetoMercado.model.dao
 
         
 
-        public void Delete(Fornecedor fornecedor)
+        public bool Delete(Fornecedor fornecedor)
         {
-             
-        }
-        
+            bool state = false; /* Indica se o comando foi executado com sucesso */
+
+            /* Recebe a conexão utilizada para acessar o Banco de Dados */
+            MySqlConnection connection = Database.GetInstance().GetConnection();
+
+            /* String que contém o SQL que será executado */
+            string query = "DELETE FROM Fornecedor WHERE codigo = @Codigo;";
+
+            /* Responsável pelo comando SQL */
+            MySqlCommand command = new MySqlCommand(query, connection);
+
+            /* Adiciona o parâmetro */
+            command.Parameters.AddWithValue("@Codigo", fornecedor.Codigo);
+
+            try
+            {
+                /* Abre a conexão */
+                if (connection.State != System.Data.ConnectionState.Open)
+                    connection.Open();
+
+                /* Executa o comando SQL */
+                command.ExecuteNonQuery();
+
+                state = true; /* Comando foi executado */
+            }
+            catch (MySqlException exception)
+            {
+                /* Fornecedor está atrelado a produtos */
+                if (exception.Number == (int)MySqlErrorCode.RowIsReferenced2)
+                {
+                    MessageBox.Show("Este fornecedor não pode ser excluído, pois está atrelado " +
+                        "a produtos cadastrados", "Fornecedor não pode ser excluído",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show(exception.Message, "Erro ao excluir",
+                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return state;
+        }        
     }
 }

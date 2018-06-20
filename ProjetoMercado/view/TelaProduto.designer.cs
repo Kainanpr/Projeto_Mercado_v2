@@ -152,7 +152,7 @@
             this.cbFornecedor.Location = new System.Drawing.Point(90, 139);
             this.cbFornecedor.Name = "cbFornecedor";
             this.cbFornecedor.Size = new System.Drawing.Size(273, 24);
-            this.cbFornecedor.TabIndex = 18;
+            this.cbFornecedor.TabIndex = 8;
             // 
             // label7
             // 
@@ -171,7 +171,7 @@
             this.cbCategoria.Location = new System.Drawing.Point(90, 109);
             this.cbCategoria.Name = "cbCategoria";
             this.cbCategoria.Size = new System.Drawing.Size(273, 24);
-            this.cbCategoria.TabIndex = 16;
+            this.cbCategoria.TabIndex = 7;
             // 
             // txtPreco
             // 
@@ -179,7 +179,7 @@
             this.txtPreco.Name = "txtPreco";
             this.txtPreco.ReadOnly = true;
             this.txtPreco.Size = new System.Drawing.Size(94, 22);
-            this.txtPreco.TabIndex = 14;
+            this.txtPreco.TabIndex = 4;
             this.txtPreco.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPreco_KeyPress);
             // 
             // label6
@@ -197,7 +197,7 @@
             this.txtQntMinEstoque.Name = "txtQntMinEstoque";
             this.txtQntMinEstoque.ReadOnly = true;
             this.txtQntMinEstoque.Size = new System.Drawing.Size(154, 22);
-            this.txtQntMinEstoque.TabIndex = 12;
+            this.txtQntMinEstoque.TabIndex = 9;
             this.txtQntMinEstoque.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtQntMinEstoque_KeyPress);
             // 
             // label5
@@ -224,7 +224,7 @@
             this.txtDescricao.Name = "txtDescricao";
             this.txtDescricao.ReadOnly = true;
             this.txtDescricao.Size = new System.Drawing.Size(273, 22);
-            this.txtDescricao.TabIndex = 8;
+            this.txtDescricao.TabIndex = 6;
             this.txtDescricao.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDescricao_KeyPress);
             // 
             // label3
@@ -241,7 +241,7 @@
             this.btnVoltar.Location = new System.Drawing.Point(270, 303);
             this.btnVoltar.Name = "btnVoltar";
             this.btnVoltar.Size = new System.Drawing.Size(75, 50);
-            this.btnVoltar.TabIndex = 7;
+            this.btnVoltar.TabIndex = 15;
             this.btnVoltar.Text = "Voltar";
             this.btnVoltar.UseVisualStyleBackColor = true;
             this.btnVoltar.Click += new System.EventHandler(this.btnVoltar_Click);
@@ -252,7 +252,7 @@
             this.btnCancelar.Location = new System.Drawing.Point(159, 303);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 50);
-            this.btnCancelar.TabIndex = 6;
+            this.btnCancelar.TabIndex = 14;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
@@ -263,7 +263,7 @@
             this.btnExcluir.Location = new System.Drawing.Point(43, 303);
             this.btnExcluir.Name = "btnExcluir";
             this.btnExcluir.Size = new System.Drawing.Size(75, 50);
-            this.btnExcluir.TabIndex = 5;
+            this.btnExcluir.TabIndex = 13;
             this.btnExcluir.Text = "Excluir";
             this.btnExcluir.UseVisualStyleBackColor = true;
             this.btnExcluir.Click += new System.EventHandler(this.btnExcluir_Click);
@@ -274,7 +274,7 @@
             this.btnSalvar.Location = new System.Drawing.Point(270, 216);
             this.btnSalvar.Name = "btnSalvar";
             this.btnSalvar.Size = new System.Drawing.Size(75, 50);
-            this.btnSalvar.TabIndex = 4;
+            this.btnSalvar.TabIndex = 12;
             this.btnSalvar.Text = "Salvar";
             this.btnSalvar.UseVisualStyleBackColor = true;
             this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
@@ -285,7 +285,7 @@
             this.btnAtualizar.Location = new System.Drawing.Point(159, 216);
             this.btnAtualizar.Name = "btnAtualizar";
             this.btnAtualizar.Size = new System.Drawing.Size(75, 50);
-            this.btnAtualizar.TabIndex = 3;
+            this.btnAtualizar.TabIndex = 11;
             this.btnAtualizar.Text = "Atualizar";
             this.btnAtualizar.UseVisualStyleBackColor = true;
             this.btnAtualizar.Click += new System.EventHandler(this.btnAtualizar_Click);
@@ -295,7 +295,7 @@
             this.btnAdicionar.Location = new System.Drawing.Point(43, 216);
             this.btnAdicionar.Name = "btnAdicionar";
             this.btnAdicionar.Size = new System.Drawing.Size(75, 50);
-            this.btnAdicionar.TabIndex = 2;
+            this.btnAdicionar.TabIndex = 10;
             this.btnAdicionar.Text = "Adicionar";
             this.btnAdicionar.UseVisualStyleBackColor = true;
             this.btnAdicionar.Click += new System.EventHandler(this.btnAdicionar_Click);
@@ -306,7 +306,7 @@
             this.txtCodBarras.Name = "txtCodBarras";
             this.txtCodBarras.ReadOnly = true;
             this.txtCodBarras.Size = new System.Drawing.Size(235, 22);
-            this.txtCodBarras.TabIndex = 1;
+            this.txtCodBarras.TabIndex = 5;
             this.txtCodBarras.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCodBarras_KeyPress);
             // 
             // label2
@@ -324,7 +324,7 @@
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.ReadOnly = true;
             this.txtCodigo.Size = new System.Drawing.Size(94, 22);
-            this.txtCodigo.TabIndex = 0;
+            this.txtCodigo.TabIndex = 3;
             // 
             // label1
             // 
@@ -343,6 +343,7 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "TelaProduto";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Produto";
             this.Load += new System.EventHandler(this.TelaProduto_Load);
             this.groupBox1.ResumeLayout(false);

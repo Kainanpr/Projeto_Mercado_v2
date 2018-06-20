@@ -124,13 +124,20 @@ namespace ProjetoMercado.view
         {
             /* Verifica se o usúario tem certeza que deseja excluir a categoria */
             var result = MessageBox.Show(this, "Você tem certeza que deseja excluir esta categoria?",
-                "Atenção", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+                "Deseja excluir categoria?", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
 
             if (result == DialogResult.Yes)
             {
                 /* Busca no Banco de Dados e exclui */
                 Categoria categoria = GetDTO();
-                categoriaDAO.Delete(categoria);
+
+                /* Chama o método para deletar a categoria do bd */
+                if (categoriaDAO.Delete(categoria))
+                {
+                    /* Mensagem indicando que a categoria foi excluída */
+                    MessageBox.Show("Categoria foi excluída.", "Categoria Excluída",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
 
                 AtualizaDGV(); /* Atualiza o Data Grid View */
 
@@ -173,7 +180,8 @@ namespace ProjetoMercado.view
         {
             /* Não permite a inserção de dígitos e caracteres de pontuação no 
              * text box descrição */
-            if (char.IsDigit(e.KeyChar) || char.IsPunctuation(e.KeyChar))
+            if (!(char.IsLetter(e.KeyChar) || char.IsWhiteSpace(e.KeyChar) ||
+                e.KeyChar.Equals('\b')))
                 e.Handled = true;
         }
         
