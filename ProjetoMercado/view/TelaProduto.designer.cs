@@ -142,7 +142,7 @@
             this.groupBox2.Size = new System.Drawing.Size(375, 368);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Categoria";
+            this.groupBox2.Text = "Produto";
             // 
             // cbFornecedor
             // 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProjetoMercado.model.domain
 {
-    class Fornecedor
+    public class Fornecedor
     {
         /* Atributos */
         private int codigo;
