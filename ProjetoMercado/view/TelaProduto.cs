@@ -95,6 +95,16 @@ namespace ProjetoMercado.view
                          * para criar a categoria no Banco de Dados */
                         if(produtoDAO.Create(produto))
                         {
+                            ProdutoEstoque produtoEstoque = new ProdutoEstoque();
+                            ProdutoEstoqueDAO produtoEstoqueDAO = new ProdutoEstoqueDAO();
+
+                            /* Adiciona o produto em um objeto ProdutoEstoque */
+                            produtoEstoque.Produto = produtoDAO.Read(txtCodBarras.Text);
+                            produtoEstoque.QuantidadeEstoque = 0;
+
+                            /* Salva o produto no estoque também */
+                            produtoEstoqueDAO.Create(produtoEstoque);
+
                             /* Mensagem indicando que o produto foi cadastrado */
                             MessageBox.Show("Produto foi cadastrado.", "Produto Cadastrado",
                                 MessageBoxButtons.OK, MessageBoxIcon.Information);

@@ -24,16 +24,17 @@ namespace ProjetoMercado.model.connection
                 connection = new MySqlConnection(connectionString); /* Configura a conexão */
                 connection.Open(); /* Abre a conexão para teste */
             }
-            catch (Exception exception)
+            catch (MySqlException exception)
             {
-                if (exception.Message.ToString().Contains("Unknown database 'mercado'"))
+                if (exception.Number == (int)MySqlErrorCode.None)
                 {
                     CreateDB(); /* Chama o método para criar o Bando de Dados */
                 }
                 else
                 {
                     /* Se ocorrer algum erro mostra uma caixa de texto com o erro */
-                    MessageBox.Show(exception.Message.ToString(), "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(exception.Message.ToString(), "Erro", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
                 }
             }
             finally
@@ -77,7 +78,8 @@ namespace ProjetoMercado.model.connection
             catch (Exception exception)
             {
                 /* Se ocorrer algum erro mostra uma caixa de texto com o erro */
-                MessageBox.Show(exception.ToString(), "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(exception.ToString(), "Erro", MessageBoxButtons.OK, 
+                    MessageBoxIcon.Error);
             }
             finally
             {
@@ -208,13 +210,26 @@ namespace ProjetoMercado.model.connection
 
                 /* Executa o comando MySql */
                 command = new MySqlCommand(query, connection);
-                command.ExecuteNonQuery();            
+                command.ExecuteNonQuery();
 
+                /* SQL para criar a tabela Produto_Estoque */
+                query = "CREATE TABLE IF NOT EXISTS Produto_Estoque (" +
+                    "codigo INTEGER AUTO_INCREMENT," +
+                    "cod_produto INTEGER NOT NULL," +
+                    "quantidade INTEGER NOT NULL," +
+                    "CONSTRAINT pk_produto_estoque PRIMARY KEY(codigo)," +
+                    "CONSTRAINT fk_produto_estoque FOREIGN KEY(cod_produto) " +
+                    "REFERENCES Produto(codigo));";
+
+                /* Executa o comando MySql */
+                command = new MySqlCommand(query, connection);
+                command.ExecuteNonQuery();
             }
-            catch (Exception exception)
+            catch (MySqlException exception)
             {
                 /* Se ocorrer alguma exceção mostra uma caixa de texto com o erro */
-                MessageBox.Show(exception.ToString(), "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(exception.Message.ToString(), "Erro", MessageBoxButtons.OK, 
+                    MessageBoxIcon.Error);
             }
             finally
             {

@@ -89,5 +89,23 @@ namespace ProjetoMercado.view
             /* Preeche o label com a hora atual */
             lblHora.Text = DateTime.Now.ToLongTimeString();
         }
+
+        private void btnProdutosEstoque_Click(object sender, EventArgs e)
+        {
+            /* Abre a Tela de Produtos em Estoque */
+            TelaProdutosEstoque telaProdutosEstoque = new TelaProdutosEstoque();
+            this.Hide();
+            telaProdutosEstoque.ShowDialog();
+            this.Show();
+        }
+
+        private void btnReceberProdutos_Click(object sender, EventArgs e)
+        {
+            /* Abre a Tela de Receber Produtos */
+            TelaReceberProduto telaReceberProduto = new TelaReceberProduto();
+            this.Hide();
+            telaReceberProduto.ShowDialog();
+            this.Show();
+        }
     }
 }

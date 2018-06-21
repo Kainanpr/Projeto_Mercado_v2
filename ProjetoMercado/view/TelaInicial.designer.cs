@@ -41,8 +41,12 @@
             this.lblData = new System.Windows.Forms.Label();
             this.lblHora = new System.Windows.Forms.Label();
             this.timer = new System.Windows.Forms.Timer(this.components);
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btnReceberProdutos = new System.Windows.Forms.Button();
+            this.btnProdutosEstoque = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -163,11 +167,44 @@
             this.timer.Interval = 1000;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.btnReceberProdutos);
+            this.groupBox3.Controls.Add(this.btnProdutosEstoque);
+            this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox3.Location = new System.Drawing.Point(12, 189);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(275, 119);
+            this.groupBox3.TabIndex = 5;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Estoque";
+            // 
+            // btnReceberProdutos
+            // 
+            this.btnReceberProdutos.Location = new System.Drawing.Point(142, 34);
+            this.btnReceberProdutos.Name = "btnReceberProdutos";
+            this.btnReceberProdutos.Size = new System.Drawing.Size(119, 71);
+            this.btnReceberProdutos.TabIndex = 4;
+            this.btnReceberProdutos.Text = "Receber Produtos";
+            this.btnReceberProdutos.UseVisualStyleBackColor = true;
+            this.btnReceberProdutos.Click += new System.EventHandler(this.btnReceberProdutos_Click);
+            // 
+            // btnProdutosEstoque
+            // 
+            this.btnProdutosEstoque.Location = new System.Drawing.Point(17, 34);
+            this.btnProdutosEstoque.Name = "btnProdutosEstoque";
+            this.btnProdutosEstoque.Size = new System.Drawing.Size(119, 71);
+            this.btnProdutosEstoque.TabIndex = 3;
+            this.btnProdutosEstoque.Text = "Produtos em Estoque";
+            this.btnProdutosEstoque.UseVisualStyleBackColor = true;
+            this.btnProdutosEstoque.Click += new System.EventHandler(this.btnProdutosEstoque_Click);
+            // 
             // TelaInicial
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(711, 195);
+            this.ClientSize = new System.Drawing.Size(711, 323);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.lblHora);
             this.Controls.Add(this.lblData);
             this.Controls.Add(this.lblLogin);
@@ -180,6 +217,7 @@
             this.Load += new System.EventHandler(this.TelaInicial_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -199,5 +237,8 @@
         private System.Windows.Forms.Label lblData;
         private System.Windows.Forms.Label lblHora;
         private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Button btnReceberProdutos;
+        private System.Windows.Forms.Button btnProdutosEstoque;
     }
 }
