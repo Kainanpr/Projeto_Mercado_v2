@@ -143,7 +143,7 @@ namespace ProjetoMercado.model.dao
                     produtoEstoque.Produto.Preco = dataReader.GetDecimal(4);
                     produtoEstoque.Produto.CodigoBarras = dataReader.GetString(5);
                     produtoEstoque.Produto.Descricao = dataReader.GetString(6);
-                    produtoEstoque.Produto.QntMinEstoque = (8);
+                    produtoEstoque.Produto.QntMinEstoque = dataReader.GetInt32(8);
 
                     produtoEstoque.Produto.Categoria.Codigo = dataReader.GetInt32(10);
                     produtoEstoque.Produto.Categoria.Descricao = dataReader.GetString(11);                    
@@ -207,7 +207,7 @@ namespace ProjetoMercado.model.dao
 
                     produtoEstoque.Produto.Codigo = dataReader.GetInt32(3);
                     produtoEstoque.Produto.Descricao = dataReader.GetString(6);
-                    produtoEstoque.Produto.QntMinEstoque = (8);
+                    produtoEstoque.Produto.QntMinEstoque = dataReader.GetInt32(8);
 
                     lista.Add(produtoEstoque);
                 }
