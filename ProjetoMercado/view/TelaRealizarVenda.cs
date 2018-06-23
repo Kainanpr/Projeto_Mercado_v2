@@ -136,7 +136,8 @@ namespace ProjetoMercado.view
 
             /* Percorre todos os produtos que estão no Data Grid View */
             for(int i = 0; i < dgvProdutos.Rows.Count; i++)
-            {               
+            {
+                ProdutoEstoqueDAO produtoEstoqueDAO = new ProdutoEstoqueDAO();
                 ItemVenda itemVenda = new ItemVenda();
 
                 /* Busca o produto pelo código presente no DGV e o coloca em item*/
@@ -154,6 +155,15 @@ namespace ProjetoMercado.view
 
                 /* Grava o ItemVenda no Banco de Dados */
                 itemVendaDAO.Create(itemVenda);
+
+                /* Recupera a informação do Produto Estoque */
+                ProdutoEstoque produtoEstoque = produtoEstoqueDAO.Read(itemVenda.Produto.Codigo);
+
+                /* Atualiza o estoque subtraindo os produtos vendidos */
+                produtoEstoque.QuantidadeEstoque -= itemVenda.Quantidade;
+
+                /* Armazena o BD o novo estoque */
+                produtoEstoqueDAO.Update(produtoEstoque);
             }
             /* Desabilita o botão */
             btnConfirmarVenda.Enabled = false;

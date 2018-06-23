@@ -55,7 +55,7 @@
             this.groupBox1.Controls.Add(this.btnFornecedores);
             this.groupBox1.Controls.Add(this.btnCategorias);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(12, 64);
+            this.groupBox1.Location = new System.Drawing.Point(12, 42);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(403, 119);
             this.groupBox1.TabIndex = 0;
@@ -64,32 +64,44 @@
             // 
             // btnProdutos
             // 
+            this.btnProdutos.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnProdutos.FlatAppearance.MouseDownBackColor = System.Drawing.Color.CornflowerBlue;
+            this.btnProdutos.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnProdutos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnProdutos.Location = new System.Drawing.Point(267, 34);
             this.btnProdutos.Name = "btnProdutos";
             this.btnProdutos.Size = new System.Drawing.Size(119, 71);
             this.btnProdutos.TabIndex = 2;
             this.btnProdutos.Text = "Produtos";
-            this.btnProdutos.UseVisualStyleBackColor = true;
+            this.btnProdutos.UseVisualStyleBackColor = false;
             this.btnProdutos.Click += new System.EventHandler(this.btnProdutos_Click);
             // 
             // btnFornecedores
             // 
+            this.btnFornecedores.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnFornecedores.FlatAppearance.MouseDownBackColor = System.Drawing.Color.CornflowerBlue;
+            this.btnFornecedores.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnFornecedores.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFornecedores.Location = new System.Drawing.Point(142, 34);
             this.btnFornecedores.Name = "btnFornecedores";
             this.btnFornecedores.Size = new System.Drawing.Size(119, 71);
             this.btnFornecedores.TabIndex = 1;
             this.btnFornecedores.Text = "Fornecedores";
-            this.btnFornecedores.UseVisualStyleBackColor = true;
+            this.btnFornecedores.UseVisualStyleBackColor = false;
             this.btnFornecedores.Click += new System.EventHandler(this.btnFornecedores_Click);
             // 
             // btnCategorias
             // 
+            this.btnCategorias.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnCategorias.FlatAppearance.MouseDownBackColor = System.Drawing.Color.CornflowerBlue;
+            this.btnCategorias.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnCategorias.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCategorias.Location = new System.Drawing.Point(17, 34);
             this.btnCategorias.Name = "btnCategorias";
             this.btnCategorias.Size = new System.Drawing.Size(119, 71);
             this.btnCategorias.TabIndex = 0;
             this.btnCategorias.Text = "Categorias";
-            this.btnCategorias.UseVisualStyleBackColor = true;
+            this.btnCategorias.UseVisualStyleBackColor = false;
             this.btnCategorias.Click += new System.EventHandler(this.btnCategorias_Click);
             // 
             // groupBox2
@@ -97,7 +109,7 @@
             this.groupBox2.Controls.Add(this.btnListarVendas);
             this.groupBox2.Controls.Add(this.btnRealizarVenda);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(421, 64);
+            this.groupBox2.Location = new System.Drawing.Point(421, 42);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(275, 119);
             this.groupBox2.TabIndex = 3;
@@ -106,22 +118,30 @@
             // 
             // btnListarVendas
             // 
+            this.btnListarVendas.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnListarVendas.FlatAppearance.MouseDownBackColor = System.Drawing.Color.CornflowerBlue;
+            this.btnListarVendas.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnListarVendas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnListarVendas.Location = new System.Drawing.Point(142, 34);
             this.btnListarVendas.Name = "btnListarVendas";
             this.btnListarVendas.Size = new System.Drawing.Size(119, 71);
             this.btnListarVendas.TabIndex = 4;
             this.btnListarVendas.Text = "Listar Vendas";
-            this.btnListarVendas.UseVisualStyleBackColor = true;
+            this.btnListarVendas.UseVisualStyleBackColor = false;
             this.btnListarVendas.Click += new System.EventHandler(this.btnListarVendas_Click);
             // 
             // btnRealizarVenda
             // 
+            this.btnRealizarVenda.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnRealizarVenda.FlatAppearance.MouseDownBackColor = System.Drawing.Color.CornflowerBlue;
+            this.btnRealizarVenda.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnRealizarVenda.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRealizarVenda.Location = new System.Drawing.Point(17, 34);
             this.btnRealizarVenda.Name = "btnRealizarVenda";
             this.btnRealizarVenda.Size = new System.Drawing.Size(119, 71);
             this.btnRealizarVenda.TabIndex = 3;
             this.btnRealizarVenda.Text = "Realizar Venda";
-            this.btnRealizarVenda.UseVisualStyleBackColor = true;
+            this.btnRealizarVenda.UseVisualStyleBackColor = false;
             this.btnRealizarVenda.Click += new System.EventHandler(this.btnRealizarVenda_Click);
             // 
             // label1
@@ -172,7 +192,7 @@
             this.groupBox3.Controls.Add(this.btnReceberProdutos);
             this.groupBox3.Controls.Add(this.btnProdutosEstoque);
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.Location = new System.Drawing.Point(12, 189);
+            this.groupBox3.Location = new System.Drawing.Point(12, 167);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(275, 119);
             this.groupBox3.TabIndex = 5;
@@ -181,29 +201,38 @@
             // 
             // btnReceberProdutos
             // 
+            this.btnReceberProdutos.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnReceberProdutos.FlatAppearance.MouseDownBackColor = System.Drawing.Color.CornflowerBlue;
+            this.btnReceberProdutos.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnReceberProdutos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReceberProdutos.Location = new System.Drawing.Point(142, 34);
             this.btnReceberProdutos.Name = "btnReceberProdutos";
             this.btnReceberProdutos.Size = new System.Drawing.Size(119, 71);
             this.btnReceberProdutos.TabIndex = 4;
             this.btnReceberProdutos.Text = "Receber Produtos";
-            this.btnReceberProdutos.UseVisualStyleBackColor = true;
+            this.btnReceberProdutos.UseVisualStyleBackColor = false;
             this.btnReceberProdutos.Click += new System.EventHandler(this.btnReceberProdutos_Click);
             // 
             // btnProdutosEstoque
             // 
+            this.btnProdutosEstoque.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnProdutosEstoque.FlatAppearance.MouseDownBackColor = System.Drawing.Color.CornflowerBlue;
+            this.btnProdutosEstoque.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnProdutosEstoque.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnProdutosEstoque.Location = new System.Drawing.Point(17, 34);
             this.btnProdutosEstoque.Name = "btnProdutosEstoque";
             this.btnProdutosEstoque.Size = new System.Drawing.Size(119, 71);
             this.btnProdutosEstoque.TabIndex = 3;
             this.btnProdutosEstoque.Text = "Produtos em Estoque";
-            this.btnProdutosEstoque.UseVisualStyleBackColor = true;
+            this.btnProdutosEstoque.UseVisualStyleBackColor = false;
             this.btnProdutosEstoque.Click += new System.EventHandler(this.btnProdutosEstoque_Click);
             // 
             // TelaInicial
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(711, 323);
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.ClientSize = new System.Drawing.Size(711, 299);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.lblHora);
             this.Controls.Add(this.lblData);
@@ -211,6 +240,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "TelaInicial";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Mercado";
