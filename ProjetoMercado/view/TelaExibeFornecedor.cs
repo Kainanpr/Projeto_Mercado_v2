@@ -30,7 +30,7 @@ namespace ProjetoMercado.view
             txtN.Text = fornecedor.Numero.ToString();
             txtCEP.Text = fornecedor.Cep;
             txtCidade.Text = fornecedor.Cidade;
-            cbEstado.Text = fornecedor.Estado;
+            txtEstado.Text = fornecedor.Estado;
         }
     }
 }

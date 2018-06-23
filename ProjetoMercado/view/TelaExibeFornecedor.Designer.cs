@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.cbEstado = new System.Windows.Forms.ComboBox();
             this.txtCEP = new System.Windows.Forms.MaskedTextBox();
             this.txtCNPJ = new System.Windows.Forms.MaskedTextBox();
             this.txtTelefone = new System.Windows.Forms.MaskedTextBox();
@@ -49,12 +48,13 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtCodigo = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.txtEstado = new System.Windows.Forms.TextBox();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.cbEstado);
+            this.groupBox2.Controls.Add(this.txtEstado);
             this.groupBox2.Controls.Add(this.txtCEP);
             this.groupBox2.Controls.Add(this.txtCNPJ);
             this.groupBox2.Controls.Add(this.txtTelefone);
@@ -81,16 +81,6 @@
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Fornecedor";
-            // 
-            // cbEstado
-            // 
-            this.cbEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbEstado.Enabled = false;
-            this.cbEstado.FormattingEnabled = true;
-            this.cbEstado.Location = new System.Drawing.Point(285, 161);
-            this.cbEstado.Name = "cbEstado";
-            this.cbEstado.Size = new System.Drawing.Size(78, 24);
-            this.cbEstado.TabIndex = 21;
             // 
             // txtCEP
             // 
@@ -257,6 +247,14 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Código";
             // 
+            // txtEstado
+            // 
+            this.txtEstado.Location = new System.Drawing.Point(281, 161);
+            this.txtEstado.Name = "txtEstado";
+            this.txtEstado.ReadOnly = true;
+            this.txtEstado.Size = new System.Drawing.Size(82, 22);
+            this.txtEstado.TabIndex = 21;
+            // 
             // TelaExibeFornecedor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -275,7 +273,6 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.ComboBox cbEstado;
         private System.Windows.Forms.MaskedTextBox txtCEP;
         private System.Windows.Forms.MaskedTextBox txtCNPJ;
         private System.Windows.Forms.MaskedTextBox txtTelefone;
@@ -295,5 +292,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtCodigo;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtEstado;
     }
 }
