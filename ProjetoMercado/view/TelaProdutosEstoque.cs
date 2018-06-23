@@ -82,9 +82,9 @@ namespace ProjetoMercado.view
             int codigo = int.Parse(dgvProdutosEstoque.CurrentRow.Cells[0].Value.ToString());
             Fornecedor fornecedor = fornecedorDAO.Read(produtoDAO.Read(codigo).Fornecedor.Codigo);
             TelaExibeFornecedor telaExibeFornecedor = new TelaExibeFornecedor(fornecedor);
-            this.Hide();
+            //this.Hide();
             telaExibeFornecedor.ShowDialog();
-            this.Show();
+            //this.Show();
         }
     }
 }

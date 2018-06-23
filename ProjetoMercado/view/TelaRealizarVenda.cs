@@ -117,66 +117,78 @@ namespace ProjetoMercado.view
 
         private void btnConfirmarVenda_Click(object sender, EventArgs e)
         {
-            /* Realiza as operações com a venda */
-            Venda venda = new Venda();
+            /* Verifica se o usúario tem certeza que deseja concluir a comprao */
+            var result = MessageBox.Show(this, "Você tem certeza que deseja concluir está compra?",
+                "Deseja concluir está compra?", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
 
-            /* Coloca o codigo em venda, sendo o último inserido no banco mais um */
-            venda.Codigo = vendaDAO.NextCodVenda();
-
-            /* Coloca a hora da venda */
-            venda.DataHora = DateTime.Now;
-
-            /* Coloca o valor total da venda */
-            venda.ValotTotal = subTotal;
-
-            /* Grava a venda no Banco de Dados */
-            vendaDAO.Create(venda);
-
-            /* Depois, realiza as operações com os itens */
-
-            /* Percorre todos os produtos que estão no Data Grid View */
-            for(int i = 0; i < dgvProdutos.Rows.Count; i++)
+            if (result == DialogResult.Yes)
             {
-                ProdutoEstoqueDAO produtoEstoqueDAO = new ProdutoEstoqueDAO();
-                ItemVenda itemVenda = new ItemVenda();
+                /* Realiza as operações com a venda */
+                Venda venda = new Venda();
 
-                /* Busca o produto pelo código presente no DGV e o coloca em item*/
-                itemVenda.Produto = produtoDAO.Read(int.Parse(dgvProdutos.Rows[i].Cells[0].Value.ToString()));
+                /* Coloca o codigo em venda, sendo o último inserido no banco mais um */
+                venda.Codigo = vendaDAO.NextCodVenda();
 
-                /* Informa a venda para o item */
-                itemVenda.Venda = venda;
+                /* Coloca a hora da venda */
+                venda.DataHora = DateTime.Now;
 
-                /* Coloca a quantidade em item */
-                itemVenda.Quantidade = int.Parse(dgvProdutos.Rows[i].Cells[2].Value.ToString());
+                /* Coloca o valor total da venda */
+                venda.ValotTotal = subTotal;
 
-                /* Pega o preco do produto e coloca o preco no item da venda 
-                 * (Caso o valor do produto mude, temos esse registro do valor que o produto foi vendido)*/
-                itemVenda.PrecoUnitario = itemVenda.Produto.Preco;
+                /* Grava a venda no Banco de Dados */
+                vendaDAO.Create(venda);
 
-                /* Grava o ItemVenda no Banco de Dados */
-                itemVendaDAO.Create(itemVenda);
+                /* Depois, realiza as operações com os itens */
 
-                /* Recupera a informação do Produto Estoque */
-                ProdutoEstoque produtoEstoque = produtoEstoqueDAO.Read(itemVenda.Produto.Codigo);
+                /* Percorre todos os produtos que estão no Data Grid View */
+                for (int i = 0; i < dgvProdutos.Rows.Count; i++)
+                {
+                    ProdutoEstoqueDAO produtoEstoqueDAO = new ProdutoEstoqueDAO();
+                    ItemVenda itemVenda = new ItemVenda();
 
-                /* Atualiza o estoque subtraindo os produtos vendidos */
-                produtoEstoque.QuantidadeEstoque -= itemVenda.Quantidade;
+                    /* Busca o produto pelo código presente no DGV e o coloca em item*/
+                    itemVenda.Produto = produtoDAO.Read(int.Parse(dgvProdutos.Rows[i].Cells[0].Value.ToString()));
 
-                /* Armazena o BD o novo estoque */
-                produtoEstoqueDAO.Update(produtoEstoque);
+                    /* Informa a venda para o item */
+                    itemVenda.Venda = venda;
+
+                    /* Coloca a quantidade em item */
+                    itemVenda.Quantidade = int.Parse(dgvProdutos.Rows[i].Cells[2].Value.ToString());
+
+                    /* Pega o preco do produto e coloca o preco no item da venda 
+                     * (Caso o valor do produto mude, temos esse registro do valor que o produto foi vendido)*/
+                    itemVenda.PrecoUnitario = itemVenda.Produto.Preco;
+
+                    /* Grava o ItemVenda no Banco de Dados */
+                    itemVendaDAO.Create(itemVenda);
+
+                    /* Recupera a informação do Produto Estoque */
+                    ProdutoEstoque produtoEstoque = produtoEstoqueDAO.Read(itemVenda.Produto.Codigo);
+
+                    /* Atualiza o estoque subtraindo os produtos vendidos */
+                    produtoEstoque.QuantidadeEstoque -= itemVenda.Quantidade;
+
+                    /* Armazena o BD o novo estoque */
+                    produtoEstoqueDAO.Update(produtoEstoque);
+                }
+                /* Desabilita o botão */
+                btnConfirmarVenda.Enabled = false;
+
+                txtQuantidade.ReadOnly = true; /* Desabilita a edição */
+
+                LimparTextBox(); /* Limpa as textBox */
+
+                dgvProdutos.Rows.Clear(); /* Limpa o DGV */
+
+                subTotal = 0.0m;
+
+                txtSubTotal.Text = subTotal.ToString("c");
+
+                /* Mensagem indicando que a compra foi realizada com sucesso */
+                MessageBox.Show("Compra foi realizada com sucesso.", "Compra realizada",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            /* Desabilita o botão */
-            btnConfirmarVenda.Enabled = false;
-
-            txtQuantidade.ReadOnly = true; /* Desabilita a edição */
-
-            LimparTextBox(); /* Limpa as textBox */
-
-            dgvProdutos.Rows.Clear(); /* Limpa o DGV */
-
-            subTotal = 0.0m;
-
-            txtSubTotal.Text = subTotal.ToString("c");
+                    
         }
     }
 }
