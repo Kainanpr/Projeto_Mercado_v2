@@ -429,7 +429,7 @@
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "TelaFornecedor";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Fornecedor";
             this.Load += new System.EventHandler(this.TelaFornecedor_Load);
             this.groupBox1.ResumeLayout(false);

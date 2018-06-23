@@ -137,6 +137,7 @@
             this.ClientSize = new System.Drawing.Size(356, 232);
             this.Controls.Add(this.groupBox2);
             this.Name = "TelaReceberProduto";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Receber Produtos";
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();

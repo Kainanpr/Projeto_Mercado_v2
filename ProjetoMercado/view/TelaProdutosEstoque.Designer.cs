@@ -35,22 +35,22 @@
             this.Quantidade = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.QuantidadeMinima = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtFornecedor = new System.Windows.Forms.TextBox();
+            this.txtCategoria = new System.Windows.Forms.TextBox();
+            this.txtSituacao = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.txtPreco = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.txtDescricao = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.btnVoltar = new System.Windows.Forms.Button();
             this.txtCodBarras = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.txtPreco = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.txtCodigo = new System.Windows.Forms.TextBox();
-            this.txtSituacao = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnVoltar = new System.Windows.Forms.Button();
             this.btnInformacoesFornecedor = new System.Windows.Forms.Button();
-            this.txtCategoria = new System.Windows.Forms.TextBox();
-            this.txtFornecedor = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProdutosEstoque)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -141,6 +141,39 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Produto";
             // 
+            // txtFornecedor
+            // 
+            this.txtFornecedor.Location = new System.Drawing.Point(90, 139);
+            this.txtFornecedor.Name = "txtFornecedor";
+            this.txtFornecedor.ReadOnly = true;
+            this.txtFornecedor.Size = new System.Drawing.Size(273, 22);
+            this.txtFornecedor.TabIndex = 21;
+            // 
+            // txtCategoria
+            // 
+            this.txtCategoria.Location = new System.Drawing.Point(90, 112);
+            this.txtCategoria.Name = "txtCategoria";
+            this.txtCategoria.ReadOnly = true;
+            this.txtCategoria.Size = new System.Drawing.Size(273, 22);
+            this.txtCategoria.TabIndex = 20;
+            // 
+            // txtSituacao
+            // 
+            this.txtSituacao.Location = new System.Drawing.Point(90, 169);
+            this.txtSituacao.Name = "txtSituacao";
+            this.txtSituacao.ReadOnly = true;
+            this.txtSituacao.Size = new System.Drawing.Size(273, 22);
+            this.txtSituacao.TabIndex = 18;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(8, 172);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(61, 16);
+            this.label5.TabIndex = 19;
+            this.label5.Text = "Situação";
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -149,6 +182,23 @@
             this.label7.Size = new System.Drawing.Size(78, 16);
             this.label7.TabIndex = 17;
             this.label7.Text = "Fornecedor";
+            // 
+            // txtPreco
+            // 
+            this.txtPreco.Location = new System.Drawing.Point(269, 22);
+            this.txtPreco.Name = "txtPreco";
+            this.txtPreco.ReadOnly = true;
+            this.txtPreco.Size = new System.Drawing.Size(94, 22);
+            this.txtPreco.TabIndex = 4;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(199, 25);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(72, 16);
+            this.label6.TabIndex = 15;
+            this.label6.Text = "Preço (R$)";
             // 
             // label4
             // 
@@ -176,17 +226,6 @@
             this.label3.TabIndex = 9;
             this.label3.Text = "Descrição";
             // 
-            // btnVoltar
-            // 
-            this.btnVoltar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnVoltar.Location = new System.Drawing.Point(775, 388);
-            this.btnVoltar.Name = "btnVoltar";
-            this.btnVoltar.Size = new System.Drawing.Size(75, 50);
-            this.btnVoltar.TabIndex = 15;
-            this.btnVoltar.Text = "Voltar";
-            this.btnVoltar.UseVisualStyleBackColor = true;
-            this.btnVoltar.Click += new System.EventHandler(this.btnVoltar_Click);
-            // 
             // txtCodBarras
             // 
             this.txtCodBarras.Location = new System.Drawing.Point(128, 53);
@@ -204,22 +243,13 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "Código de Barras";
             // 
-            // label6
+            // txtCodigo
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(199, 25);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(72, 16);
-            this.label6.TabIndex = 15;
-            this.label6.Text = "Preço (R$)";
-            // 
-            // txtPreco
-            // 
-            this.txtPreco.Location = new System.Drawing.Point(269, 22);
-            this.txtPreco.Name = "txtPreco";
-            this.txtPreco.ReadOnly = true;
-            this.txtPreco.Size = new System.Drawing.Size(94, 22);
-            this.txtPreco.TabIndex = 4;
+            this.txtCodigo.Location = new System.Drawing.Point(90, 22);
+            this.txtCodigo.Name = "txtCodigo";
+            this.txtCodigo.ReadOnly = true;
+            this.txtCodigo.Size = new System.Drawing.Size(94, 22);
+            this.txtCodigo.TabIndex = 3;
             // 
             // label1
             // 
@@ -230,30 +260,16 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Código";
             // 
-            // txtCodigo
+            // btnVoltar
             // 
-            this.txtCodigo.Location = new System.Drawing.Point(90, 22);
-            this.txtCodigo.Name = "txtCodigo";
-            this.txtCodigo.ReadOnly = true;
-            this.txtCodigo.Size = new System.Drawing.Size(94, 22);
-            this.txtCodigo.TabIndex = 3;
-            // 
-            // txtSituacao
-            // 
-            this.txtSituacao.Location = new System.Drawing.Point(90, 169);
-            this.txtSituacao.Name = "txtSituacao";
-            this.txtSituacao.ReadOnly = true;
-            this.txtSituacao.Size = new System.Drawing.Size(273, 22);
-            this.txtSituacao.TabIndex = 18;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(8, 172);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(61, 16);
-            this.label5.TabIndex = 19;
-            this.label5.Text = "Situação";
+            this.btnVoltar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVoltar.Location = new System.Drawing.Point(775, 388);
+            this.btnVoltar.Name = "btnVoltar";
+            this.btnVoltar.Size = new System.Drawing.Size(75, 50);
+            this.btnVoltar.TabIndex = 15;
+            this.btnVoltar.Text = "Voltar";
+            this.btnVoltar.UseVisualStyleBackColor = true;
+            this.btnVoltar.Click += new System.EventHandler(this.btnVoltar_Click);
             // 
             // btnInformacoesFornecedor
             // 
@@ -267,22 +283,6 @@
             this.btnInformacoesFornecedor.UseVisualStyleBackColor = true;
             this.btnInformacoesFornecedor.Click += new System.EventHandler(this.btnInformacoesFornecedor_Click);
             // 
-            // txtCategoria
-            // 
-            this.txtCategoria.Location = new System.Drawing.Point(90, 112);
-            this.txtCategoria.Name = "txtCategoria";
-            this.txtCategoria.ReadOnly = true;
-            this.txtCategoria.Size = new System.Drawing.Size(273, 22);
-            this.txtCategoria.TabIndex = 20;
-            // 
-            // txtFornecedor
-            // 
-            this.txtFornecedor.Location = new System.Drawing.Point(90, 139);
-            this.txtFornecedor.Name = "txtFornecedor";
-            this.txtFornecedor.ReadOnly = true;
-            this.txtFornecedor.Size = new System.Drawing.Size(273, 22);
-            this.txtFornecedor.TabIndex = 21;
-            // 
             // TelaProdutosEstoque
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -293,6 +293,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnVoltar);
             this.Name = "TelaProdutosEstoque";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Estoque de Produtos";
             this.Load += new System.EventHandler(this.TelaProdutosEstoque_Load);
             this.groupBox1.ResumeLayout(false);

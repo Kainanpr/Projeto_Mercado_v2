@@ -264,6 +264,7 @@
             this.ClientSize = new System.Drawing.Size(389, 216);
             this.Controls.Add(this.groupBox2);
             this.Name = "TelaExibeFornecedor";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "TelaExibeFornecedor";
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();

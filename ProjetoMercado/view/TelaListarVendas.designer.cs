@@ -185,6 +185,7 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "TelaListarVendas";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "TelaListarVendas";
             this.Load += new System.EventHandler(this.TelaListarVendas_Load);
             this.groupBox1.ResumeLayout(false);

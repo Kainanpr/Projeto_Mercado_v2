@@ -245,7 +245,7 @@
             this.Cursor = System.Windows.Forms.Cursors.Default;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "TelaCategoria";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Categorias";
             this.Load += new System.EventHandler(this.TelaCategoria_Load);
             this.groupBox1.ResumeLayout(false);

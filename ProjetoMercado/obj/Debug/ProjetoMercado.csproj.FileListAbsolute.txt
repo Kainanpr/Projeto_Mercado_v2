@@ -71,3 +71,24 @@ D:\Projeto_Mercado_v2\ProjetoMercado\obj\Debug\ProjetoMercado.view.TelaProdutosE
 D:\Projeto_Mercado_v2\ProjetoMercado\obj\Debug\ProjetoMercado.view.TelaRealizarVenda.resources
 D:\Projeto_Mercado_v2\ProjetoMercado\obj\Debug\ProjetoMercado.view.TelaReceberProduto.resources
 D:\Projeto_Mercado_v2\ProjetoMercado\obj\Debug\ProjetoMercado.csproj.GenerateResource.Cache
+D:\com tela atualizada\Projeto_Mercado_v2\ProjetoMercado\bin\Debug\ProjetoMercado.exe.config
+D:\com tela atualizada\Projeto_Mercado_v2\ProjetoMercado\obj\Debug\ProjetoMercado.exe
+D:\com tela atualizada\Projeto_Mercado_v2\ProjetoMercado\obj\Debug\ProjetoMercado.pdb
+D:\com tela atualizada\Projeto_Mercado_v2\ProjetoMercado\bin\Debug\ProjetoMercado.exe
+D:\com tela atualizada\Projeto_Mercado_v2\ProjetoMercado\bin\Debug\ProjetoMercado.pdb
+D:\com tela atualizada\Projeto_Mercado_v2\ProjetoMercado\bin\Debug\MySql.Data.dll
+D:\com tela atualizada\Projeto_Mercado_v2\ProjetoMercado\bin\Debug\MySql.Data.xml
+D:\com tela atualizada\Projeto_Mercado_v2\ProjetoMercado\obj\Debug\ProjetoMercado.csprojResolveAssemblyReference.cache
+D:\com tela atualizada\Projeto_Mercado_v2\ProjetoMercado\obj\Debug\ProjetoMercado.Properties.Resources.resources
+D:\com tela atualizada\Projeto_Mercado_v2\ProjetoMercado\obj\Debug\ProjetoMercado.view.TelaCadastroUsuario.resources
+D:\com tela atualizada\Projeto_Mercado_v2\ProjetoMercado\obj\Debug\ProjetoMercado.view.TelaExibeFornecedor.resources
+D:\com tela atualizada\Projeto_Mercado_v2\ProjetoMercado\obj\Debug\ProjetoMercado.view.TelaFornecedor.resources
+D:\com tela atualizada\Projeto_Mercado_v2\ProjetoMercado\obj\Debug\ProjetoMercado.view.TelaCategoria.resources
+D:\com tela atualizada\Projeto_Mercado_v2\ProjetoMercado\obj\Debug\ProjetoMercado.view.TelaInicial.resources
+D:\com tela atualizada\Projeto_Mercado_v2\ProjetoMercado\obj\Debug\ProjetoMercado.view.TelaListarVendas.resources
+D:\com tela atualizada\Projeto_Mercado_v2\ProjetoMercado\obj\Debug\ProjetoMercado.view.TelaLogin.resources
+D:\com tela atualizada\Projeto_Mercado_v2\ProjetoMercado\obj\Debug\ProjetoMercado.view.TelaProduto.resources
+D:\com tela atualizada\Projeto_Mercado_v2\ProjetoMercado\obj\Debug\ProjetoMercado.view.TelaProdutosEstoque.resources
+D:\com tela atualizada\Projeto_Mercado_v2\ProjetoMercado\obj\Debug\ProjetoMercado.view.TelaRealizarVenda.resources
+D:\com tela atualizada\Projeto_Mercado_v2\ProjetoMercado\obj\Debug\ProjetoMercado.view.TelaReceberProduto.resources
+D:\com tela atualizada\Projeto_Mercado_v2\ProjetoMercado\obj\Debug\ProjetoMercado.csproj.GenerateResource.Cache

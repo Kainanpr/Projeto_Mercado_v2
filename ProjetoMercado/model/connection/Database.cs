@@ -354,8 +354,11 @@ namespace ProjetoMercado.model.connection
 
             //Cadastro de produtos  
             ProdutoDAO produtoDAO = new ProdutoDAO();
+            ProdutoEstoqueDAO produtoEstoqueDAO = new ProdutoEstoqueDAO();
+            ProdutoEstoque produtoEstoque = new ProdutoEstoque();
 
             Produto produto1 = new Produto();
+            produto1.Codigo = 1;
             produto1.Preco = 1.99m;
             produto1.CodigoBarras = "1111";
             produto1.Descricao = "Sabonete";
@@ -363,8 +366,12 @@ namespace ProjetoMercado.model.connection
             produto1.QntMinEstoque = 50;
             produto1.Fornecedor = fornecedor1;
             produtoDAO.Create(produto1);
+            produtoEstoque.Produto = produto1;
+            produtoEstoque.QuantidadeEstoque = 20;
+            produtoEstoqueDAO.Create(produtoEstoque);
 
             Produto produto2 = new Produto();
+            produto2.Codigo = 2;
             produto2.Preco = 2.99m;
             produto2.CodigoBarras = "1112";
             produto2.Descricao = "Papel Toalha";
@@ -372,8 +379,12 @@ namespace ProjetoMercado.model.connection
             produto2.QntMinEstoque = 25;
             produto2.Fornecedor = fornecedor1;
             produtoDAO.Create(produto2);
+            produtoEstoque.Produto = produto2;
+            produtoEstoque.QuantidadeEstoque = 10;
+            produtoEstoqueDAO.Create(produtoEstoque);
 
             Produto produto3 = new Produto();
+            produto3.Codigo = 3;
             produto3.Preco = 41.44m;
             produto3.CodigoBarras = "1113";
             produto3.Descricao = "Limpa Tecido Automotivo";
@@ -381,8 +392,12 @@ namespace ProjetoMercado.model.connection
             produto3.QntMinEstoque = 20;
             produto3.Fornecedor = fornecedor1;
             produtoDAO.Create(produto3);
+            produtoEstoque.Produto = produto3;
+            produtoEstoque.QuantidadeEstoque = 90;
+            produtoEstoqueDAO.Create(produtoEstoque);
 
             Produto produto4 = new Produto();
+            produto4.Codigo = 4;
             produto4.Preco = 8.50m;
             produto4.CodigoBarras = "2221";
             produto4.Descricao = "Coca Cola 2L";
@@ -390,8 +405,12 @@ namespace ProjetoMercado.model.connection
             produto4.QntMinEstoque = 60;
             produto4.Fornecedor = fornecedor5;
             produtoDAO.Create(produto4);
+            produtoEstoque.Produto = produto4;
+            produtoEstoque.QuantidadeEstoque = 20;
+            produtoEstoqueDAO.Create(produtoEstoque);
 
             Produto produto5 = new Produto();
+            produto5.Codigo = 5;
             produto5.Preco = 12.10m;
             produto5.CodigoBarras = "2222";
             produto5.Descricao = "Cerveja Brahma 300ml";
@@ -399,8 +418,12 @@ namespace ProjetoMercado.model.connection
             produto5.QntMinEstoque = 55;
             produto5.Fornecedor = fornecedor5;
             produtoDAO.Create(produto5);
+            produtoEstoque.Produto = produto5;
+            produtoEstoque.QuantidadeEstoque = 50;
+            produtoEstoqueDAO.Create(produtoEstoque);
 
             Produto produto6 = new Produto();
+            produto6.Codigo = 6;
             produto6.Preco = 6.50m;
             produto6.CodigoBarras = "2223";
             produto6.Descricao = "Fanta Laranja 2L";
@@ -408,8 +431,12 @@ namespace ProjetoMercado.model.connection
             produto6.QntMinEstoque = 75;
             produto6.Fornecedor = fornecedor4;
             produtoDAO.Create(produto6);
+            produtoEstoque.Produto = produto6;
+            produtoEstoque.QuantidadeEstoque = 60;
+            produtoEstoqueDAO.Create(produtoEstoque);
 
             Produto produto7 = new Produto();
+            produto7.Codigo = 7;
             produto7.Preco = 1.99m;
             produto7.CodigoBarras = "3331";
             produto7.Descricao = "Miojo NISSIN";
@@ -417,8 +444,12 @@ namespace ProjetoMercado.model.connection
             produto7.QntMinEstoque = 55;
             produto7.Fornecedor = fornecedor1;
             produtoDAO.Create(produto7);
+            produtoEstoque.Produto = produto7;
+            produtoEstoque.QuantidadeEstoque = 10;
+            produtoEstoqueDAO.Create(produtoEstoque);
 
             Produto produto8 = new Produto();
+            produto8.Codigo = 8;
             produto8.Preco = 19.25m;
             produto8.CodigoBarras = "3332";
             produto8.Descricao = "Sorvete KIBON 2L";
@@ -426,8 +457,12 @@ namespace ProjetoMercado.model.connection
             produto8.QntMinEstoque = 78;
             produto8.Fornecedor = fornecedor3;
             produtoDAO.Create(produto8);
+            produtoEstoque.Produto = produto8;
+            produtoEstoque.QuantidadeEstoque = 0;
+            produtoEstoqueDAO.Create(produtoEstoque);
 
             Produto produto9 = new Produto();
+            produto9.Codigo = 9;
             produto9.Preco = 10.25m;
             produto9.CodigoBarras = "3333";
             produto9.Descricao = "Arroz Integral Vapza";
@@ -435,8 +470,12 @@ namespace ProjetoMercado.model.connection
             produto9.QntMinEstoque = 110;
             produto9.Fornecedor = fornecedor1;
             produtoDAO.Create(produto9);
+            produtoEstoque.Produto = produto9;
+            produtoEstoque.QuantidadeEstoque = 60;
+            produtoEstoqueDAO.Create(produtoEstoque);
 
             Produto produto10 = new Produto();
+            produto10.Codigo = 10;
             produto10.Preco = 49.99m;
             produto10.CodigoBarras = "4441";
             produto10.Descricao = "Bola Futebol Nike";
@@ -444,8 +483,12 @@ namespace ProjetoMercado.model.connection
             produto10.QntMinEstoque = 40;
             produto10.Fornecedor = fornecedor6;
             produtoDAO.Create(produto10);
+            produtoEstoque.Produto = produto10;
+            produtoEstoque.QuantidadeEstoque = 20;
+            produtoEstoqueDAO.Create(produtoEstoque);
 
             Produto produto11 = new Produto();
+            produto11.Codigo = 11;
             produto11.Preco = 89.90m;
             produto11.CodigoBarras = "4442";
             produto11.Descricao = "Boneca Barbie";
@@ -453,6 +496,9 @@ namespace ProjetoMercado.model.connection
             produto11.QntMinEstoque = 35;
             produto11.Fornecedor = fornecedor6;
             produtoDAO.Create(produto11);
+            produtoEstoque.Produto = produto11;
+            produtoEstoque.QuantidadeEstoque = 70;
+            produtoEstoqueDAO.Create(produtoEstoque);
 
         }
     }
