@@ -17,6 +17,8 @@ namespace ProjetoMercado.view
     {
         /* Atributo responsável pelo CRUD produto */
         private ProdutoDAO produtoDAO = new ProdutoDAO();
+        /* Atributo responsável pelo CRUD produtoEstoque */
+        private ProdutoEstoqueDAO produtoEstoqueDAO = new ProdutoEstoqueDAO();
         /* Atributo responsável pelo CRUD venda */
         private VendaDAO vendaDAO = new VendaDAO();
         /* Atributo responsável pelo CRUD itemVenda */
@@ -60,29 +62,52 @@ namespace ProjetoMercado.view
 
         private void btnConfirmarProduto_Click(object sender, EventArgs e)
         {
+            /* Encontra o produto no banco de dados */
             Produto produto = produtoDAO.Read(txtCodBarras.Text);
 
-            /* Salva a quantidade, se não tiver nada no textbox assume 1 */
-            int quantidade;
-            if (!int.TryParse(txtQuantidade.Text, out quantidade))
-                quantidade = 1;
+            /* Apos encontrar o produto, traz as informações do estoque desse produto*/
+            ProdutoEstoque produtoEstoque = produtoEstoqueDAO.Read(produto.Codigo);
 
-            /* Adiciona o produto no Data Grid View */
-            dgvProdutos.Rows.Add(produto.Codigo, produto.Descricao, quantidade,
-                (produto.Preco * quantidade).ToString("c"));
+            /* Verifica se existe este produto no estoque */
+            if(produtoEstoque.QuantidadeEstoque > 0)
+            {
+                /* Salva a quantidade, se não tiver nada no textbox assume 1 */
+                int quantidade;
+                if (!int.TryParse(txtQuantidade.Text, out quantidade))
+                    quantidade = 1;
 
-            /* Atualiza p subTotal da Venda */
-            subTotal += (produto.Preco * quantidade);
-            txtSubTotal.Text = subTotal.ToString("c");
+                if(quantidade <= produtoEstoque.QuantidadeEstoque)
+                {
+                    /* Adiciona o produto no Data Grid View */
+                    dgvProdutos.Rows.Add(produto.Codigo, produto.Descricao, quantidade,
+                        (produto.Preco * quantidade).ToString("c"));
 
-            /* Desabilita os botões */
-            btnConfirmarProduto.Enabled = false;
-            btnCancelarProduto.Enabled = false;
-            btnConfirmarVenda.Enabled = true;
+                    /* Atualiza p subTotal da Venda */
+                    subTotal += (produto.Preco * quantidade);
+                    txtSubTotal.Text = subTotal.ToString("c");
 
-            txtQuantidade.ReadOnly = true; /* Desabilita a edição */
+                    /* Desabilita os botões */
+                    btnConfirmarProduto.Enabled = false;
+                    btnCancelarProduto.Enabled = false;
+                    btnConfirmarVenda.Enabled = true;
 
-            LimparTextBox(); /* Limpa as textBox */
+                    txtQuantidade.ReadOnly = true; /* Desabilita a edição */
+
+                    LimparTextBox(); /* Limpa as textBox */
+                }
+                else
+                {
+                    MessageBox.Show("Quantidade indisponível, este produto possui " + produtoEstoque.QuantidadeEstoque 
+                                    + " unidades no estoque.", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+  
+            }
+            else
+            {
+                MessageBox.Show("Produto indisponível.", "AVISO",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            
         }
 
         private void btnCancelarProduto_Click(object sender, EventArgs e)
