@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ProjetoMercado.model.domain;
 using ProjetoMercado.model.dao;
+using System.Text.RegularExpressions;
 
 namespace ProjetoMercado.view
 {
@@ -91,7 +92,15 @@ namespace ProjetoMercado.view
                             /* Verifica se o CEP está completamente preenchido */
                             if (txtCEP.MaskCompleted)
                             {
-                                dadosCompletos = true;
+                                if (ValidaEmail())
+                                {
+                                    dadosCompletos = true;
+                                }
+                                else
+                                {
+                                    MessageBox.Show("O e-mail preenchido não é válido.", "E-mail Inválido",
+                                      MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                }
                             }
                             else
                             {
@@ -366,6 +375,17 @@ namespace ProjetoMercado.view
                 digito2 = 0;
 
             if (CNPJ[12] == digito1 && CNPJ[13] == digito2)
+                return true;
+            else
+                return false;
+        }
+
+        private bool ValidaEmail()
+        {
+            Regex emailRg1 = new Regex(@"(((^[\w]+)([_\.\-]?)([\w]+)@([\w]+)([\.]{1})(com)$))");
+            Regex emailRg2 = new Regex(@"(((^[\w]+)([_\.\-]?)([\w]+)@([\w]+)([\.]{1})(com))([\.])(br)$)");
+
+            if (emailRg1.IsMatch(txtEmail.Text) || emailRg2.IsMatch(txtEmail.Text))
                 return true;
             else
                 return false;
