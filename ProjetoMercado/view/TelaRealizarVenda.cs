@@ -53,10 +53,25 @@ namespace ProjetoMercado.view
                     /* Habilitação dos botões */
                     btnConfirmarProduto.Enabled = true;
                     btnCancelarProduto.Enabled = true;
+                    btnExcluirProduto.Enabled = false;
                 }
                 else
+                {
                     MessageBox.Show("Código de Barras não cadastrado.", "Produto não cadastrado",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    LimparTextBox();
+
+                    txtQuantidade.ReadOnly = true; /* Habilita a edição */
+
+                    /* Habilitação dos botões */
+                    btnCancelarProduto.Enabled = false;
+                    btnExcluirProduto.Enabled = false;
+                    btnConfirmarProduto.Enabled = false;
+
+                    dgvProdutos.ClearSelection();
+                }
+                    
             }
         }
 
@@ -107,6 +122,8 @@ namespace ProjetoMercado.view
                 MessageBox.Show("Produto indisponível.", "AVISO",
                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
+
+            dgvProdutos.ClearSelection();
             
         }
 
@@ -115,6 +132,9 @@ namespace ProjetoMercado.view
             /* Desabilita os botões */
             btnConfirmarProduto.Enabled = false;
             btnCancelarProduto.Enabled = false;
+            btnExcluirProduto.Enabled = false;
+
+            dgvProdutos.ClearSelection();
 
             txtQuantidade.ReadOnly = true; /* Desabilita a edição */
 
@@ -198,6 +218,8 @@ namespace ProjetoMercado.view
                 }
                 /* Desabilita o botão */
                 btnConfirmarVenda.Enabled = false;
+                btnExcluirProduto.Enabled = false;
+                btnCancelarProduto.Enabled = false;
 
                 txtQuantidade.ReadOnly = true; /* Desabilita a edição */
 
@@ -215,6 +237,83 @@ namespace ProjetoMercado.view
             }
                     
         }
+
+        private void dgvProdutos_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            /* Habilitação e desabilitação dos botões */
+            btnConfirmarProduto.Enabled = false;
+            btnExcluirProduto.Enabled = true;
+            btnCancelarProduto.Enabled = true;
+
+            txtQuantidade.ReadOnly = true; /* Habilita a edição */
+
+            ExibeProduto(); /* Exibe o produto nas caixas de texto */
+        }
+
+
+        /* Preenche a tela com as informações passadas com a categoria */
+        private void SetDTO(Produto produto)
+        {
+            txtQuantidade.Text = dgvProdutos.CurrentRow.Cells[2].Value.ToString();
+            txtPreco.Text = produto.Preco.ToString();
+            txtCodBarras.Text = produto.CodigoBarras;
+            txtDescricao.Text = produto.Descricao;
+            txtCategoria.Text = produto.Categoria.Descricao;
+        }
+
+        private void ExibeProduto()
+        {
+            /* Pega o código da categoria selecionada */
+            int codigo = int.Parse(dgvProdutos.CurrentRow.Cells[0].Value.ToString());
+
+            /* Busca no Banco de Dados e preenche a tela */
+            Produto produto = produtoDAO.Read(codigo);
+
+            SetDTO(produto);
+        }
+
+        private void btnExcluirProduto_Click(object sender, EventArgs e)
+        {
+            /* Verifica se o usúario tem certeza que deseja excluir um produto do carrinho */
+            var result = MessageBox.Show(this, "Você tem certeza que deseja excluir este produto do carrinho?",
+                "Deseja excluir produto?", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+
+            if (result == DialogResult.Yes)
+            {
+                /* Coloca em uma string o sub total do datagrid do produto selecionado */
+                String subTotalProduto = dgvProdutos.CurrentRow.Cells[3].Value.ToString();
+
+                /* Como a string virá com caracteres, sera necessario a remoção para fazer a conta */
+                subTotalProduto = subTotalProduto.Trim(new Char[] { 'R', '$', ' ' });
+
+                /* Como o produto foi excluido, sera necessario subtrair o sub total da venda */
+                subTotal -= decimal.Parse(subTotalProduto);
+
+                /* Atualiza o sub total da venda na tela */
+                txtSubTotal.Text = "R$ " + subTotal.ToString();
+
+                /* Remove a linha correspondente ao produto excluido */
+                dgvProdutos.Rows.RemoveAt(dgvProdutos.CurrentRow.Index);
+
+                /* Retira a seleção do datagrid */
+                dgvProdutos.ClearSelection();
+
+                LimparTextBox();
+
+                btnExcluirProduto.Enabled = false;
+                btnCancelarProduto.Enabled = false;
+
+                MessageBox.Show("Produto foi excluído do carrinho.", "Produto Excluído",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                /* Caso o sub total seja 0 nao sera possivel confirmar a venda */
+                if(subTotal <= 0.0m)
+                    btnConfirmarVenda.Enabled = false;
+            }
+
+        }
+        
+
     }
 }
 

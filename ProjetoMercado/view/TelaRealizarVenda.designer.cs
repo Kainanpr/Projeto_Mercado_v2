@@ -49,7 +49,6 @@
             this.txtCodBarras = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.btnCancelarVenda = new System.Windows.Forms.Button();
             this.btnConfirmarVenda = new System.Windows.Forms.Button();
             this.txtSubTotal = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -91,6 +90,7 @@
             this.dgvProdutos.Size = new System.Drawing.Size(388, 405);
             this.dgvProdutos.TabIndex = 9;
             this.dgvProdutos.TabStop = false;
+            this.dgvProdutos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProdutos_CellClick);
             // 
             // Numero
             // 
@@ -169,6 +169,7 @@
             this.btnExcluirProduto.TabIndex = 21;
             this.btnExcluirProduto.Text = "Excluir";
             this.btnExcluirProduto.UseVisualStyleBackColor = true;
+            this.btnExcluirProduto.Click += new System.EventHandler(this.btnExcluirProduto_Click);
             // 
             // btnCancelarProduto
             // 
@@ -262,7 +263,6 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.btnCancelarVenda);
             this.groupBox3.Controls.Add(this.btnConfirmarVenda);
             this.groupBox3.Controls.Add(this.txtSubTotal);
             this.groupBox3.Controls.Add(this.label5);
@@ -274,44 +274,39 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Venda";
             // 
-            // btnCancelarVenda
-            // 
-            this.btnCancelarVenda.Enabled = false;
-            this.btnCancelarVenda.Location = new System.Drawing.Point(242, 131);
-            this.btnCancelarVenda.Name = "btnCancelarVenda";
-            this.btnCancelarVenda.Size = new System.Drawing.Size(75, 50);
-            this.btnCancelarVenda.TabIndex = 22;
-            this.btnCancelarVenda.Text = "Cancelar";
-            this.btnCancelarVenda.UseVisualStyleBackColor = true;
-            // 
             // btnConfirmarVenda
             // 
+            this.btnConfirmarVenda.BackColor = System.Drawing.Color.LawnGreen;
             this.btnConfirmarVenda.Enabled = false;
+            this.btnConfirmarVenda.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnConfirmarVenda.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnConfirmarVenda.Location = new System.Drawing.Point(46, 131);
             this.btnConfirmarVenda.Name = "btnConfirmarVenda";
-            this.btnConfirmarVenda.Size = new System.Drawing.Size(75, 50);
+            this.btnConfirmarVenda.Size = new System.Drawing.Size(271, 62);
             this.btnConfirmarVenda.TabIndex = 22;
-            this.btnConfirmarVenda.Text = "Confirmar";
-            this.btnConfirmarVenda.UseVisualStyleBackColor = true;
+            this.btnConfirmarVenda.Text = "Confirmar venda";
+            this.btnConfirmarVenda.UseVisualStyleBackColor = false;
             this.btnConfirmarVenda.Click += new System.EventHandler(this.btnConfirmarVenda_Click);
             // 
             // txtSubTotal
             // 
-            this.txtSubTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSubTotal.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.txtSubTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSubTotal.ForeColor = System.Drawing.Color.Red;
             this.txtSubTotal.Location = new System.Drawing.Point(46, 72);
             this.txtSubTotal.Name = "txtSubTotal";
             this.txtSubTotal.ReadOnly = true;
-            this.txtSubTotal.Size = new System.Drawing.Size(271, 35);
+            this.txtSubTotal.Size = new System.Drawing.Size(271, 38);
             this.txtSubTotal.TabIndex = 22;
             this.txtSubTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(127, 35);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(104, 25);
+            this.label5.Size = new System.Drawing.Size(113, 25);
             this.label5.TabIndex = 21;
             this.label5.Text = "Sub Total";
             // 
@@ -357,7 +352,6 @@
         private System.Windows.Forms.Button btnCancelarProduto;
         private System.Windows.Forms.Button btnConfirmarProduto;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Button btnCancelarVenda;
         private System.Windows.Forms.Button btnConfirmarVenda;
         private System.Windows.Forms.TextBox txtSubTotal;
         private System.Windows.Forms.Label label5;
