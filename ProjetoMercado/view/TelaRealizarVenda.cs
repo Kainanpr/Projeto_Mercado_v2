@@ -162,9 +162,9 @@ namespace ProjetoMercado.view
 
         private void btnConfirmarVenda_Click(object sender, EventArgs e)
         {
-            /* Verifica se o usúario tem certeza que deseja concluir a comprao */
-            var result = MessageBox.Show(this, "Você tem certeza que deseja concluir está compra?",
-                "Deseja concluir está compra?", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+            /* Verifica se o usúario tem certeza que deseja concluir a venda */
+            var result = MessageBox.Show(this, "Você tem certeza que deseja concluir está venda?",
+                "Deseja concluir está venda?", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
 
             if (result == DialogResult.Yes)
             {
@@ -232,7 +232,7 @@ namespace ProjetoMercado.view
                 txtSubTotal.Text = subTotal.ToString("c");
 
                 /* Mensagem indicando que a compra foi realizada com sucesso */
-                MessageBox.Show("Compra foi realizada com sucesso.", "Compra realizada",
+                MessageBox.Show("Venda foi realizada com sucesso.", "Venda realizada",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
                     
