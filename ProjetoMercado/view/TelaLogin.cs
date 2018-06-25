@@ -19,9 +19,9 @@ namespace ProjetoMercado.view
             InitializeComponent();
         }
 
-        private void btnCancelar_Click(object sender, EventArgs e)
+        private void btnCriarConta_Click(object sender, EventArgs e)
         {
-            this.Close();
+            new TelaCadastroUsuario().ShowDialog();
         }
 
         private void btnEntrar_Click(object sender, EventArgs e)
@@ -68,22 +68,5 @@ namespace ProjetoMercado.view
             }
         }
 
-        private void TelaLogin_Load(object sender, EventArgs e)
-        {
-            /* Objeto UsuarioDAO para acessar o Banco de Dados */
-            UsuarioDAO usuarioDAO = new UsuarioDAO();
-
-            /* Faz a verificação se já existem Usuários cadastrados.
-             * se não existir, uma janela para criação do primeiro usuário é exibida */
-            if (!usuarioDAO.ExisteUsuario())
-            {
-                var result = MessageBox.Show("Nenhum usuário cadastrado no sistema. Deseja realizar o " +
-                    "cadastro do primeiro usuário?", "Nenhum usuário cadastrado",
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                if (result == DialogResult.Yes)
-                    new TelaCadastroUsuario().ShowDialog();
-            }
-        }
     }
 }
