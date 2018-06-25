@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="itextsharp, Version=5.5.13.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13\lib\itextsharp.dll</HintPath>
+    </Reference>
     <Reference Include="MySql.Data">
       <HintPath>driver_conexaodb\MYSQL\v4.5.2\MySql.Data.dll</HintPath>
     </Reference>
@@ -61,6 +64,7 @@
     <Compile Include="model\domain\ItemVenda.cs" />
     <Compile Include="model\domain\Produto.cs" />
     <Compile Include="model\domain\ProdutoEstoque.cs" />
+    <Compile Include="model\domain\Relatorios.cs" />
     <Compile Include="model\domain\Usuario.cs" />
     <Compile Include="model\domain\Venda.cs" />
     <Compile Include="Program.cs" />
@@ -131,6 +135,12 @@
     <Compile Include="view\TelaReceberProduto.Designer.cs">
       <DependentUpon>TelaReceberProduto.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\TelaRelatorioVendas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\TelaRelatorioVendas.Designer.cs">
+      <DependentUpon>TelaRelatorioVendas.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -174,6 +184,10 @@
     <EmbeddedResource Include="view\TelaReceberProduto.resx">
       <DependentUpon>TelaReceberProduto.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="view\TelaRelatorioVendas.resx">
+      <DependentUpon>TelaRelatorioVendas.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

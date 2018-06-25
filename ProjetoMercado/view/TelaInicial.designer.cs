@@ -44,9 +44,14 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btnReceberProdutos = new System.Windows.Forms.Button();
             this.btnProdutosEstoque = new System.Windows.Forms.Button();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.btnRlVendas = new System.Windows.Forms.Button();
+            this.btnRlEstoque = new System.Windows.Forms.Button();
+            this.btnMaisVendidos = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -227,12 +232,68 @@
             this.btnProdutosEstoque.UseVisualStyleBackColor = false;
             this.btnProdutosEstoque.Click += new System.EventHandler(this.btnProdutosEstoque_Click);
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.btnMaisVendidos);
+            this.groupBox4.Controls.Add(this.btnRlVendas);
+            this.groupBox4.Controls.Add(this.btnRlEstoque);
+            this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox4.Location = new System.Drawing.Point(293, 168);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(403, 119);
+            this.groupBox4.TabIndex = 6;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Gerar Relatórios";
+            // 
+            // btnRlVendas
+            // 
+            this.btnRlVendas.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnRlVendas.FlatAppearance.MouseDownBackColor = System.Drawing.Color.CornflowerBlue;
+            this.btnRlVendas.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnRlVendas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRlVendas.Location = new System.Drawing.Point(142, 34);
+            this.btnRlVendas.Name = "btnRlVendas";
+            this.btnRlVendas.Size = new System.Drawing.Size(119, 71);
+            this.btnRlVendas.TabIndex = 4;
+            this.btnRlVendas.Text = "Vendas";
+            this.btnRlVendas.UseVisualStyleBackColor = false;
+            this.btnRlVendas.Click += new System.EventHandler(this.btnRlVendas_Click);
+            // 
+            // btnRlEstoque
+            // 
+            this.btnRlEstoque.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnRlEstoque.FlatAppearance.MouseDownBackColor = System.Drawing.Color.CornflowerBlue;
+            this.btnRlEstoque.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnRlEstoque.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRlEstoque.Location = new System.Drawing.Point(17, 34);
+            this.btnRlEstoque.Name = "btnRlEstoque";
+            this.btnRlEstoque.Size = new System.Drawing.Size(119, 71);
+            this.btnRlEstoque.TabIndex = 3;
+            this.btnRlEstoque.Text = "Estoque";
+            this.btnRlEstoque.UseVisualStyleBackColor = false;
+            this.btnRlEstoque.Click += new System.EventHandler(this.btnRlEstoque_Click);
+            // 
+            // btnMaisVendidos
+            // 
+            this.btnMaisVendidos.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnMaisVendidos.FlatAppearance.MouseDownBackColor = System.Drawing.Color.CornflowerBlue;
+            this.btnMaisVendidos.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnMaisVendidos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMaisVendidos.Location = new System.Drawing.Point(270, 33);
+            this.btnMaisVendidos.Name = "btnMaisVendidos";
+            this.btnMaisVendidos.Size = new System.Drawing.Size(119, 71);
+            this.btnMaisVendidos.TabIndex = 5;
+            this.btnMaisVendidos.Text = "Produtos Mais Vendidos";
+            this.btnMaisVendidos.UseVisualStyleBackColor = false;
+            this.btnMaisVendidos.Click += new System.EventHandler(this.btnMaisVendidos_Click);
+            // 
             // TelaInicial
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(711, 299);
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.lblHora);
             this.Controls.Add(this.lblData);
@@ -248,6 +309,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -270,5 +332,9 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button btnReceberProdutos;
         private System.Windows.Forms.Button btnProdutosEstoque;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Button btnRlVendas;
+        private System.Windows.Forms.Button btnRlEstoque;
+        private System.Windows.Forms.Button btnMaisVendidos;
     }
 }

@@ -109,5 +109,76 @@ namespace ProjetoMercado.model.dao
             }
             return listaItens; /* Retorna a lista */
         }
+
+        public List<ItemVenda> ListAll()
+        {
+            /* Recebe a conexão utilizada para acessar o Banco de Dados */
+            MySqlConnection connection = Database.GetInstance().GetConnection();
+
+            /* Lista de itens */
+            List<ItemVenda> listaItens = new List<ItemVenda>();
+
+            /* Preenchido com as informações do Banco de Dados */
+            ItemVenda itemVenda;
+
+            /* String que contém o SQL que será executado */
+            string query = "SELECT iv.codigo, iv.cod_venda, iv.cod_produto, count(iv.quantidade) AS a, " +
+                "iv.preco_unitario, v.*, p.*, c.descricao FROM Item_Venda iv " +
+                "JOIN Venda v ON iv.cod_venda = v.codigo " +
+                "JOIN Produto p ON iv.cod_produto = p.codigo " +
+                "JOIN Categoria c ON p.cod_categoria = c.codigo " +
+                "GROUP BY iv.cod_produto " +
+                "ORDER BY a DESC;";
+
+            /* Responsável pelo comando SQL */
+            MySqlCommand command = new MySqlCommand(query, connection);
+
+            try
+            {
+                /* Abre a conexão */
+                if (connection.State != System.Data.ConnectionState.Open)
+                    connection.Open();
+
+                /* Responsável pela leitura do Banco de Dados */
+                MySqlDataReader dataReader = command.ExecuteReader();
+
+                /* Lê todos os dados na tabela do Banco de Dados */
+                while (dataReader.Read())
+                {
+                    itemVenda = new ItemVenda();
+                    itemVenda.Produto = new Produto();
+                    itemVenda.Produto.Categoria = new Categoria();
+                    itemVenda.Venda = new Venda();
+                    itemVenda.Codigo = dataReader.GetInt32(0);
+                    itemVenda.Venda.Codigo = dataReader.GetInt32(1);
+                    itemVenda.Produto.Codigo = dataReader.GetInt32(2);
+                    itemVenda.Quantidade = dataReader.GetInt32(3);
+                    itemVenda.PrecoUnitario = dataReader.GetDecimal(4);
+                    itemVenda.Venda.DataHora = dataReader.GetDateTime(6);
+                    itemVenda.Venda.ValotTotal = dataReader.GetDecimal(7);
+                    itemVenda.Produto.Preco = dataReader.GetDecimal(9);
+                    itemVenda.Produto.CodigoBarras = dataReader.GetString(10);
+                    itemVenda.Produto.Descricao = dataReader.GetString(11);
+                    itemVenda.Produto.Categoria.Codigo = dataReader.GetInt32(12);
+                    itemVenda.Produto.QntMinEstoque = dataReader.GetInt32(13);
+                    itemVenda.Produto.Categoria.Descricao = dataReader.GetString(14);
+
+                    listaItens.Add(itemVenda); /* Adiciona na lista */
+                }
+                dataReader.Close();
+            }
+            catch (Exception exception)
+            {
+                /* Se ocorrer alguma exceção mostra uma caixa de texto com o erro */
+                MessageBox.Show(exception.ToString(), "Erro", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+            finally
+            {
+                /* Fecha a conexão */
+                connection.Close();
+            }
+            return listaItens; /* Retorna a lista */
+        }
     }
 }

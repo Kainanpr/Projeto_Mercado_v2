@@ -168,6 +168,8 @@ namespace ProjetoMercado.view
 
             if (result == DialogResult.Yes)
             {
+                List<ItemVenda> itens = new List<ItemVenda>();
+
                 /* Realiza as operações com a venda */
                 Venda venda = new Venda();
 
@@ -207,6 +209,9 @@ namespace ProjetoMercado.view
                     /* Grava o ItemVenda no Banco de Dados */
                     itemVendaDAO.Create(itemVenda);
 
+                    /* Adiciona os itens em uma lista para gerar a nota Fiscal */
+                    itens.Add(itemVenda);
+
                     /* Recupera a informação do Produto Estoque */
                     ProdutoEstoque produtoEstoque = produtoEstoqueDAO.Read(itemVenda.Produto.Codigo);
 
@@ -216,6 +221,31 @@ namespace ProjetoMercado.view
                     /* Armazena o BD o novo estoque */
                     produtoEstoqueDAO.Update(produtoEstoque);
                 }
+
+                /* Verifica se o usúario quer gerar a nota fiscal */
+                var result2 = MessageBox.Show(this, "Você deseja gerar e salvar a nota fiscal?",
+                    "Deseja gerar a nota fiscal?", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+
+                if(result2 == DialogResult.Yes)
+                {
+                    /* Responsável por gerar o relatório dos produtos do estoque */
+
+                    /* Caixa de diálogo para salvar o arquivo */
+                    SaveFileDialog saveFileDialog = new SaveFileDialog();
+                    saveFileDialog.AddExtension = true;
+                    saveFileDialog.DefaultExt = ".pdf";
+                    saveFileDialog.ShowDialog();
+
+                    if (!saveFileDialog.FileName.ToString().Equals(""))
+                    {
+
+                        Relatorios.GerarNotaFiscal(saveFileDialog.FileName.ToString(), itens);
+
+                        MessageBox.Show("Nota fiscal foi gerada", "Nota Fiscal Gerada",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+
                 /* Desabilita o botão */
                 btnConfirmarVenda.Enabled = false;
                 btnExcluirProduto.Enabled = false;

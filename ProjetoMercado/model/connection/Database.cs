@@ -17,7 +17,7 @@ namespace ProjetoMercado.model.connection
         private static MySqlConnection connection; /* Conexão com o Banco de Dados */
         private static Database instance; /* Instância do objeto Database */
         private string connectionString = /* String de configuração da Conexão */
-            "Server=localhost; database=mercado; Uid=root; Pwd=";
+            "Server=localhost; database=mercado; Uid=root; Pwd=leonardobd";
 
         /* Construtor privado */
         private Database()
@@ -98,7 +98,7 @@ namespace ProjetoMercado.model.connection
             try
             {
                 /* Troca a string de conexão */
-                connection.ConnectionString = "Server=localhost; Uid=root; Pwd=";
+                connection.ConnectionString = "Server=localhost; Uid=root; Pwd=leonardobd";
 
                 /* Abre a conexão */
                 if (connection.State != System.Data.ConnectionState.Open)
